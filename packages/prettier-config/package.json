@@ -1,0 +1,9 @@
+{
+  "name": "@brizy/prettier-config",
+  "version": "1.0.0",
+  "main": "prettier.config.js",
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "prettier": "^2.8.7"
+  }
+}
