@@ -7,7 +7,10 @@
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "web#build": {
-      "dependsOn": ["@brizy/assetmanager#build"]
+      "dependsOn": ["@brizy/assetmanager#build", "@brizy/docs-react#build"]
+    },
+    "web#dev": {
+      "dependsOn": ["@brizy/assetmanager#build", "@brizy/docs-react#build"]
     },
     "lint": {},
     "dev": {
