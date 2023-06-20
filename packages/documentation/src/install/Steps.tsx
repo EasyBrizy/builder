@@ -22,13 +22,13 @@ export const Steps = ({ token }: Props) => {
       />
       <div className="mb-[59px]" />
       <Step
-        title="Step 2: Find the envirement variables"
+        title="Step 2: Find the environment variables"
         content={
           <div className="text-[17px] break-all">
             <div>
               <span className="leading-8">
                 In tab <i>Setting</i> access the menu{" "}
-                <i>Envirement Variables.</i>
+                <i>Environment Variables.</i>
               </span>
             </div>
           </div>
@@ -36,7 +36,7 @@ export const Steps = ({ token }: Props) => {
       />
       <div className="mb-[59px]" />
       <Step
-        title="Step 3: Fill Envirement Variables"
+        title="Step 3: Fill the environment variable"
         content={
           <div className="text-[17px] break-all">
             <span className="leading-8">
