@@ -1,17 +1,18 @@
+import { getAssets } from "@brizy/assetmanager";
+import { CompilerData } from "@utils/api";
 import Script from "next/script";
 import React, { ReactElement } from "react";
-import { getScripts } from "ui";
 
 export interface Props {
-  data: Array<string>;
+  data: CompilerData;
 }
 
 export const Scripts = (props: Props): ReactElement => {
-  const scripts = getScripts(props.data);
+  const data = getAssets(props.data);
 
   return (
     <>
-      {scripts.map((s, i) =>
+      {data.scripts.map((s, i) =>
         s.html ? (
           <Script
             key={i}

@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Brizy",
-  description: "Brizy Self-hosted",
+  description: "Brizy NextJS",
 };
 
 export default function RootLayout({

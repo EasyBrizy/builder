@@ -6,6 +6,9 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
+    "web#build": {
+      "dependsOn": ["@brizy/assetmanager#build"]
+    },
     "lint": {},
     "dev": {
       "cache": false,

@@ -1,16 +1,17 @@
+import { getAssets } from "@brizy/assetmanager";
+import { CompilerData } from "@utils/api";
 import React, { ReactElement } from "react";
-import { getStyles } from "ui";
 
 export interface Props {
-  data: Array<string>;
+  data: CompilerData;
 }
 
 export const Styles = (props: Props): ReactElement => {
-  const styles = getStyles(props.data);
+  const data = getAssets(props.data);
 
   return (
     <>
-      {styles.map((style, i) => {
+      {data.styles.map((style, i) => {
         if (style.type === "link") {
           return <link key={i} {...style.attr} />;
         }

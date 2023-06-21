@@ -8,7 +8,7 @@ export const Docs: FC<Props> = (props) => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200 p-4">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold mb-4">Documentation</h1>
+        <h1 className="text-3xl font-bold mb-4">Documentation {props.token}</h1>
 
         <div className="flex items-center mb-8">
           <div className="flex-shrink-0 w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white">

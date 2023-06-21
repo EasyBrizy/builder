@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@components/Button";
+import { brizyHost, linkShareUid } from "@utils/api";
 import React, { ReactElement } from "react";
 
 interface Props {
@@ -12,7 +13,7 @@ export const Connect = (props: Props): ReactElement => {
     const host = props.host;
 
     window.location.replace(
-      `http://localhost:3009/api/test?domain=${host}&redirectTo=${host}/init`
+      `${brizyHost}/share/${linkShareUid}?redirectUrl=${host}/init`
     );
   };
 

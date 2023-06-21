@@ -7,30 +7,30 @@ import { redirect } from "next/navigation";
 import React, { ReactElement } from "react";
 import { Brizy } from "ui";
 
-const token = process.env["API_KEY"];
+const apiKey = process.env["API_KEY"];
 
 interface Props {
-  params: { slug?: Array<string> };
+  params: { all?: Array<string> };
 }
 
 export default async function Page(props: Props): Promise<ReactElement | null> {
   const { params } = props;
-  const [mode, slug] = params.slug ?? [];
+  const [mode, slug] = params.all ?? [];
   const isHome = mode === undefined;
-  const pageSlug = arrayToPathApi([mode, slug]);
+  const pageSlug = isHome ? undefined : arrayToPathApi([mode, slug]);
 
-  if (!token) {
+  if (!apiKey) {
     redirect("/init");
     return null;
   }
 
-  const data = await getHtml({ pageSlug, token });
-  const head = <Styles data={data.styles} />;
+  const data = await getHtml({ pageSlug, projectId: apiKey });
+  const head = <Styles data={data} />;
 
   return (
     <Layout head={head}>
-      <Brizy html={data.html} />
-      <Scripts data={data.scripts} />
+      <Brizy data={data} />
+      <Scripts data={data} />
     </Layout>
   );
 }
