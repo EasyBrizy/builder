@@ -121,5 +121,9 @@ export const parseCompileData = (
     return undefined;
   }
 
-  return reader(data);
+  try {
+    return reader(data);
+  } catch (e) {
+    return undefined;
+  }
 };

@@ -12,7 +12,7 @@ const getAssets = (assets: CompilerDataEntry): Assets => {
     return { styles: [], scripts: [] };
   }
 
-  const { freeStyles, freeScripts, proStyles, proScripts, body } = data.blocks;
+  const { freeStyles, freeScripts, proStyles, proScripts } = data.blocks;
 
   const freeStylesLib = getAssetBySelector(
     freeStyles.libsMap,
@@ -76,7 +76,7 @@ const getAssets = (assets: CompilerDataEntry): Assets => {
 
 const getHtml = (assets: CompilerDataEntry): string => {
   if (!assets.blocks) {
-    return "";
+    return "<h1 style='color: red'>Invalid assets...</h1>";
   }
 
   return assets.blocks.body;

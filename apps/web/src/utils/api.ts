@@ -28,8 +28,6 @@ class API {
       }
     );
 
-    console.log("get from", url);
-
     return fetch(url, { next: { tags: ["html"], revalidate: 6000 } });
   }
 }
@@ -67,12 +65,18 @@ export const getHtml = async (data: GetHTML): Promise<CompilerData> => {
       return r;
     }
 
-    throw new Error("Fail to get html");
+    if (typeof r === "object" && "message" in r) {
+      throw new Error(r.message);
+    } else {
+      throw new Error("Fail to get html");
+    }
   } catch (e) {
     if (process.env["NODE_ENV"] !== "production") {
       console.error(e);
     }
-    return { blocks: { freeStyles: [], freeScripts: [], body: "" } };
+    return {
+      blocks: { freeStyles: [], freeScripts: [], body: `${e}` },
+    };
   }
 };
 
