@@ -8,7 +8,7 @@ interface APIData {
 }
 
 export const brizyHost = "https://beta1.brizy.cloud";
-export const linkShareUid = "9SchW5Xxw2JhcnY";
+export const linkShareUid = "TGh6Xkll111EfZd";
 
 class API {
   readonly api: string;
@@ -39,8 +39,9 @@ const api = new API();
 //#region GetHTML
 
 interface GetHTML {
-  projectId: string;
-  pageSlug?: string;
+  project: string;
+  collection: "page";
+  item?: string;
 }
 
 export interface CompilerData {
@@ -56,8 +57,8 @@ export interface CompilerData {
 export const getHtml = async (data: GetHTML): Promise<CompilerData> => {
   try {
     const res = await api.getHTML({
-      slug: data.pageSlug,
-      projectId: data.projectId,
+      projectId: data.project,
+      slug: data.item,
     });
     const r = await res.json();
 

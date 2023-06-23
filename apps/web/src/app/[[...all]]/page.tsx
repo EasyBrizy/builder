@@ -2,7 +2,6 @@ import { Layout } from "@components/Layout";
 import { Scripts } from "@components/Scripts";
 import { Styles } from "@components/Styles";
 import { getHtml } from "@utils/api";
-import { arrayToPathApi } from "@utils/common";
 import { redirect } from "next/navigation";
 import React, { ReactElement } from "react";
 import { Brizy } from "ui";
@@ -15,16 +14,18 @@ interface Props {
 
 export default async function Page(props: Props): Promise<ReactElement | null> {
   const { params } = props;
-  const [mode, slug] = params.all ?? [];
-  const isHome = mode === undefined;
-  const pageSlug = isHome ? undefined : arrayToPathApi([mode, slug]);
+  const [item] = params.all ?? [];
 
   if (!apiKey) {
     redirect("/init");
     return null;
   }
 
-  const data = await getHtml({ pageSlug, projectId: apiKey });
+  const data = await getHtml({
+    project: apiKey,
+    collection: "page",
+    item: item,
+  });
   const head = <Styles data={data} />;
 
   return (
