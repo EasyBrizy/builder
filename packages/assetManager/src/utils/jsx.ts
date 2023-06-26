@@ -17,3 +17,13 @@ export const crossOrigin = <T extends Record<string, string>>(
   }
   return r;
 };
+
+export const defer = <T extends Record<string, string>>(
+  r: T
+): T & { defer: boolean } => {
+  if ("defer" in r) {
+    return { ...r, defer: r.defer === "true" };
+  }
+
+  return { ...r, defer: true };
+};

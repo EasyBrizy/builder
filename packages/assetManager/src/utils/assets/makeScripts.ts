@@ -1,9 +1,12 @@
 import { Asset, AssetLibsMap, Scripts } from "../../types";
-import { classToClassName } from "../jsx";
+import { pipe } from "../fp/pipe";
+import { classToClassName, defer } from "../jsx";
 import { MValue } from "../types";
 import * as cheerio from "cheerio";
 
 type Assets = Asset | AssetLibsMap;
+
+const normalizeAttr = pipe(classToClassName, defer);
 
 export const makeScripts = (asset: Assets): MValue<Array<Scripts>> => {
   const { content } = asset;
@@ -29,7 +32,7 @@ export const makeScripts = (asset: Assets): MValue<Array<Scripts>> => {
           const attr = classToClassName($el.attr() ?? {});
 
           if ("src" in attr) {
-            scripts.push({ attr });
+            scripts.push({ attr: defer(attr) });
           } else {
             const html = $el.html() ?? "";
 
@@ -45,7 +48,7 @@ export const makeScripts = (asset: Assets): MValue<Array<Scripts>> => {
       return [
         {
           attr: {
-            ...classToClassName(content.attr ?? {}),
+            ...normalizeAttr(content.attr ?? {}),
             src: content.url,
           },
         },

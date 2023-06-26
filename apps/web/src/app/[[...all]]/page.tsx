@@ -1,10 +1,8 @@
 import { Layout } from "@components/Layout";
-import { Scripts } from "@components/Scripts";
-import { Styles } from "@components/Styles";
 import { getHtml } from "@utils/api";
 import { redirect } from "next/navigation";
 import React, { ReactElement } from "react";
-import { Brizy } from "ui";
+import { Brizy, Scripts, Styles } from "ui";
 
 const apiKey = process.env["API_KEY"];
 

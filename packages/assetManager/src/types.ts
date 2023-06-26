@@ -12,7 +12,7 @@ interface Link {
 export type Styles = Style | Link;
 
 export interface Scripts {
-  attr?: Record<string, string>;
+  attr?: Record<string, string | boolean>;
   html?: string;
 }
 

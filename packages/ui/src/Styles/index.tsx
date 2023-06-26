@@ -1,5 +1,5 @@
+import { CompilerData } from "../types";
 import { getAssets } from "@brizy/assetmanager";
-import { CompilerData } from "@utils/api";
 import React, { ReactElement } from "react";
 
 export interface Props {
@@ -11,19 +11,17 @@ export const Styles = (props: Props): ReactElement => {
 
   return (
     <>
-      {data.styles.map((style, i) => {
-        if (style.type === "link") {
-          return <link key={i} {...style.attr} />;
-        }
-
-        return (
+      {data.styles.map((s, i) =>
+        s.type === "link" ? (
+          <link key={i} {...s.attr} />
+        ) : (
           <style
             key={i}
-            {...style.attr}
-            dangerouslySetInnerHTML={{ __html: style.html }}
+            {...s.attr}
+            dangerouslySetInnerHTML={{ __html: s.html }}
           />
-        );
-      })}
+        )
+      )}
     </>
   );
 };

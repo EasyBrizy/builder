@@ -1,6 +1,5 @@
+import { CompilerData } from "../types";
 import { getAssets } from "@brizy/assetmanager";
-import { CompilerData } from "@utils/api";
-import Script from "next/script";
 import React, { ReactElement } from "react";
 
 export interface Props {
@@ -14,13 +13,13 @@ export const Scripts = (props: Props): ReactElement => {
     <>
       {data.scripts.map((s, i) =>
         s.html ? (
-          <Script
+          <script
             key={i}
             {...s.attr}
             dangerouslySetInnerHTML={{ __html: s.html }}
           />
         ) : (
-          <Script key={i} {...s.attr}></Script>
+          <script key={i} {...s.attr}></script>
         )
       )}
     </>
