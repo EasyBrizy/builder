@@ -8,7 +8,13 @@ const apiKey = process.env["API_KEY"];
 
 const Services = async (): Promise<ReactElement> => {
   if (!apiKey) {
-    throw new Error("Missing api keys");
+    return (
+      <>
+        <Header />
+        <h1>Missing api keys</h1>
+        <Footer />
+      </>
+    );
   }
 
   const data = await getHtml({
@@ -18,7 +24,13 @@ const Services = async (): Promise<ReactElement> => {
   });
 
   if (!data) {
-    throw new Error("Fail to get html");
+    return (
+      <>
+        <Header />
+        <h1>Fail to get html</h1>
+        <Footer />
+      </>
+    );
   }
 
   return (

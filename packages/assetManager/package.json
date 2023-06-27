@@ -8,7 +8,7 @@
     "lint": "eslint \"src/**/*.ts*\"",
     "tsc": "tsc --noEmit",
     "dev": "npm run clean && npm run build:types && webpack --watch",
-    "build": "npm run clean && webpack --mode production",
+    "build": "npm run clean && npm run build:types && webpack --mode production",
     "build:types": "tsc --emitDeclarationOnly",
     "clean": "rimraf dist"
   },
