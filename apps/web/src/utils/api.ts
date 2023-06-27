@@ -55,27 +55,20 @@ export interface CompilerData {
 }
 
 export const getHtml = async (data: GetHTML): Promise<CompilerData> => {
-  try {
-    const res = await api.getHTML({
-      projectId: data.project,
-      slug: data.item,
-    });
-    const r = await res.json();
+  const res = await api.getHTML({
+    projectId: data.project,
+    slug: data.item,
+  });
+  const r = await res.json();
 
-    if (r.blocks) {
-      return r;
-    }
+  if (r.blocks) {
+    return r;
+  }
 
-    if (typeof r === "object" && "message" in r) {
-      throw new Error(r.message);
-    } else {
-      throw new Error("Fail to get html");
-    }
-  } catch (e) {
-    if (process.env["NODE_ENV"] !== "production") {
-      console.error(e);
-    }
-    throw e;
+  if (typeof r === "object" && "message" in r) {
+    throw new Error(r.message);
+  } else {
+    throw new Error("Fail to get html");
   }
 };
 

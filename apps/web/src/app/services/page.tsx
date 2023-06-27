@@ -17,12 +17,17 @@ const Services = async (): Promise<ReactElement> => {
       </>
     );
   }
+  let data;
 
-  const data = await getHtml({
-    project: apiKey,
-    collection: "page",
-    item: "about",
-  });
+  try {
+    data = await getHtml({
+      project: apiKey,
+      collection: "page",
+      item: "about",
+    });
+  } catch (e) {
+    data = null;
+  }
 
   if (!data) {
     return (
