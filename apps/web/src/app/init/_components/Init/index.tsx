@@ -1,8 +1,8 @@
 "use client";
 
 import { Connect } from "../Connect";
-import { Docs } from "../Docs";
 import { NotFound } from "../NotFound";
+import { Install } from "@brizy/docs-react";
 import { getBaseUrl } from "@utils/common";
 import { useSearchParams } from "next/navigation";
 import React, { ReactElement, useMemo } from "react";
@@ -16,7 +16,7 @@ export const Init = (): ReactElement => {
   }, []);
 
   return token ? (
-    <Docs token={token} />
+    <Install token={token} />
   ) : host ? (
     <Connect host={host} />
   ) : (
