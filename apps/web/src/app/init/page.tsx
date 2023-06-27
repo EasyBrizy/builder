@@ -12,6 +12,7 @@ const Init = (): ReactElement => {
   const host = useMemo(() => {
     return getBaseUrl();
   }, []);
+
   return (
     <>
       {token ? (

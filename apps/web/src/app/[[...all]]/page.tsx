@@ -1,8 +1,7 @@
+import Config from "@config";
 import { getHtml } from "@utils/api";
 import React, { ReactElement } from "react";
 import { Brizy } from "ui";
-
-const apiKey = process.env["API_KEY"];
 
 interface Props {
   params: { all?: Array<string> };
@@ -11,6 +10,7 @@ interface Props {
 export default async function Page(props: Props): Promise<ReactElement> {
   const { params } = props;
   const [item] = params.all ?? [];
+  const apiKey = Config.apiKey;
 
   if (!apiKey) {
     throw Error("Missing api key");

@@ -1,9 +1,10 @@
+import Config from "@config";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const apiKey = process.env["API_KEY"];
+  const apiKey = Config.apiKey;
 
   if (!apiKey && path !== "/init") {
     return NextResponse.redirect(new URL("/init", request.url));

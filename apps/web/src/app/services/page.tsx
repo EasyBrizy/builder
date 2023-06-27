@@ -1,12 +1,13 @@
 import { Footer } from "@components/Footer";
 import { Header } from "@components/Header";
+import Config from "@config";
 import { getHtml } from "@utils/api";
 import React, { ReactElement } from "react";
 import { Brizy } from "ui";
 
-const apiKey = process.env["API_KEY"];
-
 const Services = async (): Promise<ReactElement> => {
+  const apiKey = Config.apiKey;
+
   if (!apiKey) {
     return (
       <>
