@@ -1,42 +1,14 @@
-import { Layout } from "@components/Layout";
+import { Footer } from "@components/Footer";
+import { Header } from "@components/Header";
 import { getHtml } from "@utils/api";
 import React, { ReactElement } from "react";
-import { Brizy, Scripts, Styles } from "ui";
+import { Brizy } from "ui";
 
 const apiKey = process.env["API_KEY"];
 
-const styles = {
-  height: "80px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flexDirection: "column",
-  backgroundColor: "antiquewhite",
-};
-
-const Header = () => (
-  <header style={styles}>
-    <h1>Services page</h1>
-    <p>My Custom header</p>
-  </header>
-);
-
-const Footer = () => (
-  <footer style={styles}>
-    <h4>Footer Copyright</h4>
-    <p>My Custom footer</p>
-  </footer>
-);
-
 const Services = async (): Promise<ReactElement> => {
   if (!apiKey) {
-    return (
-      <Layout>
-        <Header />
-        <h1>Missing api key</h1>
-        <Footer />
-      </Layout>
-    );
+    throw new Error("Missing api keys");
   }
 
   const data = await getHtml({
@@ -45,15 +17,18 @@ const Services = async (): Promise<ReactElement> => {
     item: "about",
   });
 
-  const head = <Styles data={data} />;
+  if (!data) {
+    throw new Error("Fail to get html");
+  }
 
   return (
-    <Layout head={head}>
+    <>
       <Header />
+
       <Brizy data={data} />
+
       <Footer />
-      <Scripts data={data} />
-    </Layout>
+    </>
   );
 };
 

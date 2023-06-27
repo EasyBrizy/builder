@@ -1,13 +1,12 @@
-import { CompilerData } from "../types";
-import { getAssets } from "@brizy/assetmanager";
+import { Assets } from "@brizy/assetmanager/dist/types";
 import React, { ReactElement } from "react";
 
 export interface Props {
-  data: CompilerData;
+  data: Assets;
 }
 
 export const Scripts = (props: Props): ReactElement => {
-  const data = getAssets(props.data);
+  const data = props.data;
 
   return (
     <>

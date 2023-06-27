@@ -12,6 +12,12 @@
     "web#dev": {
       "dependsOn": ["@brizy/assetmanager#build", "@brizy/docs-react#build"]
     },
+    "ui#dev": {
+      "dependsOn": ["@brizy/assetmanager#build"]
+    },
+    "ui#build": {
+      "dependsOn": ["@brizy/assetmanager#build"]
+    },
     "lint": {},
     "dev": {
       "cache": false,

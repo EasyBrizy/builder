@@ -75,9 +75,7 @@ export const getHtml = async (data: GetHTML): Promise<CompilerData> => {
     if (process.env["NODE_ENV"] !== "production") {
       console.error(e);
     }
-    return {
-      blocks: { freeStyles: [], freeScripts: [], body: `${e}` },
-    };
+    throw e;
   }
 };
 

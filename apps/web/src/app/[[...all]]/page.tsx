@@ -1,8 +1,6 @@
-import { Layout } from "@components/Layout";
 import { getHtml } from "@utils/api";
-import { redirect } from "next/navigation";
 import React, { ReactElement } from "react";
-import { Brizy, Scripts, Styles } from "ui";
+import { Brizy } from "ui";
 
 const apiKey = process.env["API_KEY"];
 
@@ -10,13 +8,12 @@ interface Props {
   params: { all?: Array<string> };
 }
 
-export default async function Page(props: Props): Promise<ReactElement | null> {
+export default async function Page(props: Props): Promise<ReactElement> {
   const { params } = props;
   const [item] = params.all ?? [];
 
   if (!apiKey) {
-    redirect("/init");
-    return null;
+    throw Error("Missing api key");
   }
 
   const data = await getHtml({
@@ -24,12 +21,10 @@ export default async function Page(props: Props): Promise<ReactElement | null> {
     collection: "page",
     item: item,
   });
-  const head = <Styles data={data} />;
 
-  return (
-    <Layout head={head}>
-      <Brizy data={data} />
-      <Scripts data={data} />
-    </Layout>
-  );
+  if (!data) {
+    throw Error(`Fail to get html, ${data}`);
+  }
+
+  return <Brizy data={data} />;
 }
