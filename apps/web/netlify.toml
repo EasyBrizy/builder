@@ -1,6 +1,6 @@
 # app netlify.toml
 [build]
-  command = "yarn build"
+  command = "npm build"
   functions = "functions"
   publish = "public"
 
