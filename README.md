@@ -11,6 +11,7 @@ This Turborepo includes the following packages/example:
 - `nextjs`: a [Next.js](https://nextjs.org/) example
 - `assetManager`: Brizy compiler asset manager shared in `ui` applications
 - `documentation`: a stub React component library shared in `nextjs` applications
+- `documentation-vue`: a stub vue component library shared in `nuxtjs` applications
 - `eslint-config-custom`: `eslint` configurations
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
 - `prettier-config`: `prettier.config.js`s used to opinionated code formatter
