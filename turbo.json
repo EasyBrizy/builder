@@ -6,7 +6,7 @@
       "cache": false,
       "persistent": false,
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+      "outputs": [".next/**", "!.next/cache/**", ".vercel/**"]
     },
     "dev": {
       "cache": false,
