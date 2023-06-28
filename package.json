@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "build:web": "turbo build --filter=web",
+    "build": "turbo run build",
+    "build:web": "turbo run build --filter=web",
     "dev:web": "turbo run dev --filter=web",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
