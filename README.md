@@ -1,6 +1,6 @@
 # Deploy on Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FEasyBrizy%2Fnextjs&env=API_KEY&project-name=easybrizynextjs&repository-name=easybrizynextjs&demo-title=EasyBrizy&demo-description=Brizy%20with%20NextJS&demo-url=https%3A%2F%2Fbrizy.io&demo-image=https%3A%2F%2Fa-cloud.b-cdn.net%2Fmedia%2Foriginal%2F48784df12e0f26e18235bde2ecd5510a%2Fimage.svg)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FEasyBrizy%2Fnextjs&env=API_KEY&project-name=easybrizynextjs&repository-name=easybrizynextjs&demo-title=EasyBrizy&demo-description=Brizy%20with%20NextJS&demo-url=https%3A%2F%2Fbrizy.io&demo-image=https%3A%2F%2Fa-cloud.b-cdn.net%2Fmedia%2Foriginal%2F48784df12e0f26e18235bde2ecd5510a%2Fimage.svg&root-directory=apps%2Fweb&envDescription=Set%20API_KEY%20with%20empty%20value%20%22%22)
 
 # Deploy on Netlify:
 
