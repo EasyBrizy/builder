@@ -1,6 +1,6 @@
 # app netlify.toml
 [build]
-  command = "npm build"
+  command = "npm run build"
   functions = "functions"
   publish = "public"
 
