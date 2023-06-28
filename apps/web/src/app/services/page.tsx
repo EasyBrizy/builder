@@ -1,3 +1,4 @@
+import { Error as ControlError } from "@components/Error";
 import { Footer } from "@components/Footer";
 import { Header } from "@components/Header";
 import Config from "@config";
@@ -9,10 +10,11 @@ const Services = async (): Promise<ReactElement> => {
   const apiKey = Config.apiKey;
 
   if (!apiKey) {
+    const err = Error("Missing api keys");
     return (
       <>
         <Header />
-        <h1>Missing api keys</h1>
+        <ControlError error={err} />
         <Footer />
       </>
     );
@@ -30,10 +32,11 @@ const Services = async (): Promise<ReactElement> => {
   }
 
   if (!data) {
+    const err = Error("Missing api keys");
     return (
       <>
         <Header />
-        <h1>Fail to get html</h1>
+        <ControlError error={err} />
         <Footer />
       </>
     );
