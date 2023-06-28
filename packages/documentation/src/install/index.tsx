@@ -1,7 +1,7 @@
 import { Divider } from "./Divider";
 import { Information } from "./Information";
 import { Steps } from "./Steps";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 export interface Props {
   token: string;

@@ -3,25 +3,16 @@
   "globalDependencies": ["**/.env.*local"],
   "pipeline": {
     "build": {
+      "cache": false,
+      "persistent": false,
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
-    "web#build": {
-      "dependsOn": ["@brizy/assetmanager#build", "@brizy/docs-react#build"]
-    },
-    "web#dev": {
-      "dependsOn": ["@brizy/assetmanager#build", "@brizy/docs-react#build"]
-    },
-    "ui#dev": {
-      "dependsOn": ["@brizy/assetmanager#build"]
-    },
-    "ui#build": {
-      "dependsOn": ["@brizy/assetmanager#build"]
-    },
-    "lint": {},
     "dev": {
       "cache": false,
-      "persistent": true
-    }
+      "persistent": false,
+      "dependsOn": ["^build"]
+    },
+    "lint": {}
   }
 }

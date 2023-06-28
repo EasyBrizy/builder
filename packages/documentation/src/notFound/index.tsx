@@ -1,5 +1,5 @@
 import Warning from "./assets/warning.svg";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 export const NotFound = (): ReactElement => {
   return (

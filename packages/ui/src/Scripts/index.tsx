@@ -1,5 +1,5 @@
 import { Assets } from "@brizy/assetmanager/dist/types";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 export interface Props {
   data: Assets;

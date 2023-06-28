@@ -1,11 +1,11 @@
 import { Description } from "./Description";
 import { Title } from "./Title";
-import React from "react";
+import { ReactElement } from "react";
 
 interface Props {
   title: string;
 }
-export const Information = ({ title }: Props) => {
+export const Information = ({ title }: Props): ReactElement => {
   return (
     <div className="flex flex-col flex-[1_1_0%] my-[25px] mx-[15px] md:my-[20px] md:mr-[18px]">
       <Title title={title} />

@@ -2,11 +2,7 @@
   "extends": "tsconfig/base.json",
   "compilerOptions": {
     "baseUrl": "src",
-    "esModuleInterop": true,
-    "outDir": "dist",
-    "declarationMap": false,
-    "declaration": true,
-    "emitDeclarationOnly": false
+    "outDir": "dist"
   },
   "include": ["src"],
   "exclude": ["dist", "build", "node_modules"]

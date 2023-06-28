@@ -2,12 +2,8 @@
   "extends": "tsconfig/react-library.json",
   "compilerOptions": {
     "baseUrl": "src",
-    "esModuleInterop": true,
-    "outDir": "dist",
-    "declarationMap": false,
-    "declaration": true,
-    "emitDeclarationOnly": false
+    "outDir": "dist"
   },
   "include": ["src"],
-  "exclude": ["dist", "build", "node_modules"]
+  "exclude": ["dist", "node_modules"]
 }

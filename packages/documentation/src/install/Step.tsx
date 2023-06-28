@@ -1,5 +1,5 @@
 import Check from "./asset/check.svg";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   title: string;

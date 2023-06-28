@@ -2,7 +2,7 @@ import { Scripts } from "./Scripts";
 import { Styles } from "./Styles";
 import { CompilerData } from "./types";
 import { getAssets, getHtml } from "@brizy/assetmanager";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 export interface Props {
   data: CompilerData;

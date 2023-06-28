@@ -1,10 +1,10 @@
 import { Step } from "./Step";
-import React from "react";
+import { ReactElement } from "react";
 
 interface Props {
   token: string;
 }
-export const Steps = ({ token }: Props) => {
+export const Steps = ({ token }: Props): ReactElement => {
   return (
     <div className="flex flex-col flex-[2_2_0%] mx-[15px] md:my-[20px] md:ml-[15px] lg:ml-[75px]">
       <div className="mb-[15px] md:mb-[0px]" />
