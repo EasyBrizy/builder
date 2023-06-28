@@ -1,13 +1,8 @@
-# app netlify.toml
 [build]
   command = "npm run build"
-  functions = "functions"
-  publish = "public"
-
-[build.environment]
-  APP_SPECIFIC_FLAG = "true"
+  publish = "apps/web/.next"
 
 [[redirects]]
-  from = "/some-legacy-routes/*"
+  from = "/*"
   to = "/index.html"
   status = 200
