@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
 import { Asset, AssetLibsMap } from "../../types";
 import { MValue } from "../types";
 

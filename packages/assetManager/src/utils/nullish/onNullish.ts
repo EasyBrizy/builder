@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Nullish } from "../types";
 import { isNullish } from "./isNullish";
 
