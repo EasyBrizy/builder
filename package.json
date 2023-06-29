@@ -1,9 +1,9 @@
 {
+  "name": "brizy-preview",
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "build:web": "turbo run build --filter=web",
-    "dev:web": "turbo run dev --filter=web",
+    "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
@@ -14,10 +14,9 @@
     "prettier": "^2.5.1",
     "turbo": "^1.9.7"
   },
-  "name": "brizy-preview",
   "packageManager": "npm@9.5.1",
   "workspaces": [
-    "apps/*",
+    "examples/*",
     "packages/*"
   ]
 }

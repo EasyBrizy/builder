@@ -8,19 +8,27 @@
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "dependsOn": ["^dev"]
     },
 
-    "web#build": {
+    "@brizy/nextjs#build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
 
-    "web#dev": {
+    "@brizy/nextjs#dev": {
       "cache": false,
-      "persistent": true,
-      "dependsOn": ["^build"]
+      "persistent": true
     },
+
+    "ui#dev": {
+      "dependsOn": ["@brizy/assetmanager#dev"]
+    },
+
+    "@brizy/assetmanager#dev":{},
+
+    "@brizy/docs-react#dev": {},
 
     "lint": {}
   }
