@@ -23,7 +23,7 @@ export const Welcome = ({ href }: Props): ReactElement => {
         Welcome to Brizy
       </div>
       <div className="text-center text-[15px] font-light pb-[50px] leading-[24px] lg:text-[20px] lg:w-[820px] lg:leading-[38px]">
-        To integrate our template on Verce please click on{" "}
+        To integrate our template on Vercel please click on{" "}
         <span className="font-bold text-oceanBlue">connect</span> button to
         receive the API_KEY.
       </div>

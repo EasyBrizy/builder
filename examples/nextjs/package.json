@@ -9,21 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@brizy/docs-react": "*",
     "next": "^13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ui": "*",
-    "@brizy/docs-react": "*"
+    "ui": "*"
   },
   "devDependencies": {
+    "@brizy/eslint-config": "*",
     "@brizy/prettier-config": "*",
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
     "autoprefixer": "^10.4.14",
     "eslint-config-next": "^13.4.1",
-    "@brizy/eslint-config": "*",
-    "tsconfig": "*",
-    "typescript": "^4.5.3"
+    "@brizy/tsconfig": "*"
   }
 }
