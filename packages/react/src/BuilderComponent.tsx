@@ -8,7 +8,7 @@ export interface Props {
   data: CompilerData;
 }
 
-export const Brizy = (props: Props): ReactElement => {
+export const BuilderComponent = (props: Props): ReactElement => {
   const assets = getAssets(props.data);
 
   return (
