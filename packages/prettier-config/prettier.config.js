@@ -6,6 +6,6 @@ module.exports = {
   jsxBracketSameLine: false,
   endOfLine: "lf",
   bracketSpacing: true,
-  importOrder: ["^ui/(.*)$", "^[./]"],
+  importOrder: ["^@brizy/(.*)$", "^[./]"],
   importOrderSortSpecifiers: true
 };
