@@ -37,6 +37,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Deploy on Netlify
 
-[![Deploy](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/EasyBrizy/nextjs&base=/&dir=examples/nextjs/.next)
+[![Deploy](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/EasyBrizy/nextjs&base=examples/nextjs)
 
 More details about deploy on [Netlify Platform](https://docs.netlify.com/get-started/#deploy-a-project-to-netlify).
