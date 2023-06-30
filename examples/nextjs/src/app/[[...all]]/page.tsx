@@ -1,7 +1,7 @@
+import { BuilderComponent } from "@brizy/react";
 import Config from "@config";
 import { getHtml } from "@utils/api";
 import React, { ReactElement } from "react";
-import { Brizy } from "ui";
 
 interface Props {
   params: { all?: Array<string> };
@@ -26,5 +26,5 @@ export default async function Page(props: Props): Promise<ReactElement> {
     throw Error(`Fail to get html, ${data}`);
   }
 
-  return <Brizy data={data} />;
+  return <BuilderComponent data={data} />;
 }

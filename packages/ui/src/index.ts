@@ -1,1 +1,0 @@
-export { Brizy } from "./Brizy";

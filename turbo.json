@@ -22,11 +22,11 @@
       "persistent": true
     },
 
-    "ui#dev": {
+    "@brizy/react#dev": {
       "dependsOn": ["@brizy/assetmanager#dev"]
     },
 
-    "@brizy/assetmanager#dev":{},
+    "@brizy/assetmanager#dev": {},
 
     "@brizy/docs-react#dev": {},
 
