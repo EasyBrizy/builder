@@ -7,7 +7,7 @@ interface APIData {
   slug?: string;
 }
 
-export const brizyHost = "https://beta1.brizy.cloud";
+export const brizyHost = "https://beta1.brizydemo.com";
 export const linkShareUid = "TGh6Xkll111EfZd";
 
 class API {
