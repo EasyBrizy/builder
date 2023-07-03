@@ -12,7 +12,7 @@ For example: `"lint": "eslint \"src/**/*.ts*\""`
 
 ## Usage
 
-Create an .eslintrc.js in root folder of your project
+Create an .eslintrc in root folder of your project
 
 Add a directive `"extends": ["@brizy/eslint-config"]` or/and another configs
 
@@ -28,7 +28,7 @@ module.exports = {
 
 Note that `"extends"` applies string[] of configs
 
-### If you need to override config, for example add specified rules for your project you can add them in `.eslintrc.js` file
+### If you need to override config, for example add specified rules for your project you can add them in `.eslintrc` file
 
 ```
 module.exports = {

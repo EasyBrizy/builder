@@ -36,6 +36,8 @@
 
     "@brizy/docs-vue#dev": {},
 
+    "@brizy/sdk#dev": {},
+
     "lint": {},
     "tsc": {
       "dependsOn": ["^build"]
