@@ -9,12 +9,12 @@ This Turborepo includes the following packages/example:
 ### Examples and Packages
 
 - `nextjs`: a [Next.js](https://nextjs.org/) example
-- `assetManager`: Brizy compiler asset manager shared in `ui` applications
+- `assetManager`: Brizy compiler asset manager shared in `react` applications
 - `documentation`: a stub React component library shared in `nextjs` applications
 - `eslint-config-custom`: `eslint` configurations
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
 - `prettier-config`: `prettier.config.js`s used to opinionated code formatter
-- `ui`: a stub React component library shared in `nextjs` applications
+- `react`: a stub React component library shared in `nextjs` applications
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
