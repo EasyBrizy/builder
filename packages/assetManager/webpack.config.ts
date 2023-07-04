@@ -1,5 +1,6 @@
 // @ts-ignore
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.ts",
@@ -13,6 +14,7 @@ module.exports = {
     extensions: [".js", ".json", ".ts", ".tsx"],
     alias: {
       "@utils": path.resolve(__dirname, "src/utils/"),
+      process: "process/browser",
     },
   },
   module: {
@@ -24,4 +26,9 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      process: "process/browser",
+    }),
+  ],
 };

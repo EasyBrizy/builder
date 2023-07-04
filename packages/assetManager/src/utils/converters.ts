@@ -6,6 +6,7 @@ import {
   Fonts,
   FreeScripts,
   FreeStyles,
+  ProStyles,
 } from "../types";
 import { pipe } from "./fp/pipe";
 import { throwOnNullish } from "./nullish/throwOnNullish";
@@ -16,6 +17,7 @@ import { MValue } from "./types";
 import { mPipe } from "fp-utilities/dist/mPipe";
 import { optional } from "fp-utilities/dist/parsers/parse";
 import { parseStrict } from "fp-utilities/dist/parsers/parseStrict";
+import * as process from "process";
 
 const readStyles = parseStrict<Record<string, unknown>, FreeStyles>({
   main: pipe(
@@ -57,6 +59,33 @@ const readStyles = parseStrict<Record<string, unknown>, FreeStyles>({
       (v) => v as unknown as Asset[] | undefined
     ),
     throwOnNullish("Invalid blocks: pageStyles")
+  ),
+});
+
+const readProStyles = parseStrict<Record<string, unknown>, ProStyles>({
+  main: pipe(
+    mPipe(
+      Obj.readKey("main"),
+      Obj.read,
+      (v) => v as unknown as Asset | undefined
+    ),
+    throwOnNullish("Invalid blocks: main")
+  ),
+  generic: pipe(
+    mPipe(Obj.readKey("generic"), Arr.read, (v) => (v as Asset[]) ?? []),
+    throwOnNullish("Invalid blocks: generic")
+  ),
+  libsMap: pipe(
+    mPipe(
+      Obj.readKey("libsMap"),
+      Arr.read,
+      (v) => v as unknown as AssetLibsMap[] | undefined
+    ),
+    throwOnNullish("Invalid blocks: libsMap")
+  ),
+  libsSelectors: pipe(
+    mPipe(Obj.readKey("libsSelectors"), Arr.readWithItemReader(Str.read)),
+    throwOnNullish("Invalid blocks: libsSelectors")
   ),
 });
 
@@ -103,7 +132,7 @@ const blocksReader = parseStrict<
     mPipe(Obj.readKey("body"), Str.read),
     throwOnNullish("Invalid blocks: body")
   ),
-  proStyles: optional(mPipe(Obj.readKey("proStyles"), Obj.read, readStyles)),
+  proStyles: optional(mPipe(Obj.readKey("proStyles"), Obj.read, readProStyles)),
   proScripts: optional(mPipe(Obj.readKey("proScripts"), Obj.read, readScripts)),
 });
 
@@ -124,6 +153,10 @@ export const parseCompileData = (
   try {
     return reader(data);
   } catch (e) {
+    if (process.env["NODE_ENV"] === "development") {
+      console.error(e);
+    }
+
     return undefined;
   }
 };
