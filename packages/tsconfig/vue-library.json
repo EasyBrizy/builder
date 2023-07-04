@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Vue Library",
+  "extends": "@vue/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": false,
+    "moduleResolution": "node"
+  },
+  "exclude": ["node_modules"]
+}
