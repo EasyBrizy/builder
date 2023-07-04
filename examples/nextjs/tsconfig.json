@@ -6,7 +6,7 @@
     "baseUrl": "src",
     "paths": {
       "@utils/*": ["utils/*"],
-      "@config": ["config"],
+      "@builderConfig": ["builderConfig"],
       "@components/*": ["components/*"],
       "@styles/*": ["styles/*"]
     }
