@@ -1,16 +1,17 @@
 import "@styles/globals.css";
 import { Metadata } from "next";
+import { ReactElement, ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: "Brizy",
   description: "Brizy NextJS",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+interface Props {
+  children: ReactNode;
+}
+
+export default function RootLayout({ children }: Props): ReactElement {
   return (
     <html lang="en">
       <body>{children}</body>

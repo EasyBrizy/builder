@@ -1,4 +1,5 @@
 import Config from "@config";
+import { builderRedirects } from "@utils/common";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -12,6 +13,14 @@ export function middleware(request: NextRequest) {
 
   if (apiKey && path === "/init") {
     return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  for (const basePath in builderRedirects) {
+    if (path.startsWith(`/${basePath}`)) {
+      const toUrl = new URL(`/${builderRedirects[basePath]}`, request.url);
+
+      return NextResponse.redirect(toUrl);
+    }
   }
 
   return NextResponse.next();

@@ -15,7 +15,6 @@ export default async function Page(props: Props): Promise<ReactElement> {
 
   try {
     const data = await api.getHTMLByItem({
-      collection: "page",
       item: item,
     });
 
