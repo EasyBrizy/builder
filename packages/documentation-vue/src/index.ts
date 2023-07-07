@@ -1,6 +1,3 @@
-import Install from "./install/index.vue";
-import NotFound from "./notFound/index.vue";
-import "./styles/globals.css";
-import Welcome from "./welcome/index.vue";
-
-export { Install, NotFound, Welcome };
+export { default as Welcome } from "./pages/welcome/index.vue";
+export { default as Install } from "./pages/install/index.vue";
+export { default as NotFound } from "./pages/NotFound/index.vue";

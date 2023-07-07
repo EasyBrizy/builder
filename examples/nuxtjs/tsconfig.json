@@ -1,0 +1,3 @@
+{
+  "extends": "@brizy/tsconfig/nuxtjs.json",
+}
