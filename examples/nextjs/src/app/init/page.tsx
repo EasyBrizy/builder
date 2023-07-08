@@ -1,7 +1,7 @@
 "use client";
 
 import { Install, NotFound, Welcome } from "@brizy/docs-react";
-import { brizyHost, linkShareUid } from "@utils/api";
+import Config from "@config";
 import { getUrl } from "@utils/common";
 import { useSearchParams } from "next/navigation";
 import React, { ReactElement, useMemo } from "react";
@@ -12,15 +12,14 @@ const Init = (): ReactElement => {
   const redirectUrl = useMemo(() => {
     return getUrl("/init");
   }, []);
+  const { builderWelcomeUrl } = Config;
 
   return (
     <>
       {token ? (
         <Install token={token} />
       ) : redirectUrl ? (
-        <Welcome
-          href={`${brizyHost}/share/${linkShareUid}?redirectUrl=${redirectUrl}`}
-        />
+        <Welcome href={`${builderWelcomeUrl}?redirectUrl=${redirectUrl}`} />
       ) : (
         <NotFound />
       )}

@@ -22,12 +22,22 @@
       "persistent": true
     },
 
+    "@brizy/nuxtjs#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".nuxt/**"]
+    },
+
+    "@brizy/nuxtjs#dev": {
+      "cache": false,
+      "persistent": true
+    },
+
     "@brizy/react#dev": {
-      "dependsOn": ["@brizy/assetmanager#dev"]
+      "dependsOn": ["@brizy/assetmanager#dev", "@brizy/sdk#dev"]
     },
 
     "@brizy/vue#dev": {
-      "dependsOn": ["@brizy/assetmanager#dev"]
+      "dependsOn": ["@brizy/assetmanager#dev", "@brizy/sdk#dev"]
     },
 
     "@brizy/assetmanager#dev": {},

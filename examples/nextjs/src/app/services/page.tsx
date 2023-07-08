@@ -2,14 +2,15 @@ import { BuilderComponent } from "@brizy/react";
 import { Error as ControlError } from "@components/Error";
 import { Footer } from "@components/Footer";
 import { Header } from "@components/Header";
-import { getHtml } from "@utils/api";
+import { API } from "@utils/api";
 import React, { ReactElement } from "react";
 
 const Services = async (): Promise<ReactElement> => {
   let data;
 
   try {
-    data = await getHtml({
+    const api = API.getInstance();
+    data = await api.getHTMLByItem({
       collection: "page",
       item: "about",
     });

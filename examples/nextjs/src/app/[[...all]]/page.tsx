@@ -1,5 +1,5 @@
 import { BuilderComponent } from "@brizy/react";
-import { getHtml } from "@utils/api";
+import { API } from "@utils/api";
 import React, { ReactElement } from "react";
 
 interface Props {
@@ -9,8 +9,9 @@ interface Props {
 export default async function Page(props: Props): Promise<ReactElement> {
   const { params } = props;
   const [item] = params.all ?? [];
+  const api = API.getInstance();
 
-  const data = await getHtml({
+  const data = await api.getHTMLByItem({
     collection: "page",
     item: item,
   });
