@@ -1,0 +1,17 @@
+{
+  "name": "@brizy/utils",
+  "version": "1.0.0",
+  "description": "Collection of utils created for Brizy development",
+  "main": "index.ts",
+  "types": "index.ts",
+  "devDependencies": {
+    "@brizy/tsconfig": "*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "files": [
+    "package.json",
+    "index.js"
+  ]
+}
