@@ -16,6 +16,7 @@ export const makeScripts = (asset: Assets): MValue<Array<Scripts>> => {
         {
           attr: classToClassName(content.attr ?? {}),
           html: content.content,
+          name: asset.name,
         },
       ];
     }
@@ -50,6 +51,7 @@ export const makeScripts = (asset: Assets): MValue<Array<Scripts>> => {
           attr: {
             ...normalizeAttr(content.attr ?? {}),
             src: content.url,
+            name: asset.name,
           },
         },
       ];
