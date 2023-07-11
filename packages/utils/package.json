@@ -2,8 +2,8 @@
   "name": "@brizy/utils",
   "version": "1.0.0",
   "description": "Collection of utils created for Brizy development",
-  "main": "index.ts",
-  "types": "index.ts",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
   "devDependencies": {
     "@brizy/tsconfig": "*"
   },

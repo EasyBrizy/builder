@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@brizy/docs-react": "*",
+    "@brizy/utils": "*",
     "next": "^13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -19,11 +20,11 @@
   "devDependencies": {
     "@brizy/eslint-config": "*",
     "@brizy/prettier-config": "*",
+    "@brizy/tsconfig": "*",
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
     "autoprefixer": "^10.4.14",
-    "eslint-config-next": "^13.4.1",
-    "@brizy/tsconfig": "*"
+    "eslint-config-next": "^13.4.1"
   }
 }
