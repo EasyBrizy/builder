@@ -1,4 +1,4 @@
-const builderHost = "https://beta1.brizydemo.com";
+const builderHost = "https://brizy.cloud";
 
 const Config = {
   apiKey: process.env["API_KEY"] ?? "",
