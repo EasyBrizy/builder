@@ -11,16 +11,16 @@ export class PageController {
   //#region getPages
 
   async getPages(slug?: string): Promise<CompilerData> {
-    const baseURL = `${this.resource.getDomain()}/projects/${this.resource.getApiKey()}/pages/compiled/html`;
-    const params = {
-      placeholders_enabled: "1",
-      content_type: "array",
-      ...(slug && { page_slug: slug }),
-    };
-
-    const url: string = makeUrl(baseURL, params);
-
     try {
+      const baseURL = `${this.resource.getDomain()}/projects/${this.resource.getApiKey()}/pages/compiled/html`;
+      const params = {
+        placeholders_enabled: "1",
+        content_type: "array",
+        ...(slug && { page_slug: slug }),
+      };
+
+      const url: string = makeUrl(baseURL, params);
+
       const response: Response = await fetch(url);
       const rj = await response.json();
 
@@ -31,10 +31,10 @@ export class PageController {
       if (typeof rj === "object" && "message" in rj) {
         throw new Error(rj.message);
       } else {
-        throw new Error("Fail to get html");
+        throw new Error("Fail to get HTML");
       }
     } catch (e) {
-      throw new Error("Something went wrong, please try again...");
+      throw new Error(e as string);
     }
   }
 
