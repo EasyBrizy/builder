@@ -1,20 +1,32 @@
-import Config from "@config";
+import BuilderConfig from "@builderConfig";
+import { API } from "@utils/api";
+import { getReqCookieLang } from "@utils/cookie";
+import { languageRedirect } from "@utils/language";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+const generateURL = (locale: string, path: string, request: NextRequest): URL =>
+  new URL(locale ? `${locale}${path}` : path, request.url);
+
+export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const apiKey = Config.apiKey;
+  const apiKey = BuilderConfig.apiKey;
+  const api = API.getInstance();
+  const config = await api.getConfig();
 
   if (!apiKey && path !== "/init") {
-    return NextResponse.redirect(new URL("/init", request.url));
+    return NextResponse.redirect(
+      generateURL(getReqCookieLang(request), "/init", request)
+    );
   }
 
   if (apiKey && path === "/init") {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(
+      generateURL(getReqCookieLang(request), "/", request)
+    );
   }
 
-  return NextResponse.next();
+  return languageRedirect(config, request, path);
 }
 
 export const config = {
