@@ -11,14 +11,18 @@ export default async function Page(props: Props): Promise<ReactElement> {
   const [item] = params.all ?? [];
   const api = API.getInstance();
 
-  const data = await api.getHTMLByItem({
-    collection: "page",
-    item: item,
-  });
+  try {
+    const data = await api.getHTMLByItem({
+      collection: "page",
+      item: item,
+    });
 
-  if (!data) {
-    throw Error(`Fail to get html, ${data}`);
+    if (!data) {
+      throw Error(`Fail to get html, ${data}`);
+    }
+
+    return <BuilderComponent data={data} />;
+  } catch (e) {
+    return <h1 style={{ color: "red" }}>Something went wrong...</h1>;
   }
-
-  return <BuilderComponent data={data} />;
 }
