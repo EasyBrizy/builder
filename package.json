@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
+    "build:nextjs": "turbo build --scope='@brizy/nextjs'",
+    "build:nuxtjs": "turbo build --scope='@brizy/nuxtjs'",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "tsc": "turbo run tsc",
