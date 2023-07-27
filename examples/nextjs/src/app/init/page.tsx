@@ -1,30 +1,14 @@
-"use client";
+import { Base } from "./components/base";
+import React, { ReactElement } from "react";
 
-import { Install, NotFound, Welcome } from "@brizy/docs-react";
-import Config from "@config";
-import { getUrl } from "@utils/common";
-import { useSearchParams } from "next/navigation";
-import React, { ReactElement, useMemo } from "react";
+interface Props {
+  searchParams: { [key: string]: string | undefined };
+}
 
-const Init = (): ReactElement => {
-  const searchParams = useSearchParams();
-  const token = searchParams.get("token");
-  const redirectUrl = useMemo(() => {
-    return getUrl("/init");
-  }, []);
-  const { builderWelcomeUrl } = Config;
+const Init = (props: Props): ReactElement => {
+  const token = props.searchParams.token;
 
-  return (
-    <>
-      {token ? (
-        <Install token={token} />
-      ) : redirectUrl ? (
-        <Welcome href={`${builderWelcomeUrl}?redirectUrl=${redirectUrl}`} />
-      ) : (
-        <NotFound />
-      )}
-    </>
-  );
+  return <Base token={token} />;
 };
 
 export default Init;
