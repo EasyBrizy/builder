@@ -17,13 +17,13 @@
     "@brizy/assetmanager": "*",
     "@brizy/sdk": "*",
     "cheerio": "^1.0.0-rc.12",
-    "fp-utilities": "^1.1.4",
-    "react": "^18.0.2",
-    "react-dom": "^18.0.2"
+    "fp-utilities": "^1.1.4"
+  },
+  "peerDependencies": {
+    "react": "^18.0.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
     "@brizy/eslint-config": "*",
     "rimraf": "^5.0.1",
     "@brizy/tsconfig": "*",
