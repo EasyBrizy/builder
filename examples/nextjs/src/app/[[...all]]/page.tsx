@@ -6,6 +6,8 @@ interface Props {
   params: { all?: Array<string> };
 }
 
+export const runtime = "edge";
+
 export default async function Page(props: Props): Promise<ReactElement> {
   const { params } = props;
   const [item] = params.all ?? [];

@@ -5,6 +5,8 @@ import { Header } from "@components/Header";
 import { API } from "@utils/api";
 import React, { ReactElement } from "react";
 
+export const runtime = "edge";
+
 const Services = async (): Promise<ReactElement> => {
   let data;
 
