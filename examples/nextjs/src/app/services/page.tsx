@@ -1,4 +1,4 @@
-import { BuilderComponent } from "@brizy/react";
+import { Builder } from "@components/Builder";
 import { Error as ControlError } from "@components/Error";
 import { Footer } from "@components/Footer";
 import { Header } from "@components/Header";
@@ -32,9 +32,7 @@ const Services = async (): Promise<ReactElement> => {
   return (
     <>
       <Header />
-
-      <BuilderComponent data={data} />
-
+      <Builder data={data} />
       <Footer />
     </>
   );

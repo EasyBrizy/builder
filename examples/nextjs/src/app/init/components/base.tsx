@@ -32,7 +32,7 @@ export const Base: FC<Props> = (props) => {
         setTimeout(() => {
           router.refresh();
           refresh();
-        }, 3000);
+        }, 7000);
       };
 
       refresh();
