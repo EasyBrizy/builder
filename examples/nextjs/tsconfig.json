@@ -7,6 +7,7 @@
     "paths": {
       "@utils/*": ["utils/*"],
       "@config": ["config"],
+      "@lib/*": ["lib/*"],
       "@components/*": ["components/*"],
       "@styles/*": ["styles/*"]
     }

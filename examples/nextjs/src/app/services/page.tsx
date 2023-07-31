@@ -13,7 +13,6 @@ const Services = async (): Promise<ReactElement> => {
   try {
     const api = API.getInstance();
     data = await api.getHTMLByItem({
-      collection: "page",
       item: "about",
     });
   } catch (e) {

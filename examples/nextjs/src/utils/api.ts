@@ -1,12 +1,8 @@
+import { ClientItem, SignIn, User, ResetPass, SignUp } from "./types";
 import { Client, CompilerData } from "@brizy/react";
 import Config from "@config";
 
 //#region API
-
-interface APIData {
-  collection: "page";
-  item?: string;
-}
 
 class API {
   private static instance: API;
@@ -24,8 +20,73 @@ class API {
     return API.instance;
   }
 
-  public getHTMLByItem({ item }: APIData): Promise<CompilerData> {
+  public getHTMLByItem({ item }: ClientItem): Promise<CompilerData> {
     return this.client.page.getPages(item);
+  }
+
+  public async resetPass(data: ResetPass): Promise<User> {
+    try {
+      const r = await fetch(Config.auth.reset, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const user = await r.json();
+
+      if (r.ok && user?.token) {
+        return {
+          id: user._id,
+          token: user.token,
+        };
+      }
+
+      throw new Error("Invalid User");
+    } catch (e) {
+      throw new Error("Fail to reset password");
+    }
+  }
+
+  public async signIn(data: SignIn): Promise<User> {
+    try {
+      const r = await fetch(Config.auth.signIn, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const user = await r.json();
+
+      if (r.ok && user?.token) {
+        return {
+          id: user._id,
+          token: user.token,
+        };
+      }
+      throw new Error("Invalid User");
+    } catch (e) {
+      throw new Error("Fail to SignIn");
+    }
+  }
+
+  public async signUp(data: SignUp): Promise<User> {
+    try {
+      const r = await fetch(Config.auth.register, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const user = await r.json();
+
+      if (r.ok && user?.token) {
+        return {
+          id: user._id,
+          token: user.token,
+        };
+      }
+
+      throw new Error("Invalid User");
+    } catch (e) {
+      throw new Error("Fail to SignUp");
+    }
   }
 }
 

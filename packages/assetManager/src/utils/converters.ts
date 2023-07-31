@@ -153,7 +153,8 @@ export const parseCompileData = (
   try {
     return reader(data);
   } catch (e) {
-    if (process.env["NODE_ENV"] === "development") {
+    // eslint-disable-next-line turbo/no-undeclared-env-vars
+    if (process.env.NODE_ENV === "development") {
       console.error(e);
     }
 
