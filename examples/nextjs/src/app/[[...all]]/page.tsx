@@ -1,4 +1,4 @@
-import { Builder } from "@components/Builder";
+import { PreviewBuilder } from "@components/Builder";
 import { API } from "@utils/api";
 import React, { ReactElement } from "react";
 
@@ -23,7 +23,7 @@ export default async function Page(props: Props): Promise<ReactElement> {
       throw Error(`Fail to get html, ${data}`);
     }
 
-    return <Builder data={data} />;
+    return <PreviewBuilder data={data} />;
   } catch (e) {
     return <h1 style={{ color: "red" }}>Something went wrong...</h1>;
   }
