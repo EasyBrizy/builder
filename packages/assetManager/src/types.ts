@@ -14,6 +14,7 @@ export type Styles = Style | Link;
 export interface Scripts {
   attr?: Record<string, string | boolean>;
   html?: string;
+  name?: string;
 }
 
 export interface AssetCommon {
