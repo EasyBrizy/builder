@@ -1,5 +1,6 @@
 import { Client, CompilerData } from "@brizy/react";
 import Config from "@config";
+import { demoConfig } from "@utils/demo";
 
 //#region API
 
@@ -26,6 +27,14 @@ class API {
 
   public getHTMLByItem({ item }: APIData): Promise<CompilerData> {
     return this.client.page.getPages(item);
+  }
+
+  // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
+  public getItem(_: APIData): Promise<{
+    pageData: Record<string, unknown>;
+    projectData: Record<string, unknown>;
+  }> {
+    return Promise.resolve(demoConfig);
   }
 }
 
