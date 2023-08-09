@@ -49,7 +49,7 @@ export default defineComponent({
   },
   data(): WelcomeData {
     return {
-      hrefValue: "",
+      hrefValue: this.href,
     };
   },
   beforeMount() {

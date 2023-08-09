@@ -1,3 +1,12 @@
 {
-  "extends": "@brizy/tsconfig/nuxtjs.json"
+  "extends": "@brizy/tsconfig/nuxtjs.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@utils/*": ["src/utils/*"],
+      "@config": ["src/config"],
+      "@components/*": ["src/components/*"],
+      "@styles/*": ["src/styles/*"]
+    }
+  }
 }

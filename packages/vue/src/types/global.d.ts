@@ -1,8 +1,9 @@
-import { Builder } from "./types";
+import { Builder, HtmlOutputType } from "./types";
 
+export {};
 declare global {
   interface Window {
-    Builder: Builder;
+    Builder: Builder<HtmlOutputType>;
     isServer: boolean;
   }
 }
