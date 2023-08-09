@@ -2,12 +2,12 @@ name: "(¬‿¬)"
 
 on:
   pull_request:
-    types: [ labeled ]
+    types: [labeled]
 
 jobs:
   tests:
     name: Tests
-    runs-on: [ self-hosted ]
+    runs-on: [self-hosted]
     concurrency:
       group: ${{ github.head_ref || github.run_id }}
       cancel-in-progress: true

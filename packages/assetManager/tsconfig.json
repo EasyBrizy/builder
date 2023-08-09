@@ -1,8 +1,12 @@
 {
   "extends": "@brizy/tsconfig/base.json",
   "compilerOptions": {
-    "baseUrl": "src",
-    "outDir": "dist"
+    "lib": ["DOM", "ES6", "DOM.Iterable"],
+    "module": "ESNext",
+    "target": "ESNext",
+    "outDir": "dist",
+    "declaration": true,
+    "rootDir": "src"
   },
   "include": ["src"],
   "exclude": ["dist", "build", "node_modules"]

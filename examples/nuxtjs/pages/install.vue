@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Install  token="fsdfadssdvadsfvdsfv" href="https://vercel.com/docs/concepts/projects/environment-variables"></Install>
+    <Install
+      token="fsdfadssdvadsfvdsfv"
+      href="https://vercel.com/docs/concepts/projects/environment-variables"
+    ></Install>
   </div>
 </template>
 

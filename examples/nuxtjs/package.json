@@ -8,9 +8,12 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
-  "devDependencies": {
+  "dependencies": {
     "@brizy/docs-vue": "*",
     "@brizy/tsconfig": "*",
+    "@brizy/vue": "*"
+  },
+  "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxt/types": "^2.17.0",
     "@nuxt/typescript-build": "^3.0.1",
