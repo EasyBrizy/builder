@@ -22,8 +22,8 @@ class API {
     return API.instance;
   }
 
-  public getHTMLByItem({ item }: APIData): Promise<CompilerData> {
-    return this.client.page.getPages(item);
+  public getPageHTML({ item }: APIData): Promise<CompilerData> {
+    return this.client.page.getHTML(item);
   }
 }
 

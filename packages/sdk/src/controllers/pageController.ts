@@ -10,7 +10,7 @@ export class PageController {
 
   //#region getPages
 
-  async getPages(slug?: string): Promise<CompilerData> {
+  async getHTML(slug?: string): Promise<CompilerData> {
     try {
       const baseURL = `${this.resource.getDomain()}/projects/${this.resource.getApiKey()}/pages/compiled/html`;
       const params = {

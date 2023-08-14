@@ -12,7 +12,7 @@ const Services = async (): Promise<ReactElement> => {
 
   try {
     const api = API.getInstance();
-    data = await api.getHTMLByItem({
+    data = await api.getPageHTML({
       collection: "page",
       item: "about",
     });

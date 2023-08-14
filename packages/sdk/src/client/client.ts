@@ -1,13 +1,14 @@
 import { PageController } from "../controllers/pageController";
-import { ConfigType } from "../types/types";
+import { CompilerData, ConfigType } from "../types/types";
 import { Config } from "./config";
+import { BrizyProvider } from "@brizy/provider";
 
 interface ClientInterface {
   config: ConfigType;
   readonly page: PageController;
 }
 
-export class Client implements ClientInterface {
+export class Client implements ClientInterface, BrizyProvider {
   private _config: Config;
   readonly page: PageController;
 
@@ -21,6 +22,10 @@ export class Client implements ClientInterface {
   constructor(config: ConfigType) {
     this._config = config;
     this.page = new PageController(this.config);
+  }
+
+  public getHTML(slug?: string): Promise<CompilerData> {
+    return this.page.getHTML(slug);
   }
 
   public get config() {
