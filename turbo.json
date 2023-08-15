@@ -46,7 +46,11 @@
 
     "@brizy/docs-vue#dev": {},
 
-    "@brizy/sdk#dev": {},
+    "@brizy/sdk#dev": {
+      "dependsOn": ["@brizy/provider#dev"]
+    },
+
+    "@brizy/provider#dev": {},
 
     "lint": {},
     "tsc": {

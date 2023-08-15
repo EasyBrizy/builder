@@ -16,20 +16,21 @@
     "react": "^18.2.0"
   },
   "devDependencies": {
+    "@brizy/eslint-config": "*",
+    "@brizy/tsconfig": "*",
     "@svgr/webpack": "^8.0.1",
     "@types/react": "^18.2.0",
     "autoprefixer": "^10.4.14",
     "css-loader": "^6.8.1",
-    "@brizy/eslint-config": "*",
     "mini-css-extract-plugin": "^2.7.6",
     "path-browserify": "^1.0.1",
     "postcss": "^8.4.24",
     "postcss-loader": "^7.3.3",
     "rimraf": "^5.0.1",
     "tailwindcss": "^3.3.2",
-    "@brizy/tsconfig": "*",
     "util": "^0.12.5",
-    "webpack": "^5.85.1"
+    "webpack": "^5.85.1",
+    "webpack-cli": "^5.1.4"
   },
   "files": [
     "package.json",

@@ -36,9 +36,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-interface WelcomeData {
-  hrefValue: string;
-}
 export default defineComponent({
   name: "Welcome",
   props: {
@@ -47,17 +44,9 @@ export default defineComponent({
       required: true,
     },
   },
-  data(): WelcomeData {
-    return {
-      hrefValue: "",
-    };
-  },
-  beforeMount() {
-    this.hrefValue = this.href;
-  },
   methods: {
     handleClick(): void {
-      const hrefValue = this.hrefValue;
+      const hrefValue = this.$props.href;
       window.location.replace(hrefValue);
     },
   },
