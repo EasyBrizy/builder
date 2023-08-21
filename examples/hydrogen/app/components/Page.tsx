@@ -24,7 +24,7 @@ export default function Page(props: PageProps): ReactElement {
     const api = await API.getInstance(apiKey);
 
     try {
-      const data = await api.getHTMLByItem({
+      const data = await api.getPageHTML({
         collection: "page",
         item: index,
       });

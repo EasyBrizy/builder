@@ -14,7 +14,9 @@ class API {
   private readonly client: Client;
 
   private constructor() {
-    this.client = Client.buildClient({ apiKey: Config.apiKey });
+    this.client = Client.buildClient({
+      apiKey: Config.apiKey,
+    });
   }
 
   public static getInstance(): API {
@@ -25,16 +27,16 @@ class API {
     return API.instance;
   }
 
-  public getHTMLByItem({ item }: APIData): Promise<CompilerData> {
-    return this.client.page.getPages(item);
-  }
-
   // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
   public getItem(_: APIData): Promise<{
     pageData: Record<string, unknown>;
     projectData: Record<string, unknown>;
   }> {
     return Promise.resolve(demoConfig);
+  }
+
+  public getPageHTML({ item }: APIData): Promise<CompilerData> {
+    return this.client.getHTML(item);
   }
 }
 
