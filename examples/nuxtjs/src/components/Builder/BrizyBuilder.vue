@@ -18,7 +18,7 @@ export default defineComponent({
       required: true,
     },
     pagePreview: {
-      type: Boolean,
+      type: String,
       required: true,
     },
   },

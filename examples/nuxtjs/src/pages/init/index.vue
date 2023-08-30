@@ -4,7 +4,10 @@
 
 <script setup>
 import Base from "./components/base.vue";
-import { defineProps } from "vue";
+
+definePageMeta({
+  middleware: ["index"],
+});
 
 const props = defineProps({
   searchParams: {

@@ -13,6 +13,9 @@ export default {
   buildModules: ["@nuxt/typescript-build"],
   css: ["@brizy/docs-vue/dist/index.css"],
   srcDir: "./src",
+  router: {
+    middleware: ["index"],
+  },
   alias: {
     // Your aliases here
     "@utils": path.resolve(__dirname, "src/utils"),
@@ -20,7 +23,9 @@ export default {
     "@components": path.resolve(__dirname, "src/components"),
     "@styles": path.resolve(__dirname, "src/styles"),
   },
-  publicRuntimeConfig: {
-    public: process.env.API_KEY,
+  runtimeConfig: {
+    public: {
+      API_KEY: process.env.API_KEY,
+    },
   },
 };

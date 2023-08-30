@@ -1,4 +1,3 @@
-// import Config from "../config/index.vue";
 import { demoConfig } from "./demo";
 import { Client, CompilerData } from "@brizy/vue";
 
@@ -15,8 +14,7 @@ class API {
 
   private constructor() {
     this.client = Client.buildClient({
-      apiKey:
-        "dfad15fb19615244b81a9439cb3dfa59ab55204dd9278925a3648e3a37beeaff",
+      apiKey: useRuntimeConfig().public.API_KEY,
     });
   }
 
@@ -28,7 +26,6 @@ class API {
     return API.instance;
   }
 
-  // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
   public getItem(_: APIData): Promise<{
     pageData: Record<string, unknown>;
     projectData: Record<string, unknown>;

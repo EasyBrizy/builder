@@ -1,16 +1,3 @@
 {
-  "extends": "@brizy/tsconfig/nextjs.json",
-  "compilerOptions": {
-    "plugins": [{ "name": "nuxt" }],
-    "strictNullChecks": true,
-    "baseUrl": "src",
-    "paths": {
-      "@utils/*": ["utils/*"],
-      "@config": ["config"],
-      "@components/*": ["components/*"],
-      "@styles/*": ["styles/*"]
-    }
-  },
-  "include": ["**/*.ts"],
-  "exclude": ["node_modules"]
+  "extends": "@brizy/tsconfig/nuxt.json",
 }

@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import Config from "../../../config/index.vue";
+import { builderWelcomeUrl } from "../../../config/index.vue";
 import { getUrl } from "../../../utils/common";
 import { Install, NotFound, Welcome } from "@brizy/docs-vue";
 import { ref, onMounted, computed } from "vue";
@@ -24,7 +24,6 @@ const props = defineProps({
   },
 });
 
-const { builderWelcomeUrl } = Config.setup().builderWelcomeUrl;
 const router = useRouter();
 const mounted = ref(false);
 
