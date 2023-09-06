@@ -14,7 +14,7 @@ export default {
   css: ["@brizy/docs-vue/dist/index.css"],
   srcDir: "./src",
   router: {
-    middleware: ["index"],
+    middleware: "index",
   },
   alias: {
     // Your aliases here

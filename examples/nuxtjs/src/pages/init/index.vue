@@ -12,7 +12,7 @@ definePageMeta({
 const props = defineProps({
   searchParams: {
     type: Object,
-    default: () => ({ token: "" }),
+    default: () => ({ token: useRuntimeConfig().public.API_KEY }),
   },
 });
 
