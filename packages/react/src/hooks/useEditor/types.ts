@@ -2,7 +2,7 @@ import type {
   Config as BuilderConfig,
   Builder,
   HtmlOutputType as BuilderHtmlOutputType,
-} from "@/types/types";
+} from "@/types/Builder/config";
 
 export enum ActionKind {
   idle = "idle",

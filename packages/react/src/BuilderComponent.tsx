@@ -1,6 +1,6 @@
 import { Scripts } from "@/Scripts";
 import { Styles } from "@/Styles";
-import { CompilerData } from "@/types/types";
+import { CompilerData } from "@/types/Builder/common";
 import { getAssets, getHtml } from "@brizy/assetmanager";
 import { ReactElement, useEffect, useRef } from "react";
 
