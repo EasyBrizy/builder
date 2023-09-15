@@ -1,4 +1,4 @@
-import { Builder } from "./types";
+import { Builder } from "./Builder/config";
 
 declare global {
   interface Window {

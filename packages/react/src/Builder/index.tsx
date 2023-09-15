@@ -37,7 +37,7 @@ export const Builder: FC<Props> = (props) => {
           ref={containerRef}
         />
       )}
-      <script src="https://cdn.brizylocal.com/pages/2.1.35/index.js"></script>
+      <script src="https://cdn.brizylocal.com/pages/3.0.1/index.js"></script>
     </>
   );
 };
