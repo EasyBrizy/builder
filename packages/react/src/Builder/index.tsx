@@ -1,5 +1,6 @@
 import { useEditor } from "@/hooks/useEditor";
 import { Config } from "@/hooks/useEditor/types";
+import { LeftSidebarOptionsIds } from "@/types/Builder/leftSidebar";
 import { FC, useRef } from "react";
 
 export interface Props {
@@ -20,6 +21,31 @@ export const Builder: FC<Props> = (props) => {
     container: containerRef.current,
     htmlOutputType: "monolith",
 
+    ui: {
+      publish: {
+        handler(res, _rej, data) {
+          res(data);
+          console.log(data);
+        },
+      },
+      leftSidebar: {
+        topTabsOrder: [
+          LeftSidebarOptionsIds.cms,
+          LeftSidebarOptionsIds.addElements,
+          LeftSidebarOptionsIds.reorderBlock,
+          LeftSidebarOptionsIds.globalStyle,
+        ],
+        cms: {
+          onOpen() {
+            console.log("Open the CMS");
+          },
+          onClose() {
+            console.log("CMS Still Closed");
+          },
+        },
+      },
+    },
+
     onSave: (data) => {
       console.log(data);
     },
@@ -37,7 +63,7 @@ export const Builder: FC<Props> = (props) => {
           ref={containerRef}
         />
       )}
-      <script src="https://cdn.brizylocal.com/pages/3.0.1/index.js"></script>
+      <script src="https://cdn.brizylocal.com/pages/3.1.0/index.js"></script>
     </>
   );
 };

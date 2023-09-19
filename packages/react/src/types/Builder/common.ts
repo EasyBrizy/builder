@@ -9,3 +9,7 @@ export interface CompilerData {
     body: string;
   };
 }
+
+export type ProjectData = Record<string, unknown>;
+
+export type PageData = Record<string, unknown>;
