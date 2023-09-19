@@ -4,6 +4,7 @@ import { Form } from "./form";
 import { LeftSidebar } from "./leftSidebar";
 import { Media } from "./media";
 import { Menu } from "./menu";
+import { Publish } from "./publish";
 import { Screenshots } from "./screenshots";
 import {
   DefaultKits,
@@ -100,6 +101,9 @@ export interface Config<T extends HtmlOutputType> {
 
     // LeftSidebar
     leftSidebar?: LeftSidebar;
+
+    // Publish
+    publish?: Publish<T>;
   };
 
   //#endregion
