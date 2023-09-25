@@ -1,18 +1,20 @@
+import { demoConfig3 } from "../demoConfig/demo";
 import { Core } from "@brizy/core";
 import { AbstractPlugin } from "@brizy/core";
 
 class Shopify extends AbstractPlugin {
   constructor(core: Core) {
     super("Shopify", core);
-    this.applyHook("GET_COLLECTION_TYPES", this.getCollectionTypes);
-  }
+    this.applyHook("ADD_COLLECTION_TYPE", {
+      ...demoConfig3.pageData.collectionType,
+      editors: [{ name: "Builder", type: "Brizy" }],
+    });
 
-  getCollectionTypes(payload: unknown) {
-    if (typeof payload === "number") {
-      return [(payload + 1).toString()];
-    } else {
-      return null;
-    }
+    this.applyHook("ADD_COLLECTION_ITEM", {
+      pageData: demoConfig3.pageData,
+      projectData: demoConfig3.projectData,
+      editor: { name: "Builder", type: "Brizy" },
+    });
   }
 }
 

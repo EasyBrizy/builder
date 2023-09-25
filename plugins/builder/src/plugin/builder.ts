@@ -1,7 +1,6 @@
 import { Config, HtmlOutputType, Modes } from "../types/Builder/config";
 import { LeftSidebarOptionsIds } from "../types/Builder/leftSidebar";
 import { AbstractPlugin, Core } from "@brizy/core";
-import { CollectionItem, CollectionType } from "@brizy/core/dist/types/type";
 
 class Builder extends AbstractPlugin {
   constructor(core: Core) {
@@ -16,49 +15,33 @@ class Builder extends AbstractPlugin {
     this.core.dispatch({ type: "CLOSE_CMS" }, "Builder");
   };
 
-  getCollectionTypes = () => this.applyHook("GET_COLLECTION_TYPES");
-
-  getCollectionItems = () => this.applyHook("GET_COLLECTION_ITEMS");
-
   createBuilderConfiguration = (
     container: HTMLDivElement
   ): Config<HtmlOutputType> => {
-    const pagePreview = this.applyHook("GET_PREVIEW_LINK");
-    const collectionTypes = this.getCollectionTypes() as Array<CollectionType>;
-    const collectionItems = this.getCollectionItems() as Array<CollectionItem>;
+    const collectionTypes = this.core.collectionTypes;
+    const collectionItems = this.core.collectionItems;
 
-    // Check if collectionTypes are valid
-    if (
-      !collectionTypes ||
-      (Array.isArray(collectionTypes) && collectionTypes.length === 0)
-    )
+    if (collectionTypes.length === 0)
       throw new Error("Missing collection types");
 
-    // Check if collectionItems are valid
-    if (
-      !collectionItems ||
-      (Array.isArray(collectionItems) && collectionItems.length === 0)
-    )
+    if (collectionItems.length === 0)
       throw new Error("Missing collection items");
 
     // Using query params to detect which collectionItem we need to edit in Builder
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-    const collectionType = urlParams.get("type");
-    const pageSlug = urlParams.get("slug");
+    const itemId = urlParams.get("id");
+    const itemSlug = urlParams.get("slug");
 
-    if (!collectionType || !pageSlug)
-      throw new Error("Missing item to edit...");
+    if (!itemId || !itemSlug) throw new Error("Missing item to edit...");
 
     const item = collectionItems.filter((item) => {
-      if (
-        item.pageData.slug === pageSlug &&
-        (item.pageData.collectionType as CollectionType).title ===
-          collectionType
-      )
+      if (item.pageData.slug === itemSlug && item.pageData.id === itemId)
         return item;
     })[0];
+
+    const pagePreview = this.applyHook("GET_PREVIEW_LINK", item);
 
     return {
       ...item,
@@ -98,6 +81,9 @@ class Builder extends AbstractPlugin {
 
   render(container: HTMLDivElement) {
     const token = this.applyHook("GET_TOKEN");
+
+    if (typeof token !== "string") throw new Error("Invalid Token");
+
     const config = this.createBuilderConfiguration(container);
 
     const Builder = window.Builder;
