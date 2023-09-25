@@ -1,9 +1,28 @@
-// import { App as BrizyApp, Builder, DataBase } from "@brizy/core";
-//
-// const app = new BrizyApp();
-// const dataBase = new DataBase(app);
-// const builder = new Builder(app);
-//
-export const Init = () => {
-  //
+"use client";
+
+import { Builder } from "@brizy/builder";
+import { Core } from "@brizy/core";
+import { FC, useEffect, useRef } from "react";
+
+const core = new Core();
+const builder = new Builder(core);
+
+const BrizyBuilder: FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const shouldRenderBuilder = useRef<boolean>(true);
+
+  useEffect(() => {
+    if (shouldRenderBuilder.current && containerRef.current) {
+      shouldRenderBuilder.current = false;
+      builder.render(containerRef.current);
+    }
+  }, []);
+
+  return (
+    <>
+      <div id="editor" style={{ height: "100vh" }} ref={containerRef}></div>
+      <script src="https://cdn.brizylocal.com/pages/3.1.0/index.js" />
+    </>
+  );
 };
+export { BrizyBuilder };
