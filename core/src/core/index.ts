@@ -1,23 +1,57 @@
 import { AbstractPlugin } from "../abstractPlugin/AbstractPlugin";
 import { PluginManager } from "../pluginManager/PluginManager";
 import { MockApiClient } from "../plugins/mockApiClient/mockApiClient";
-import { Action, Dispatch } from "../types/type";
-import { Callback, Filters } from "../types/type";
+import {
+  Action,
+  Callback,
+  CollectionItem,
+  CollectionType,
+  Dispatch,
+  Hooks,
+  HookTypes,
+} from "../types/type";
+import { isServer } from "./utils/common";
 
 class Core {
   private pluginManager: PluginManager;
   private $dispatch: Dispatch | undefined;
   private actions: Set<string> = new Set();
-  private filters: Filters = {};
+  private hooks: Hooks = {};
+
+  collectionTypes: Array<CollectionType> = [];
+  collectionItems: Array<CollectionItem> = [];
 
   constructor() {
     this.pluginManager = new PluginManager();
 
-    this.pluginManager.preInstallPlugin(new MockApiClient(this));
-  }
+    //#region predefined Hooks
 
-  private initAction() {
-    return this.createAction("INIT_APP");
+    this.addHook(HookTypes.ADD_COLLECTION_TYPE, (collectionType) => {
+      if (collectionType) {
+        this.collectionTypes.push(collectionType as CollectionType);
+      }
+    });
+
+    this.addHook(HookTypes.GET_COLLECTION_TYPES, () => this.collectionTypes);
+
+    this.addHook(HookTypes.ADD_COLLECTION_ITEM, (collectionItem) => {
+      this.collectionItems.push(collectionItem as CollectionItem);
+    });
+
+    this.addHook(HookTypes.GET_COLLECTION_ITEMS, () => this.collectionItems);
+
+    // Create link for EDIT button
+    // Temporary solution
+    this.addHook(HookTypes.BUILDER_EDIT_LINK, (collection) => {
+      return `${window.location.origin}/admin/?type=${
+        // @ts-expect-error: unknown
+        collection.pageData.collectionType.title
+      }&slug=${(collection as CollectionItem).pageData.slug}`;
+    });
+
+    //#endregion
+
+    this.pluginManager.preInstallPlugin(new MockApiClient(this));
   }
 
   public setDispatch(dispatch: Dispatch) {
@@ -25,6 +59,8 @@ class Core {
   }
 
   public start() {
+    if (isServer()) return;
+
     // Init App
     this.dispatch(this.initAction(), this);
 
@@ -59,32 +95,35 @@ class Core {
     this.pluginManager.registerPlugin(plugin);
   }
 
-  //#region Filters
-
-  // Creating filter
-  public addFilter<T extends string, U extends Callback>(
-    filterName: T,
+  // Creating hook
+  public addHook<T extends string, U extends Callback>(
+    hookName: T,
     callback: U
   ): void {
-    if (!this.filters[filterName]) {
-      this.filters[filterName] = [];
+    if (!this.hooks[hookName]) {
+      this.hooks[hookName] = [];
     }
-    this.filters[filterName].push(callback);
+    this.hooks[hookName].push(callback);
   }
 
-  // Checking for existing filters
-  public getFilters(): Filters {
-    return this.filters;
+  //#region Hooks
+
+  // Checking for existing hooks
+  public getHooks(): Hooks {
+    return this.hooks;
   }
 
-  // Removing filter
-  public removeFilter<T extends string>(filterName: T): void {
-    delete this.filters[filterName];
+  // Removing hook
+  public removeHook<T extends string>(hookName: T): void {
+    delete this.hooks[hookName];
   }
 
-  // Executing filter
-  public applyFilter<T extends string, U>(filterName: T, payload?: U): unknown {
-    const handlers = this.filters[filterName];
+  // Executing hook
+  public applyHook<T extends string, U = unknown>(
+    hookName: T,
+    payload?: U
+  ): unknown {
+    const handlers = this.hooks[hookName];
 
     if (handlers) {
       let result: unknown = payload;
@@ -97,6 +136,10 @@ class Core {
     }
 
     return payload;
+  }
+
+  private initAction() {
+    return this.createAction("INIT_APP");
   }
 
   //#endregion

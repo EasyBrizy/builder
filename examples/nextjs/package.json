@@ -15,7 +15,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@brizy/react": "*",
-    "@brizy/core": "*"
+    "@brizy/core": "*",
+    "@brizy/cms": "*"
   },
   "devDependencies": {
     "@brizy/eslint-config": "*",

@@ -4,8 +4,8 @@ import { AbstractPlugin } from "@brizy/core";
 class Contentful extends AbstractPlugin {
   constructor(core: Core) {
     super("Contentful", core);
-    this.addFilter("GET_API_CLIENT", this.getClient);
-    this.addFilter("GET_COLLECTION_TYPES", this.getCollectionTypes);
+    this.addHook("GET_API_CLIENT", this.getClient);
+    this.addHook("GET_COLLECTION_TYPES", this.getCollectionTypes);
   }
 
   getClient = (client: unknown) => {

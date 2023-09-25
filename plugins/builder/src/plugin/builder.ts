@@ -1,23 +1,67 @@
-import { PageData, ProjectData } from "../types/Builder/common";
 import { Config, HtmlOutputType, Modes } from "../types/Builder/config";
 import { LeftSidebarOptionsIds } from "../types/Builder/leftSidebar";
 import { AbstractPlugin, Core } from "@brizy/core";
+import { CollectionItem, CollectionType } from "@brizy/core/dist/types/type";
 
 class Builder extends AbstractPlugin {
   constructor(core: Core) {
     super("Builder", core);
   }
 
+  openCMS = () => {
+    this.core.dispatch({ type: "OPEN_CMS" }, "Builder");
+  };
+
+  closeCMS = () => {
+    this.core.dispatch({ type: "CLOSE_CMS" }, "Builder");
+  };
+
+  getCollectionTypes = () => this.applyHook("GET_COLLECTION_TYPES");
+
+  getCollectionItems = () => this.applyHook("GET_COLLECTION_ITEMS");
+
   createBuilderConfiguration = (
     container: HTMLDivElement
   ): Config<HtmlOutputType> => {
-    const projectData = this.applyFilter("GET_PROJECT_DATA");
-    const pageData = this.applyFilter("GET_PAGE_DATA");
-    const previewLink = this.applyFilter("GET_PREVIEW_LINK");
+    const pagePreview = this.applyHook("GET_PREVIEW_LINK");
+    const collectionTypes = this.getCollectionTypes() as Array<CollectionType>;
+    const collectionItems = this.getCollectionItems() as Array<CollectionItem>;
+
+    // Check if collectionTypes are valid
+    if (
+      !collectionTypes ||
+      (Array.isArray(collectionTypes) && collectionTypes.length === 0)
+    )
+      throw new Error("Missing collection types");
+
+    // Check if collectionItems are valid
+    if (
+      !collectionItems ||
+      (Array.isArray(collectionItems) && collectionItems.length === 0)
+    )
+      throw new Error("Missing collection items");
+
+    // Using query params to detect which collectionItem we need to edit in Builder
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    const collectionType = urlParams.get("type");
+    const pageSlug = urlParams.get("slug");
+
+    if (!collectionType || !pageSlug)
+      throw new Error("Missing item to edit...");
+
+    const item = collectionItems.filter((item) => {
+      if (
+        item.pageData.slug === pageSlug &&
+        (item.pageData.collectionType as CollectionType).title ===
+          collectionType
+      )
+        return item;
+    })[0];
 
     return {
-      pageData: pageData as PageData,
-      projectData: projectData as ProjectData,
+      ...item,
       container,
       htmlOutputType: "monolith",
       mode: Modes.page,
@@ -25,7 +69,6 @@ class Builder extends AbstractPlugin {
         publish: {
           handler(res, _rej, data) {
             res(data);
-            console.log(data);
           },
         },
         leftSidebar: {
@@ -36,16 +79,15 @@ class Builder extends AbstractPlugin {
             LeftSidebarOptionsIds.globalStyle,
           ],
           cms: {
-            onOpen() {
-              console.log("CMS did OPEN");
+            onOpen: () => {
+              this.openCMS();
             },
-            onClose() {
-              console.log("CMS did CLOSE");
-            },
+            onClose: this.closeCMS,
           },
         },
       },
-      pagePreview: typeof previewLink === "string" ? previewLink : undefined,
+
+      pagePreview: typeof pagePreview === "string" ? pagePreview : undefined,
 
       onSave: (data) => {
         console.log("Builder did SAVE");
@@ -55,7 +97,7 @@ class Builder extends AbstractPlugin {
   };
 
   render(container: HTMLDivElement) {
-    const token = this.applyFilter("GET_TOKEN");
+    const token = this.applyHook("GET_TOKEN");
     const config = this.createBuilderConfiguration(container);
 
     const Builder = window.Builder;
