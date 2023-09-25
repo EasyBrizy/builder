@@ -1,13 +1,9 @@
 import { CollectionType } from "../../../types/type";
-import * as Arr from "../reader/array";
-import * as Obj from "../reader/object";
-import { readWithParser } from "../reader/readWithParser";
-import * as Str from "../reader/string";
-import { mPipe } from "fp-utilities";
+import { Arr, mPipe, Obj, parse, Str } from "@brizy/readers/src";
 
 const editorReader = mPipe(
   Obj.read,
-  readWithParser({
+  parse({
     name: mPipe(Obj.readKey("name"), Str.read),
     type: mPipe(Obj.readKey("type"), Str.read),
   })
@@ -15,7 +11,7 @@ const editorReader = mPipe(
 
 export const parseCollectionType = mPipe(
   Obj.read,
-  readWithParser<Record<string, unknown>, CollectionType>({
+  parse<Record<string, unknown>, CollectionType>({
     title: mPipe(Obj.readKey("title"), Str.read),
     id: mPipe(Obj.readKey("id"), Str.read),
     editors: mPipe(
@@ -28,13 +24,13 @@ export const parseCollectionType = mPipe(
 
 export const parseCollectionItem = mPipe(
   Obj.read,
-  readWithParser({
+  parse({
     pageData: mPipe(Obj.readKey("pageData"), Obj.read),
     projectData: mPipe(Obj.readKey("projectData"), Obj.read),
     editor: mPipe(
       Obj.readKey("editor"),
       Obj.read,
-      readWithParser({
+      parse({
         name: mPipe(Obj.readKey("name"), Str.read),
         type: mPipe(Obj.readKey("type"), Str.read),
       })
@@ -44,7 +40,7 @@ export const parseCollectionItem = mPipe(
 
 export const parseItemPreviewData = mPipe(
   Obj.read,
-  readWithParser({
+  parse({
     id: mPipe(Obj.readKey("id"), Str.read),
     slug: mPipe(Obj.readKey("slug"), Str.read),
   })

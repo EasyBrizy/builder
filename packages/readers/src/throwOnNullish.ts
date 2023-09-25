@@ -1,5 +1,5 @@
-import { MValue } from "../types";
 import { isNullish } from "./isNullish";
+import { MValue } from "./reader/types";
 
 export const throwOnNullish =
   <T>(msg: string) =>

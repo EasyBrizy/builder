@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export function pipe<T1>(fn0: () => T1): () => T1;
 export function pipe<V0, T1>(fn0: (x0: V0) => T1): (x0: V0) => T1;
 export function pipe<V0, V1, T1>(

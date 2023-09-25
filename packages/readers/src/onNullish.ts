@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
-import { Nullish } from "../types";
 import { isNullish } from "./isNullish";
+import { Nullish } from "./reader/types";
 
 export function onNullish<T>(orElse: T, v: T | Nullish): T;
 export function onNullish<T>(orElse: T): (v: T | Nullish) => T;

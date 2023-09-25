@@ -12,6 +12,10 @@ export interface CustomFile {
   fileUrl?: string;
 
   addFile?: {
-    handler: (res: Response<AddFileData>, rej: Response<string>, extra: AddFileExtra) => void;
+    handler: (
+      res: Response<AddFileData>,
+      rej: Response<string>,
+      extra: AddFileExtra
+    ) => void;
   };
 }

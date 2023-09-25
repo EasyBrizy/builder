@@ -1,4 +1,4 @@
-import { isNullish } from "../nullish/isNullish";
+import { isNullish } from "../isNullish";
 import { Reader } from "./types";
 
 export const read: Reader<Array<unknown>> = (v) => {
