@@ -23,6 +23,11 @@ export default {
     "@components": path.resolve(__dirname, "src/components"),
     "@styles": path.resolve(__dirname, "src/styles"),
   },
+  build: {
+    rollupOptions: {
+      external: ["@brizy/docs-vue/dist/index.css"],
+    },
+  },
   runtimeConfig: {
     public: {
       API_KEY: process.env.API_KEY,
