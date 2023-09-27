@@ -6,7 +6,7 @@
 import Base from "./components/base.vue";
 
 definePageMeta({
-  middleware: ["index"],
+  middleware: ["middleware"],
 });
 
 const props = defineProps({

@@ -15,7 +15,7 @@ import AsyncComponent from "./AsyncComponent.vue";
 import { defineComponent } from "vue";
 
 definePageMeta({
-  middleware: ["index"],
+  middleware: ["middleware"],
 });
 export default defineComponent({
   components: {
