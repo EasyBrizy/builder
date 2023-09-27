@@ -1,3 +1,4 @@
+import { Callback, Filters } from "../types/types";
 import { AbstractPlugin } from "./AbstractPlugin";
 import { PluginManager } from "./PluginManager";
 import { Action, Dispatch } from "./type";
@@ -6,6 +7,7 @@ export class App {
   private pluginManager: PluginManager;
   private $dispatch: Dispatch | undefined;
   private actions: Set<string> = new Set();
+  private filters: Filters = {};
 
   constructor() {
     this.pluginManager = new PluginManager();
@@ -25,6 +27,15 @@ export class App {
 
     // Initialize the plugins
     this.pluginManager.initializePlugins();
+
+    // Test filter on app start
+    // this.addFilter("GET_COLLECTION_BY_ID", ({ id }) => {
+    //   return {
+    //     id,
+    //     collectionName: "Products",
+    //     productsCount: "666",
+    //   };
+    // });
   }
 
   public dispatch<T extends Action>(action: T, initiator: unknown) {
@@ -53,6 +64,48 @@ export class App {
   public registerPlugin(plugin: AbstractPlugin) {
     this.pluginManager.registerPlugin(plugin);
   }
+
+  //#region Filters
+
+  // Creating filter
+  public addFilter<T extends string, U extends Callback>(
+    filterName: T,
+    callback: U
+  ): void {
+    if (!this.filters[filterName]) {
+      this.filters[filterName] = [];
+    }
+    this.filters[filterName].push(callback);
+  }
+
+  // Checking for existing filters
+  public getFilters(): Filters {
+    return this.filters;
+  }
+
+  // Removing filter
+  public removeFilter<T extends string>(filterName: T): void {
+    delete this.filters[filterName];
+  }
+
+  // Executing filter
+  public applyFilter<T extends string, U>(filterName: T, payload?: U): unknown {
+    const handlers = this.filters[filterName];
+
+    if (handlers) {
+      let result: unknown = payload;
+
+      handlers.forEach((cb) => {
+        result = cb(result);
+      });
+
+      return result;
+    }
+
+    return payload;
+  }
+
+  //#endregion
 }
 
 export default App;
