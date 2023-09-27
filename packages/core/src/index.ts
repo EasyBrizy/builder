@@ -1,13 +1,17 @@
 import { App } from "./core/App";
+import { BaseApiClient } from "./plugins/BaseApiClient";
 import { Builder } from "./plugins/Builder";
-import { CustomPlugin } from "./plugins/CustomPlugin";
+import { Cms } from "./plugins/Cms";
+import { ContentFull } from "./plugins/ContentFull";
 import { HelloWorldPlugin } from "./plugins/HelloWorldPlugin";
+import { Shopify } from "./plugins/Shopify";
 
 export { App } from "./core/App";
 export { CustomPlugin } from "./plugins/CustomPlugin";
 export { HelloWorldPlugin } from "./plugins/HelloWorldPlugin";
 export { Builder } from "./plugins/Builder";
-// export { BaseApiClient } from "./plugins/BaseApiClient";
+export { Cms } from "./plugins/Cms";
+export { Shopify } from "./plugins/Shopify";
 
 const app = new App();
 
@@ -17,10 +21,15 @@ app.setDispatch((action) => {
 
 // Register plugins
 
-// new BaseApiClient(app);
+new BaseApiClient(app);
+new ContentFull(app);
+new Shopify(app);
+new Cms(app);
+
 const builder = new Builder(app);
-new HelloWorldPlugin(app);
-new CustomPlugin(app);
+const helloPlugin = new HelloWorldPlugin(app);
+
+helloPlugin.greet();
 
 app.start();
 
