@@ -4,6 +4,11 @@ import { Action } from "./type";
 export class PluginManager {
   private plugins: AbstractPlugin[] = [];
 
+  public preInstallPlugin(plugin: AbstractPlugin): void {
+    this.plugins.push(plugin);
+    plugin.initialize();
+  }
+
   public registerPlugin(plugin: AbstractPlugin) {
     if (this.plugins.find((p) => p.name === plugin.name)) {
       throw Error(`The plugin ${plugin.name} already registered`);

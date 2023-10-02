@@ -36,7 +36,7 @@ export abstract class AbstractPlugin {
 
   // Define setDispatch method
   public handleAction(action: Action): void {
-    console.log(`handleAction: ${this.name}, ${JSON.stringify(action)}`);
+    action;
   }
 
   //#region Filters

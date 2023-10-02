@@ -1,3 +1,4 @@
+import { BaseApiClient } from "../plugins/BaseApiClient";
 import { Callback, Filters } from "../types/types";
 import { AbstractPlugin } from "./AbstractPlugin";
 import { PluginManager } from "./PluginManager";
@@ -11,6 +12,9 @@ export class App {
 
   constructor() {
     this.pluginManager = new PluginManager();
+
+    // PreInstall Plugins
+    this.pluginManager.preInstallPlugin(new BaseApiClient(this));
   }
 
   private initAction() {
@@ -27,15 +31,6 @@ export class App {
 
     // Initialize the plugins
     this.pluginManager.initializePlugins();
-
-    // Test filter on app start
-    // this.addFilter("GET_COLLECTION_BY_ID", ({ id }) => {
-    //   return {
-    //     id,
-    //     collectionName: "Products",
-    //     productsCount: "666",
-    //   };
-    // });
   }
 
   public dispatch<T extends Action>(action: T, initiator: unknown) {
