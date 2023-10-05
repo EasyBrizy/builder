@@ -26,8 +26,7 @@
     "rimraf": "^5.0.1",
     "@brizy/tsconfig": "*",
     "@brizy/prettier-config": "*",
-    "@brizy/utils": "*",
-    "@brizy/provider": "*"
+    "@brizy/utils": "*"
   },
   "files": [
     "package.json",
