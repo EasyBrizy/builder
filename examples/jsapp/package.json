@@ -1,0 +1,39 @@
+{
+  "name": "@brizy/jsapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "prettier-check": "prettier --check src/**.js",
+    "dev": "npm run clean && webpack --watch",
+    "build": "npm run clean && webpack --mode production",
+    "start": "npm run server",
+    "server": "http-server dist -p 9001",
+    "clean": "rimraf dist",
+    "clean:modules": "find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \\;",
+    "reinstall": "npm run clean:modules && npm install"
+  },
+  "devDependencies": {
+    "@brizy/eslint-config": "*",
+    "@brizy/prettier-config": "*",
+    "html-webpack-plugin": "^5.5.3",
+    "path-browserify": "^1.0.1",
+    "rimraf": "^5.0.1",
+    "util": "^0.12.5",
+    "webpack": "^5.88.2"
+  },
+  "dependencies": {
+    "@brizy/builder": "*",
+    "@brizy/core": "*",
+    "@brizy/mock-api-client": "*",
+    "http-server": "^14.1.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "files": [
+    "dist",
+    "package.json"
+  ]
+}
