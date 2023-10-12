@@ -26,7 +26,6 @@
   "dependencies": {
     "@brizy/builder": "*",
     "@brizy/core": "*",
-    "@brizy/mock-api-client": "*",
     "http-server": "^14.1.1"
   },
   "keywords": [],

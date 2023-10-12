@@ -1,5 +1,6 @@
 import { AbstractPlugin } from "../abstractPlugin/AbstractPlugin";
 import { PluginManager } from "../pluginManager/PluginManager";
+import { MockApiClient } from "../plugins/mockApiClient/mockApiClient";
 import { Action, Dispatch } from "../types/type";
 import { Callback, Filters } from "../types/type";
 
@@ -11,6 +12,8 @@ class Core {
 
   constructor() {
     this.pluginManager = new PluginManager();
+
+    this.pluginManager.preInstallPlugin(new MockApiClient(this));
   }
 
   private initAction() {
