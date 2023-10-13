@@ -32,3 +32,10 @@ export type Dispatch<T = Action> = (action: T) => void;
 export type Callback = (payload?: unknown) => unknown;
 
 export type Filters = Record<string, Array<Callback>>;
+
+export enum FilterTypes {
+  GET_API_CLIENT = "GET_API_CLIENT",
+  GET_PROJECT_DATA = "GET_PROJECT_DATA",
+  GET_PAGE_DATA = "GET_PAGE_DATA",
+  GET_TOKEN = "GET_TOKEN",
+}
