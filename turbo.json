@@ -48,6 +48,32 @@
 
     "@brizy/sdk#dev": {},
 
+    "@brizy/core#dev": {},
+
+    "@brizy/builder#dev": {
+      "dependsOn": ["@brizy/core"]
+    },
+
+    "@brizy/mock-api-client#dev": {
+      "dependsOn": ["@brizy/core"]
+    },
+
+    "@brizy/cms#dev": {
+      "dependsOn": ["@brizy/core"]
+    },
+
+    "@brizy/contentful#dev": {
+      "dependsOn": ["@brizy/core"]
+    },
+
+    "@brizy/shopify#dev": {
+      "dependsOn": ["@brizy/core"]
+    },
+
+    "@brizy/jsapp#dev": {
+      "dependsOn": ["@brizy/core"]
+    },
+
     "lint": {},
     "tsc": {
       "dependsOn": ["^build"]
