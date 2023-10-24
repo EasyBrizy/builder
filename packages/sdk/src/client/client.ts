@@ -1,14 +1,13 @@
 import { PageController } from "../controllers/pageController";
 import { CompilerData, ConfigType } from "../types/types";
 import { Config } from "./config";
-import { BrizyProvider } from "@brizy/provider";
 
 interface ClientInterface {
   config: ConfigType;
   readonly page: PageController;
 }
 
-export class Client implements ClientInterface, BrizyProvider {
+export class Client implements ClientInterface {
   private _config: Config;
   readonly page: PageController;
 
