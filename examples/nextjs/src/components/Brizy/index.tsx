@@ -22,7 +22,6 @@ const BrizyBuilder: FC = () => {
     <>
       <div id="editor" style={{ height: "100vh" }} ref={containerRef}></div>
       <script src="https://cdn.brizylocal.com/pages/3.1.0/index.js" />
-      <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.24.min.js" />
     </>
   );
 };
