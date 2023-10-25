@@ -1,0 +1,20 @@
+{
+  "extends": "@brizy/tsconfig/base.json",
+  "compilerOptions": {
+    "target": "ES2018",
+    "lib": ["ES6"],
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "rootDir": "./src",
+    "sourceMap": true,
+    "outDir": "./build",
+    "removeComments": true,
+    "noImplicitAny": false
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/tests", "src/examples"],
+  "lib": ["esnext"],
+  "ts-node": {
+    "esm": true
+  }
+}
