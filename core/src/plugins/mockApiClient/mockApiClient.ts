@@ -10,6 +10,7 @@ class MockApiClient extends AbstractPlugin {
     this.addFilter(FilterTypes.GET_PAGE_DATA, this.getPageData);
     this.addFilter(FilterTypes.GET_TOKEN, this.getToken);
     this.addFilter(FilterTypes.GET_API_CLIENT, this.getClient);
+    this.addFilter(FilterTypes.GET_PREVIEW_LINK, this.getPreviewLink);
   }
 
   getClient = (client: unknown) => {
@@ -18,6 +19,8 @@ class MockApiClient extends AbstractPlugin {
         ...client,
         getPage: this.getPageData,
         getProject: this.getProjectData,
+        getToken: this.getToken,
+        getPreviewLink: this.getPreviewLink,
       };
     } else {
       throw new Error("Wrong API client");
@@ -34,6 +37,10 @@ class MockApiClient extends AbstractPlugin {
 
   getToken() {
     return "demo";
+  }
+
+  getPreviewLink() {
+    return "/preview";
   }
 }
 
