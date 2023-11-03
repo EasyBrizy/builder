@@ -31,12 +31,41 @@ export type Dispatch<T = Action> = (action: T) => void;
 
 export type Callback = (payload?: unknown) => unknown;
 
-export type Filters = Record<string, Array<Callback>>;
+export type Hooks = Record<string, Array<Callback>>;
 
-export enum FilterTypes {
+export enum HookTypes {
   GET_API_CLIENT = "GET_API_CLIENT",
   GET_PROJECT_DATA = "GET_PROJECT_DATA",
   GET_PAGE_DATA = "GET_PAGE_DATA",
   GET_TOKEN = "GET_TOKEN",
   GET_PREVIEW_LINK = "GET_PREVIEW_LINK",
+
+  GET_COLLECTION_TYPES = "GET_COLLECTION_TYPES",
+  ADD_COLLECTION_TYPE = "ADD_COLLECTION_TYPE",
+
+  GET_COLLECTION_ITEMS = "GET_COLLECTION_ITEMS",
+  ADD_COLLECTION_ITEM = "ADD_COLLECTION_ITEM",
+
+  BUILDER_EDIT_LINK = "BUILDER_EDIT_LINK",
+
+  EDIT_ITEM = "EDIT_ITEM",
+}
+
+type pluginType = "Brizy";
+
+export interface Editor {
+  name: string;
+  type: pluginType;
+}
+
+export interface CollectionType {
+  title: string;
+  id: string;
+  editors: Array<Editor>;
+}
+
+export interface CollectionItem {
+  pageData: Record<string, unknown>;
+  projectData: Record<string, unknown>;
+  editor: Editor;
 }

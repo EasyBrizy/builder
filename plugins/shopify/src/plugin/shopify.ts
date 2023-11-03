@@ -4,7 +4,7 @@ import { AbstractPlugin } from "@brizy/core";
 class Shopify extends AbstractPlugin {
   constructor(core: Core) {
     super("Shopify", core);
-    this.addFilter("GET_COLLECTION_TYPES", this.getCollectionTypes);
+    this.applyHook("GET_COLLECTION_TYPES", this.getCollectionTypes);
   }
 
   getCollectionTypes(payload: unknown) {

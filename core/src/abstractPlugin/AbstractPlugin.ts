@@ -1,14 +1,14 @@
 import { Core } from "../core";
-import { Action, ActionTypes, Callback, Filters } from "../types/type";
+import { Action, ActionTypes, Callback, Hooks } from "../types/type";
 
 abstract class AbstractPlugin {
   public name: string;
-  protected app: Core;
+  protected core: Core;
 
-  protected constructor(name: string, app: Core) {
+  protected constructor(name: string, core: Core) {
     this.name = name;
-    this.app = app;
-    app.registerPlugin(this);
+    this.core = core;
+    core.registerPlugin(this);
   }
 
   // Define initialize methods
@@ -18,7 +18,7 @@ abstract class AbstractPlugin {
 
   // Define action creator method
   public createAction<T extends string>(type: T, payload?: Action["payload"]) {
-    return this.app.createAction(
+    return this.core.createAction(
       type,
       typeof payload === "object" && payload !== null
         ? { ...payload, pluginName: this.name }
@@ -28,7 +28,7 @@ abstract class AbstractPlugin {
 
   // Define dispatch creator method
   public dispatchAction(action: Action) {
-    this.app.dispatch(action, this);
+    this.core.dispatch(action, this);
   }
 
   // Define initAction
@@ -43,29 +43,29 @@ abstract class AbstractPlugin {
     console.log(`handleAction: ${this.name}, ${JSON.stringify(action)}`);
   }
 
-  //#region Filters
+  //#region Hooks
 
-  // Creating filter
-  public addFilter<T extends string, U extends Callback>(
-    filterName: T,
+  // Creating hook
+  public addHook<T extends string, U extends Callback>(
+    hookName: T,
     callback: U
   ): void {
-    this.app.addFilter(filterName, callback);
+    this.core.addHook(hookName, callback);
   }
 
-  // Checking for existing filters
-  public getFilters(): Filters {
-    return this.app.getFilters();
+  // Checking for existing hooks
+  public getHooks(): Hooks {
+    return this.core.getHooks();
   }
 
-  // Removing filter
-  public removeFilter<T extends string>(filterName: T): void {
-    this.app.removeFilter(filterName);
+  // Removing hook
+  public removeHook<T extends string>(hookName: T): void {
+    this.core.removeHook(hookName);
   }
 
-  // Executing filter
-  public applyFilter<T extends string, P>(filterName: T, payload?: P): unknown {
-    return this.app.applyFilter(filterName, payload);
+  // Executing hook
+  public applyHook<T extends string, P>(hookName: T, payload?: P): unknown {
+    return this.core.applyHook(hookName, payload);
   }
 
   //#endregion
