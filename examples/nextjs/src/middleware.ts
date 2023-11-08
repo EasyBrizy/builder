@@ -1,20 +1,22 @@
 import Config from "@config";
+import { systemPages } from "@utils/systemPages";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
+  const base = request.url;
   const path = request.nextUrl.pathname;
   const apiKey = Config.apiKey;
 
   if (!apiKey && path !== "/init") {
-    return NextResponse.redirect(new URL("/init", request.url));
+    return NextResponse.redirect(new URL("/init", base));
   }
 
   if (apiKey && path === "/init") {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/", base));
   }
 
-  return NextResponse.next();
+  return await systemPages(request, NextResponse.next);
 }
 
 export const config = {
