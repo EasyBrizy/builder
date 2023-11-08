@@ -1,7 +1,7 @@
 import { BrizyBuilder } from "@components/Brizy";
 import React, { ReactElement } from "react";
 
-export default async function Admin(): Promise<ReactElement> {
+export default async function Editor(): Promise<ReactElement> {
   try {
     return <BrizyBuilder />;
   } catch (e) {

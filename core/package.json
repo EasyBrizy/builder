@@ -24,6 +24,9 @@
     "util": "^0.12.5",
     "webpack": "^5.88.2"
   },
+  "dependencies": {
+    "fp-utilities": "^1.1.4"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

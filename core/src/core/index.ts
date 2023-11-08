@@ -11,6 +11,7 @@ import {
   HookTypes,
 } from "../types/type";
 import { isServer } from "./utils/common";
+import { parseCollectionItem, parseCollectionType } from "./utils/parsers";
 
 class Core {
   private pluginManager: PluginManager;
@@ -24,34 +25,56 @@ class Core {
   constructor() {
     this.pluginManager = new PluginManager();
 
-    //#region predefined Hooks
-
     this.addHook(HookTypes.ADD_COLLECTION_TYPE, (collectionType) => {
-      if (collectionType) {
-        this.collectionTypes.push(collectionType as CollectionType);
+      const parsed = parseCollectionType(collectionType);
+
+      if (parsed) {
+        this.collectionTypes.push(parsed);
+      } else {
+        console.warn("Attempt to add invalid CollectionType");
       }
     });
 
     this.addHook(HookTypes.GET_COLLECTION_TYPES, () => this.collectionTypes);
 
     this.addHook(HookTypes.ADD_COLLECTION_ITEM, (collectionItem) => {
-      this.collectionItems.push(collectionItem as CollectionItem);
+      const parsed = parseCollectionItem(collectionItem);
+
+      if (parsed) {
+        this.collectionItems.push(parsed);
+      } else {
+        console.warn("Attempt to add invalid CollectionItem");
+      }
     });
 
     this.addHook(HookTypes.GET_COLLECTION_ITEMS, () => this.collectionItems);
 
-    // Create link for EDIT button
-    // Temporary solution
-    this.addHook(HookTypes.BUILDER_EDIT_LINK, (collection) => {
-      return `${window.location.origin}/admin/?type=${
-        // @ts-expect-error: unknown
-        collection.pageData.collectionType.title
-      }&slug=${(collection as CollectionItem).pageData.slug}`;
+    // Create link for EDIT button and Preview button || Temporary solution
+    this.addHook(HookTypes.BUILDER_EDIT_LINK, (collectionItem) => {
+      const parsed = parseCollectionItem(collectionItem);
+
+      if (parsed) {
+        return `${window.location.origin}/editor/?id=${parsed.pageData.id}&slug=${parsed.pageData.slug}`;
+      } else {
+        return undefined;
+      }
     });
 
-    //#endregion
+    this.addHook(HookTypes.GET_PREVIEW_LINK, (collectionItem) => {
+      const parsed = parseCollectionItem(collectionItem);
+
+      if (parsed) {
+        return `${window.location.origin}/preview/?id=${parsed.pageData.id}&slug=${parsed.pageData.slug}`;
+      } else {
+        return undefined;
+      }
+    });
 
     this.pluginManager.preInstallPlugin(new MockApiClient(this));
+  }
+
+  private initAction() {
+    return this.createAction("INIT_APP");
   }
 
   public setDispatch(dispatch: Dispatch) {
@@ -61,10 +84,8 @@ class Core {
   public start() {
     if (isServer()) return;
 
-    // Init App
     this.dispatch(this.initAction(), this);
 
-    // Initialize the plugins
     this.pluginManager.initializePlugins();
   }
 
@@ -95,7 +116,6 @@ class Core {
     this.pluginManager.registerPlugin(plugin);
   }
 
-  // Creating hook
   public addHook<T extends string, U extends Callback>(
     hookName: T,
     callback: U
@@ -106,19 +126,14 @@ class Core {
     this.hooks[hookName].push(callback);
   }
 
-  //#region Hooks
-
-  // Checking for existing hooks
   public getHooks(): Hooks {
     return this.hooks;
   }
 
-  // Removing hook
   public removeHook<T extends string>(hookName: T): void {
     delete this.hooks[hookName];
   }
 
-  // Executing hook
   public applyHook<T extends string, U = unknown>(
     hookName: T,
     payload?: U
@@ -137,12 +152,6 @@ class Core {
 
     return payload;
   }
-
-  private initAction() {
-    return this.createAction("INIT_APP");
-  }
-
-  //#endregion
 }
 
 export { Core };

@@ -18,29 +18,20 @@ class Cms extends AbstractPlugin {
   initialize = () => {
     super.initialize();
 
-    const collectionTypes = this.applyHook("GET_COLLECTION_TYPES");
+    const collectionTypes = this.core.collectionTypes;
+    const collectionsItems = this.core.collectionItems;
 
-    if (!collectionTypes) throw new Error("Missing collectionTypes");
-
-    if (
-      !Array.isArray(collectionTypes) ||
-      !collectionTypes.every((item) => "id" in item && "title" in item)
-    )
-      throw new Error("Wrong collectionType present");
-
-    this.collectionType = collectionTypes;
-
-    const collections = this.applyHook(
-      "GET_COLLECTION_ITEMS"
-    ) as Array<CollectionItem>;
+    if (collectionTypes.length === 0)
+      throw new Error("Missing collectionTypes");
 
     const CMSMarkup = `
         <div style="width: 1100px; height: 100vh; border: 2px solid chocolate; background: honeydew; margin: 0; padding: 0; box-sizing: border-box;">
-            ${this.renderItems(collections)}
+            ${this.renderItems(collectionsItems)}
         </div>`;
 
     const CMSNode = document.createElement("div");
-    CMSNode.id = "_cms";
+
+    CMSNode.id = "CMS";
     CMSNode.innerHTML = CMSMarkup;
     CMSNode.style.top = "0";
     CMSNode.style.left = "48px";
@@ -51,54 +42,47 @@ class Cms extends AbstractPlugin {
   };
 
   renderItems = (items: Array<CollectionItem>) => {
-    return items.map((collection: CollectionItem) => {
-      return `<ul style="display: flex;">
-          <li style="margin-left: 15px;">Title: ${
-            collection.pageData.title
-          }</li>
-          <li style="margin-left: 15px;">Slug: ${collection.pageData.slug}</li>
-          <li style="margin-left: 15px;">Status: ${
-            collection.pageData.status
-          }</li>
-          <li style="margin-left: 15px;">CollectionType: ${
-            (collection.pageData.collectionType as CollectionType).title
-          }</li>
-          <li style="margin-left: 150px;">
-            <a href="${this.applyHook(
-              "BUILDER_EDIT_LINK",
-              collection
-            )}">Edit</a>
+    return items.map((collection) => {
+      return `
+          <ul style="display: flex;">
+            <li style="margin-left: 15px;">
+              Title: ${collection.pageData.title}
+            </li>
+            <li style="margin-left: 15px;">
+              Slug: ${collection.pageData.slug}
+            </li>
+            <li style="margin-left: 15px;">
+              Status: ${collection.pageData.status}
+            </li>
+            <li style="margin-left: 15px;">
+              CollectionType: ${
+                (collection.pageData.collectionType as CollectionType).title
+              }
+            </li>
+            <li style="margin-left: 150px;">
+              <a href="${this.applyHook(
+                "BUILDER_EDIT_LINK",
+                collection
+              )}">Edit</a>
           </li>
       </ul>`;
     });
   };
 
   open = () => {
-    console.log("CMS open effect");
-
-    const cmsNode = document.querySelector<HTMLElement>("#_cms");
-    if (cmsNode) {
-      cmsNode.style.display = "block";
-    }
+    const cmsNode = document.querySelector<HTMLElement>("#CMS");
+    if (cmsNode) cmsNode.style.display = "block";
   };
 
   close = () => {
-    console.log("CMS close effect");
-
-    const cmsNode = document.querySelector<HTMLElement>("#_cms");
-    if (cmsNode) {
-      cmsNode.style.display = "none";
-    }
+    const cmsNode = document.querySelector<HTMLElement>("#CMS");
+    if (cmsNode) cmsNode.style.display = "none";
   };
 
   handleAction(action: Action) {
-    if (action.type === CMS_ACTIONS.OPEN_CMS) {
-      this.open();
-    }
+    if (action.type === CMS_ACTIONS.OPEN_CMS) this.open();
 
-    if (action.type === CMS_ACTIONS.CLOSE_CMS) {
-      this.close();
-    }
+    if (action.type === CMS_ACTIONS.CLOSE_CMS) this.close();
   }
 }
 

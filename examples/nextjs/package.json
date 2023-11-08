@@ -16,7 +16,8 @@
     "react-dom": "^18.2.0",
     "@brizy/react": "*",
     "@brizy/core": "*",
-    "@brizy/cms": "*"
+    "@brizy/cms": "*",
+    "@brizy/shopify": "*"
   },
   "devDependencies": {
     "@brizy/eslint-config": "*",
