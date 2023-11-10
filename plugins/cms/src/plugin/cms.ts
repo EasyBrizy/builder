@@ -1,17 +1,26 @@
+import { getConfig } from "../config/getConfig";
 import { CMS_ACTIONS } from "../types/types";
 import { AbstractPlugin, Core } from "@brizy/core";
 import {
-  Action,
-  CollectionItem,
-  CollectionType,
+  Action, // CollectionItem,
+  // CollectionType,
 } from "@brizy/core/dist/types/type";
+import { CMS } from "@brizy/plugin-cms";
+import React from "react";
+import { createRoot } from "react-dom/client";
 
 class Cms extends AbstractPlugin {
   collectionType: Array<string> = [];
+  rootNode: HTMLElement;
 
   constructor(core: Core) {
     super("Cms", core);
 
+    // Create the root for CMS packages
+    // the cms will be rendered inside bellow node
+    const node = document.createElement("div");
+    node.id = "cms-root-plugin";
+    this.rootNode = node;
     this.createAction("OPEN_CMS");
   }
 
@@ -19,70 +28,41 @@ class Cms extends AbstractPlugin {
     super.initialize();
 
     const collectionTypes = this.core.collectionTypes;
-    const collectionsItems = this.core.collectionItems;
 
-    if (collectionTypes.length === 0)
+    if (collectionTypes.length === 0) {
       throw new Error("Missing collectionTypes");
+    }
 
-    const CMSMarkup = `
-        <div style="width: 1100px; height: 100vh; border: 2px solid chocolate; background: honeydew; margin: 0; padding: 0; box-sizing: border-box;">
-            ${this.renderItems(collectionsItems)}
-        </div>`;
+    // Append the rootNode on initializing
+    document.body.appendChild(this.rootNode);
 
-    const CMSNode = document.createElement("div");
-
-    CMSNode.id = "CMS";
-    CMSNode.innerHTML = CMSMarkup;
-    CMSNode.style.top = "0";
-    CMSNode.style.left = "48px";
-    CMSNode.style.position = "fixed";
-    CMSNode.style.display = "none";
-
-    document.body.appendChild(CMSNode);
+    const root = createRoot(this.rootNode);
+    root.render(
+      React.createElement(CMS, {
+        config: getConfig(),
+      })
+    );
   };
 
-  renderItems = (items: Array<CollectionItem>) => {
-    return items.map((collection) => {
-      return `
-          <ul style="display: flex;">
-            <li style="margin-left: 15px;">
-              Title: ${collection.pageData.title}
-            </li>
-            <li style="margin-left: 15px;">
-              Slug: ${collection.pageData.slug}
-            </li>
-            <li style="margin-left: 15px;">
-              Status: ${collection.pageData.status}
-            </li>
-            <li style="margin-left: 15px;">
-              CollectionType: ${
-                (collection.pageData.collectionType as CollectionType).title
-              }
-            </li>
-            <li style="margin-left: 150px;">
-              <a href="${this.applyHook(
-                "BUILDER_EDIT_LINK",
-                collection
-              )}">Edit</a>
-          </li>
-      </ul>`;
-    });
-  };
+  open(): void {
+    this.rootNode.style.display = "block";
+  }
 
-  open = () => {
-    const cmsNode = document.querySelector<HTMLElement>("#CMS");
-    if (cmsNode) cmsNode.style.display = "block";
-  };
-
-  close = () => {
-    const cmsNode = document.querySelector<HTMLElement>("#CMS");
-    if (cmsNode) cmsNode.style.display = "none";
-  };
+  close(): void {
+    this.rootNode.style.display = "node";
+  }
 
   handleAction(action: Action) {
-    if (action.type === CMS_ACTIONS.OPEN_CMS) this.open();
-
-    if (action.type === CMS_ACTIONS.CLOSE_CMS) this.close();
+    switch (action.type) {
+      case CMS_ACTIONS.OPEN_CMS: {
+        this.open();
+        break;
+      }
+      case CMS_ACTIONS.CLOSE_CMS: {
+        this.close();
+        break;
+      }
+    }
   }
 }
 

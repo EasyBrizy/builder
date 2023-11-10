@@ -3,6 +3,11 @@
   "jsc": {
     "parser": {
       "syntax": "typescript"
+    },
+    "transform": {
+      "react": {
+        "runtime": "classic"
+      }
     }
   },
   "minify": false

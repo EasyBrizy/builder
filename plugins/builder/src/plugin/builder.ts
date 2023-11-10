@@ -32,14 +32,24 @@ class Builder extends AbstractPlugin {
     const urlParams = new URLSearchParams(queryString);
 
     const itemId = urlParams.get("id");
-    const itemSlug = urlParams.get("slug");
+    const itemSlug = urlParams.get("slug")?.toLowerCase();
 
     if (!itemId || !itemSlug) throw new Error("Missing item to edit...");
 
     const item = collectionItems.filter((item) => {
-      if (item.pageData.slug === itemSlug && item.pageData.id === itemId)
+      const { slug = "", id = "" } = item.pageData ?? {};
+
+      if (
+        `${slug}`.toLowerCase() === itemSlug.toLowerCase() &&
+        `${id}`.toLowerCase() === itemId.toLowerCase()
+      ) {
         return item;
+      }
     })[0];
+
+    if (!item) {
+      throw new Error("Missing item to edit...");
+    }
 
     const pagePreview = this.applyHook("GET_PREVIEW_LINK", item);
 

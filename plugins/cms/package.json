@@ -4,12 +4,13 @@
   "description": "CMS plugin, that installs CMS from Brizy.io",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "commonjs",
   "scripts": {
     "lint": "eslint \"src/**/!(*.d).ts*\"",
     "tsc": "tsc --noEmit",
     "prettier-check": "prettier --check \"src/**.{ts,tsx}\"",
-    "dev": "npm run clean && npm run build:types && webpack --watch",
-    "build": "npm run clean && webpack --mode production && npm run build:types",
+    "dev": "npm run clean && webpack --watch",
+    "build": "npm run clean && webpack --mode production",
     "build:types": "tsc --emitDeclarationOnly",
     "clean": "rimraf dist",
     "clean:modules": "find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \\;",
@@ -19,13 +20,19 @@
     "@brizy/eslint-config": "*",
     "@brizy/prettier-config": "*",
     "@brizy/tsconfig": "*",
+    "css-loader": "^6.8.1",
+    "global": "^4.4.0",
+    "mini-css-extract-plugin": "^2.7.6",
     "path-browserify": "^1.0.1",
     "rimraf": "^5.0.1",
     "util": "^0.12.5",
     "webpack": "^5.88.2"
   },
   "dependencies": {
-    "@brizy/core": "*"
+    "@brizy/core": "*",
+    "@brizy/plugin-cms": "^1.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "keywords": [],
   "author": "",
