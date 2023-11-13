@@ -1,5 +1,6 @@
 import { Config, HtmlOutputType, Modes } from "../types/Builder/config";
 import { LeftSidebarOptionsIds } from "../types/Builder/leftSidebar";
+import { createUpload } from "./utils/createUpload";
 import { AbstractPlugin, Core } from "@brizy/core";
 
 class Builder extends AbstractPlugin {
@@ -20,6 +21,10 @@ class Builder extends AbstractPlugin {
   ): Config<HtmlOutputType> => {
     const collectionTypes = this.core.collectionTypes;
     const collectionItems = this.core.collectionItems;
+
+    const templates = "https://e-t-cloud.b-cdn.net/1.0.0";
+
+    const storage = this.core.storage;
 
     if (collectionTypes.length === 0)
       throw new Error("Missing collection types");
@@ -75,6 +80,149 @@ class Builder extends AbstractPlugin {
       onSave: (data) => {
         console.log("Builder did SAVE");
         console.log(data);
+      },
+
+      api: {
+        defaultKits: {
+          async getMeta(res, rej) {
+            try {
+              const kitsUrl = `${templates}/kits`;
+              const meta = await fetch(`${kitsUrl}/meta.json`).then((r) =>
+                r.json()
+              );
+
+              // @ts-expect-error: ?????????
+              const data = meta.map((kit) => ({
+                ...kit,
+                // @ts-expect-error: ?????????
+                blocks: kit.blocks.map((item) => ({
+                  ...item,
+                  thumbnailSrc: `${kitsUrl}/thumbs/${item.id}.jpg`,
+                })),
+              }));
+
+              res(data);
+            } catch (e) {
+              rej("Failed to load meta.json");
+            }
+          },
+          async getData(res, rej, id) {
+            const kitsUrl = `${templates}/kits`;
+            try {
+              const data = await fetch(`${kitsUrl}/resolves/${id}.json`).then(
+                (r) => r.json()
+              );
+              res(data);
+            } catch (e) {
+              rej("Failed to load resolves for selected DefaultTemplate");
+            }
+          },
+        },
+        defaultPopups: {
+          async getMeta(res, rej) {
+            const popupsUrl = `${templates}/popups`;
+
+            try {
+              const meta = await fetch(`${popupsUrl}/meta.json`).then((r) =>
+                r.json()
+              );
+
+              const data = {
+                ...meta,
+                // @ts-expect-error: ?????????
+                blocks: meta.blocks.map((item) => ({
+                  ...item,
+                  thumbnailSrc: `${popupsUrl}/thumbs/${item.id}.jpg`,
+                })),
+              };
+
+              res(data);
+            } catch (e) {
+              rej("Failed to load meta.json");
+            }
+          },
+          async getData(res, rej, id) {
+            const popupsUrl = `${templates}/popups`;
+            try {
+              const data = await fetch(`${popupsUrl}/resolves/${id}.json`).then(
+                (r) => r.json()
+              );
+              res(data);
+            } catch (e) {
+              rej("Failed to load resolves for selected DefaultTemplate");
+            }
+          },
+        },
+        defaultLayouts: {
+          async getMeta(res, rej) {
+            const layoutsUrl = `${templates}/layouts`;
+            try {
+              const meta = await fetch(`${layoutsUrl}/meta.json`).then((r) =>
+                r.json()
+              );
+
+              const data = {
+                ...meta,
+                // @ts-expect-error: ?????????
+                templates: meta.templates.map((item) => ({
+                  ...item,
+                  thumbnailSrc: `${layoutsUrl}/thumbs/${item.pages[0].id}.jpg`,
+                  // @ts-expect-error: ?????????
+                  pages: item.pages.map((page) => ({
+                    ...page,
+                    thumbnailSrc: `${layoutsUrl}/thumbs/${page.id}.jpg`,
+                  })),
+                })),
+              };
+
+              res(data);
+            } catch (e) {
+              rej("Failed to load meta.json");
+            }
+          },
+          async getData(res, rej, id) {
+            const layoutsUrl = `${templates}/layouts`;
+            try {
+              const data = await fetch(
+                `${layoutsUrl}/resolves/${id}.json`
+              ).then((r) => r.json());
+
+              res(data);
+            } catch (e) {
+              rej("Failed to load resolves for selected DefaultTemplate");
+            }
+          },
+        },
+        customFile: {
+          fileUrl: "https://easybrizy.b-cdn.net",
+          addFile: {
+            async handler(resolve, reject) {
+              if (!storage) {
+                throw Error("Storage is not installed");
+              }
+
+              try {
+                const file = await createUpload();
+                const fileName = file.name;
+
+                if (
+                  typeof storage === "object" &&
+                  "uploadCustomFile" in storage &&
+                  typeof storage["uploadCustomFile"] === "function"
+                ) {
+                  storage
+                    .uploadCustomFile(file)
+                    .then(() => resolve({ fileName }))
+                    .catch((e: string) => {
+                      reject(e);
+                    });
+                }
+              } catch (e) {
+                reject("File upload failed");
+              }
+            },
+          },
+        },
       },
     };
   };

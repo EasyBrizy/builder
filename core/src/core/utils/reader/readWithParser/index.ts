@@ -144,8 +144,8 @@ export function or<A, B>(...args: [NonEmptyArray<ParseFunction<A, B>>]): (v: A) 
 export function or<A, B>(...args: [NonEmptyArray<ParseFunction<A, B>>, A]): B | undefined;
 // prettier-ignore
 export function or<A, B>(...args: | [NonEmptyArray<ParseFunction<A, B>>] | [NonEmptyArray<ParseFunction<A, B>>, A]): ((v: A) => B | undefined) | B | undefined {
-  return args.length === 1
-    ? (a: A): B | undefined => _or(args[0], a)
-    : _or(args[0], args[1]);
+    return args.length === 1
+        ? (a: A): B | undefined => _or(args[0], a)
+        : _or(args[0], args[1]);
 }
 // endregion

@@ -39,6 +39,7 @@ export enum HookTypes {
   EDIT_ITEM = "EDIT_ITEM",
   GET_PREVIEW_ITEM = "GET_PREVIEW_ITEM",
   GET_PREVIEW_LINK = "GET_PREVIEW_LINK",
+  SET_STORAGE = "SET_STORAGE",
 }
 
 export interface Editor {

@@ -31,7 +31,7 @@ class MockApiClient extends AbstractPlugin {
     });
 
     // demo hooks (will be removed) later;
-    this.addHook(HookTypes.GET_TOKEN, () => "demo");
+    this.addHook(HookTypes.GET_TOKEN, () => "YOUR_TOKEN_GOES_HERE");
 
     this.addHook(HookTypes.GET_PREVIEW_ITEM, this.getPreviewItem);
   }
