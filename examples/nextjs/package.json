@@ -17,7 +17,8 @@
     "@brizy/react": "*",
     "@brizy/core": "*",
     "@brizy/cms": "*",
-    "@brizy/shopify": "*"
+    "@brizy/shopify": "*",
+    "@brizy/storage": "*"
   },
   "devDependencies": {
     "@brizy/eslint-config": "*",

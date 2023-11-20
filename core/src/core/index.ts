@@ -22,6 +22,8 @@ class Core {
   collectionTypes: Array<CollectionType> = [];
   collectionItems: Array<CollectionItem> = [];
 
+  storage: unknown;
+
   constructor() {
     this.pluginManager = new PluginManager();
 
@@ -68,6 +70,10 @@ class Core {
       } else {
         return undefined;
       }
+    });
+
+    this.addHook(HookTypes.SET_STORAGE, (storage) => {
+      this.storage = storage;
     });
 
     this.pluginManager.preInstallPlugin(new MockApiClient(this));

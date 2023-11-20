@@ -1,7 +1,7 @@
 import { Response } from "./common";
 
 export interface AddFileData {
-  filename: string;
+  fileName: string;
 }
 
 export interface AddFileExtra {
@@ -12,6 +12,10 @@ export interface CustomFile {
   fileUrl?: string;
 
   addFile?: {
-    handler: (res: Response<AddFileData>, rej: Response<string>, extra: AddFileExtra) => void;
+    handler: (
+      res: Response<AddFileData>,
+      rej: Response<string>,
+      extra: AddFileExtra
+    ) => void;
   };
 }
