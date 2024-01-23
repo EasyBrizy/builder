@@ -7,14 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier-check": "prettier --check \"src/**.{ts,tsx}\""
+    "prettier-check": "prettier --check \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
-    "@brizy/docs-react": "*",
     "next": "^13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@brizy/react": "*",
     "@brizy/core": "*",
     "@brizy/cms": "*",
     "@brizy/shopify": "*",

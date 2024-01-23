@@ -21,7 +21,6 @@
   "workspaces": [
     "examples/*",
     "packages/*",
-    "providers/*",
     "core",
     "plugins/*"
   ]

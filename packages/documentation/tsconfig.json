@@ -1,9 +1,0 @@
-{
-  "extends": "@brizy/tsconfig/react-library.json",
-  "compilerOptions": {
-    "baseUrl": "src",
-    "outDir": "dist"
-  },
-  "include": ["src"],
-  "exclude": ["dist", "node_modules"]
-}

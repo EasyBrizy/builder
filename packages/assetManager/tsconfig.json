@@ -1,9 +1,0 @@
-{
-  "extends": "@brizy/tsconfig/base.json",
-  "compilerOptions": {
-    "baseUrl": "src",
-    "outDir": "dist"
-  },
-  "include": ["src"],
-  "exclude": ["dist", "build", "node_modules"]
-}
