@@ -242,7 +242,7 @@ class Builder extends AbstractPlugin {
       );
 
     Builder.init(token, config, () => {
-      console.log("Builder successfully rendered and ready to work");
+      this.core.dispatch({ type: "RENDER_CMS" }, "Builder");
     });
   }
 }

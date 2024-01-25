@@ -1,0 +1,7 @@
+#cms__root {
+    top: 0;
+    left: 48px;
+    position: fixed;
+    display: none;
+    width: 100%;
+}

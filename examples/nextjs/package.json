@@ -10,23 +10,23 @@
     "prettier-check": "prettier --check \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
+    "@brizy/cms": "*",
+    "@brizy/core": "*",
+    "@brizy/shopify": "*",
     "next": "^13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@brizy/core": "*",
-    "@brizy/cms": "*",
-    "@brizy/shopify": "*",
     "@brizy/storage": "*",
     "@brizy/builder": "*"
   },
   "devDependencies": {
     "@brizy/eslint-config": "*",
     "@brizy/prettier-config": "*",
+    "@brizy/tsconfig": "*",
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
     "autoprefixer": "^10.4.14",
-    "eslint-config-next": "^13.4.1",
-    "@brizy/tsconfig": "*"
+    "eslint-config-next": "^13.4.1"
   }
 }

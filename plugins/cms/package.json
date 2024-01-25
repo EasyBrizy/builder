@@ -19,13 +19,21 @@
     "@brizy/eslint-config": "*",
     "@brizy/prettier-config": "*",
     "@brizy/tsconfig": "*",
+    "css-loader": "^6.9.1",
+    "mini-css-extract-plugin": "^2.7.7",
     "path-browserify": "^1.0.1",
     "rimraf": "^5.0.1",
     "util": "^0.12.5",
     "webpack": "^5.88.2"
   },
   "dependencies": {
-    "@brizy/core": "*"
+    "@brizy/core": "*",
+    "@brizy/plugin-cms": "^1.0.3-beta2"
+  },
+  "overrides": {
+    "@types/react": "^18.0.22",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "keywords": [],
   "author": "",

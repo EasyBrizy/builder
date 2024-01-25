@@ -2,13 +2,15 @@
 
 import { Builder } from "@brizy/builder";
 import { Cms } from "@brizy/cms";
-import { Core } from "@brizy/core";
+import "@brizy/cms/dist/main.css";
 import { Shopify } from "@brizy/shopify";
 import { Storage } from "@brizy/storage";
+import { CORE } from "@utils/core";
 import { FC, useEffect, useRef } from "react";
 
-const core = new Core();
+const core = CORE.getInstance();
 const builder = new Builder(core);
+
 new Cms(core);
 new Shopify(core);
 new Storage(core);
@@ -28,8 +30,8 @@ const BrizyBuilder: FC = () => {
 
   return (
     <>
-      <div id="editor" style={{ height: "100vh" }} ref={containerRef}></div>
       <script src="https://cdn.brizylocal.com/pages/3.1.0/index.js" />
+      <div id="editor" style={{ height: "100vh" }} ref={containerRef}></div>
     </>
   );
 };

@@ -1,89 +1,99 @@
 import { CMS_ACTIONS } from "../types/types";
+import "./style.css";
 import { AbstractPlugin, Core } from "@brizy/core";
+import { Action, CollectionType } from "@brizy/core/dist/types/type";
+import CMSPlugin from "@brizy/plugin-cms";
+import "@brizy/plugin-cms/dist/index.css";
 import {
-  Action,
-  CollectionItem,
-  CollectionType,
-} from "@brizy/core/dist/types/type";
+  GetIntegrations,
+  Integrations,
+} from "@brizy/plugin-cms/lib/types/GetIntegrations";
+import { Locale } from "@brizy/plugin-cms/lib/types/Locale";
 
 class Cms extends AbstractPlugin {
   collectionType: Array<string> = [];
+  data: GetIntegrations;
 
   constructor(core: Core) {
     super("Cms", core);
 
-    this.createAction("OPEN_CMS");
+    this.data = { data: [] };
+
+    this.createAction(CMS_ACTIONS.OPEN_CMS);
+    this.createAction(CMS_ACTIONS.RENDER_CMS);
+
+    const collectionTypes = this.core.collectionTypes;
+
+    const integrations: Integrations[] = collectionTypes.map(
+      (collectionType: CollectionType) => {
+        return {
+          name: collectionType.title,
+          pages: [
+            {
+              id: 7,
+              name: collectionType.title,
+              subItems: [],
+              logo: "",
+              iframeUrl: "http://localhost:9000/", // here will be @brizy/contentful plugin page
+            },
+          ],
+        };
+      }
+    );
+
+    this.data = {
+      data: integrations,
+    };
   }
 
   initialize = () => {
     super.initialize();
 
-    const collectionTypes = this.core.collectionTypes;
-    const collectionsItems = this.core.collectionItems;
-
-    if (collectionTypes.length === 0)
-      throw new Error("Missing collectionTypes");
-
-    const CMSMarkup = `
-        <div style="width: 1100px; height: 100vh; border: 2px solid chocolate; background: honeydew; margin: 0; padding: 0; box-sizing: border-box;">
-            ${this.renderItems(collectionsItems)}
-        </div>`;
-
-    const CMSNode = document.createElement("div");
-
-    CMSNode.id = "CMS";
-    CMSNode.innerHTML = CMSMarkup;
-    CMSNode.style.top = "0";
-    CMSNode.style.left = "48px";
-    CMSNode.style.position = "fixed";
-    CMSNode.style.display = "none";
-
-    document.body.appendChild(CMSNode);
-  };
-
-  renderItems = (items: Array<CollectionItem>) => {
-    return items.map((collection) => {
-      return `
-          <ul style="display: flex;">
-            <li style="margin-left: 15px;">
-              Title: ${collection.pageData.title}
-            </li>
-            <li style="margin-left: 15px;">
-              Slug: ${collection.pageData.slug}
-            </li>
-            <li style="margin-left: 15px;">
-              Status: ${collection.pageData.status}
-            </li>
-            <li style="margin-left: 15px;">
-              CollectionType: ${
-                (collection.pageData.collectionType as CollectionType).title
-              }
-            </li>
-            <li style="margin-left: 150px;">
-              <a href="${this.applyHook(
-                "BUILDER_EDIT_LINK",
-                collection
-              )}">Edit</a>
-          </li>
-      </ul>`;
-    });
+    console.log(this.core.applyHook("GET_COLLECTION_TYPES"));
   };
 
   open = () => {
-    const cmsNode = document.querySelector<HTMLElement>("#CMS");
-    if (cmsNode) cmsNode.style.display = "block";
+    const cmsNode = document.querySelector<HTMLElement>("#cms__root");
+    if (cmsNode) {
+      cmsNode.style.display = "block";
+    }
   };
 
   close = () => {
-    const cmsNode = document.querySelector<HTMLElement>("#CMS");
-    if (cmsNode) cmsNode.style.display = "none";
+    const cmsNode = document.querySelector<HTMLElement>("#cms__root");
+    if (cmsNode) {
+      cmsNode.style.display = "none";
+    }
+  };
+
+  renderCms = () => {
+    const CMSNode = document.createElement("div");
+    CMSNode.id = "cms__root";
+    document.body.appendChild(CMSNode);
+
+    const cms = new CMSPlugin({
+      origin: "*",
+      development: true,
+      locale: "en" as Locale,
+      onClose: close,
+      getIntegrations: () => this.getIntegrations(),
+    });
+
+    cms.render(CMSNode);
   };
 
   handleAction(action: Action) {
     if (action.type === CMS_ACTIONS.OPEN_CMS) this.open();
 
     if (action.type === CMS_ACTIONS.CLOSE_CMS) this.close();
+
+    if (action.type === CMS_ACTIONS.RENDER_CMS) this.renderCms();
   }
+
+  getIntegrations = (): Promise<GetIntegrations> =>
+    new Promise<GetIntegrations>((resolve) =>
+      setTimeout(() => resolve(this.data), 2000)
+    );
 }
 
 export { Cms };
