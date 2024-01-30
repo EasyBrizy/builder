@@ -22,7 +22,8 @@
     "path-browserify": "^1.0.1",
     "rimraf": "^5.0.1",
     "util": "^0.12.5",
-    "webpack": "^5.88.2"
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "fp-utilities": "^1.1.4"
