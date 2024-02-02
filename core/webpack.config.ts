@@ -1,5 +1,4 @@
-// @ts-ignore
-const path = require("path");
+import * as path from "path";
 
 module.exports = {
   entry: "./src/index.ts",
