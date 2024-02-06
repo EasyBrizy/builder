@@ -29,7 +29,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone/hidden?repository-url=https%3A%2F%2Fgithub.com%2FEasyBrizy%2Fnextjs&project-name=easybrizynextjs&repository-name=easybrizynextjs&demo-title=EasyBrizy&demo-description=Brizy+with+NextJS&demo-url=https%3A%2F%2Fbrizy.io&demo-image=https%3A%2F%2Fa-cloud.b-cdn.net%2Fmedia%2Foriginal%2F48784df12e0f26e18235bde2ecd5510a%2Fimage.svg)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone/hidden?repository-url=https://github.com/EasyBrizy/builder&project-name=easybrizynextjs&repository-name=easybrizynextjs&demo-title=EasyBrizy&demo-description=Brizy+with+NextJS&demo-url=https://brizy.io&demo-image=https://a-cloud.b-cdn.net/media/original/48784df12e0f26e18235bde2ecd5510a/image.svg)
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_source=github.com&utm_medium=referral&utm_campaign=turborepo-readme) from the creators of Next.js.
 
@@ -37,6 +37,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Deploy on Netlify
 
-[![Deploy](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/EasyBrizy/nextjs&base=examples/nextjs)
+[![Deploy](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/EasyBrizy/builder)
 
 More details about deploy on [Netlify Platform](https://docs.netlify.com/get-started/#deploy-a-project-to-netlify).
