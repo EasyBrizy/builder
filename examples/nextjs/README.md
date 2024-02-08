@@ -40,3 +40,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 [![Deploy](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/EasyBrizy/nextjs&base=examples/nextjs)
 
 More details about deploy on [Netlify Platform](https://docs.netlify.com/get-started/#deploy-a-project-to-netlify).
+
+## Deploy to Render
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/EasyBrizy/builder)
+
+Check out [Render documentation](https://docs.render.com/deploys)

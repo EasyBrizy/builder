@@ -1,0 +1,9 @@
+services:
+  - type: web
+    rootDir: examples/nextjs
+    name: next-js
+    runtime: node
+    region: frankfurt
+    plan: free
+    buildCommand: cd ../../ && npm i && npm run build:nextjs
+    startCommand: next start
