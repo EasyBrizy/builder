@@ -1,5 +1,5 @@
 {
-  "name": "@brizy/core",
+  "name": "@brizy/builder-sdk",
   "version": "1.0.0",
   "description": "Brizy Core for pluggable apps",
   "main": "dist/index.js",

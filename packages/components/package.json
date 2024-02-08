@@ -1,0 +1,19 @@
+{
+  "name": "components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run clean && npm run build -- --watch",
+    "build": "npm run clean && webpack --config=./webpack.config.js",
+    "preserve": "npm run build",
+    "serve": "npx serve -l 1234 ./",
+    "clean": "rimraf dist"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "@brizy/core": "file:./brizy-core-1.0.0.tgz"
+  }
+}

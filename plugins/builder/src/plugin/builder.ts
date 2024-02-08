@@ -1,7 +1,7 @@
 import { Config, HtmlOutputType, Modes } from "../types/Builder/config";
 import { LeftSidebarOptionsIds } from "../types/Builder/leftSidebar";
 import { createUpload } from "./utils/createUpload";
-import { AbstractPlugin, Core } from "@brizy/core";
+import { AbstractPlugin, Core } from "@brizy/builder-sdk";
 
 class Builder extends AbstractPlugin {
   constructor(core: Core) {

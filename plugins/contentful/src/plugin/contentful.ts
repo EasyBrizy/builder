@@ -1,5 +1,5 @@
-import { Core } from "@brizy/core";
-import { AbstractPlugin } from "@brizy/core";
+import { Core } from "@brizy/builder-sdk";
+import { AbstractPlugin } from "@brizy/builder-sdk";
 
 class Contentful extends AbstractPlugin {
   constructor(core: Core) {
