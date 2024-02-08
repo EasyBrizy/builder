@@ -1,5 +1,5 @@
 import { CMS_ACTIONS } from "../types/types";
-import { AbstractPlugin, Core } from "@brizy/core";
+import { AbstractPlugin, Core } from "@brizy/builder-sdk";
 import {
   Action,
   CollectionItem,

@@ -1,4 +1,4 @@
-import { Core, HookTypes, AbstractPlugin } from "@brizy/core";
+import { Core, HookTypes, AbstractPlugin } from "@brizy/builder-sdk";
 
 class Storage extends AbstractPlugin {
   constructor(core: Core) {
