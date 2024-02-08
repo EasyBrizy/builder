@@ -10,7 +10,7 @@
     "prettier-check": "prettier --check \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
-    "next": "^13.4.1",
+    "next": "^14.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@brizy/core": "*",
@@ -22,7 +22,7 @@
   "devDependencies": {
     "@brizy/eslint-config": "*",
     "@brizy/prettier-config": "*",
-    "@types/node": "^17.0.12",
+    "@types/node": "^18.19.14",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
     "autoprefixer": "^10.4.14",
