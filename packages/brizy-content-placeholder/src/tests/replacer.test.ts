@@ -1,7 +1,7 @@
-import { Replacer } from "../modules/Replacer.js"
 import { mySimpleClass } from "../examples/mySimpleClass.js"
-import { Registry } from "../modules/Registry.js"
 import { EmptyContext } from "../modules/EmptyContext.js"
+import { Registry } from "../modules/Registry.js"
+import { Replacer } from "../modules/Replacer.js"
 import { expect } from "@jest/globals"
 
 describe("Replacer test", () => {
@@ -15,7 +15,7 @@ describe("Replacer test", () => {
     const myPlaceholder = new mySimpleClass(
       "label",
       "page_loop",
-      "myCustomValue",
+      "myCustomValue"
     )
 
     const registration = new Registry()
@@ -26,7 +26,7 @@ describe("Replacer test", () => {
 
     const result = replacer.replacePlaceholders(
       contentWithPlaceholder,
-      new EmptyContext(),
+      new EmptyContext()
     )
 
     expect(result).toBe(contentAfterReplace)

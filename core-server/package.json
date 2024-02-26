@@ -1,0 +1,36 @@
+{
+  "name": "@brizy/core-server",
+  "version": "1.0.0",
+  "description": "Brizy Core for pluggable apps",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "lint": "eslint \"src/**/!(*.d).ts*\"",
+    "tsc": "tsc --noEmit",
+    "prettier-check": "prettier --check \"src/**.{ts,tsx}\"",
+    "build:types": "tsc --emitDeclarationOnly",
+    "clean": "rimraf dist",
+    "clean:modules": "find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \\;",
+    "reinstall": "npm run clean:modules && npm install",
+    "build": "npm run clean && npx tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon --exec ts-node src/index.ts"
+  },
+  "devDependencies": {
+    "@brizy/eslint-config": "*",
+    "@brizy/prettier-config": "*",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "files": [
+    "dist",
+    "package.json"
+  ]
+}

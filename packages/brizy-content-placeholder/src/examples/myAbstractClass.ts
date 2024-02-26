@@ -15,7 +15,7 @@ export abstract class MyAbstractClass
     label: string,
     placeholder: string,
     value: string,
-    attributes?: Attr,
+    attributes?: Attr
   ) {
     super()
     this.label = label

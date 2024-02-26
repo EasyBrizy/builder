@@ -12,7 +12,7 @@ export class ContentPlaceholder {
     name: string,
     placeholder: string,
     attributes?: Attr,
-    content?: string,
+    content?: string
   ) {
     this.uid = createUid()
     this.placeholder = placeholder

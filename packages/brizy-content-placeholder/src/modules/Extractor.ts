@@ -1,7 +1,7 @@
 import { ContentPlaceholder } from "./ContentPlaceholder.js"
+import { PlaceholderInterface } from "./PlaceholderInterface.js"
 import { RegistryInterface } from "./RegistryInterface.js"
 import { Attr } from "./types.js"
-import { PlaceholderInterface } from "./PlaceholderInterface.js"
 
 type ContentPlaceholderType = ContentPlaceholder
 
@@ -27,7 +27,7 @@ export class Extractor {
   }
 
   extract(
-    content: string,
+    content: string
   ): [ContentPlaceholderType[], PlaceholderInterface[], string] {
     const placeholderInstances: PlaceholderInterface[] = []
     const contentPlaceholders: ContentPlaceholderType[] = []
@@ -54,7 +54,7 @@ export class Extractor {
       placeholderInstances.push(instance)
 
       const attributes = this.getPlaceholderAttributes(
-        match.groups?.attributes ?? "",
+        match.groups?.attributes ?? ""
       )
       const content = match.groups?.content ?? ""
 
@@ -62,7 +62,7 @@ export class Extractor {
         name,
         match[0],
         attributes,
-        content,
+        content
       )
 
       const pos: number = placeholder.getPlaceholder().indexOf(content)
@@ -70,7 +70,7 @@ export class Extractor {
       if (pos !== -1) {
         returnContent = originalContent.replace(
           placeholder.getPlaceholder(),
-          placeholder.getUid(),
+          placeholder.getUid()
         )
       }
 

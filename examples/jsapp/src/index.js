@@ -1,5 +1,5 @@
 import { Builder } from "@brizy/builder";
-import { Core } from "@brizy/core";
+import { Core } from "@brizy/core-client";
 
 const container = document.querySelector("#editor");
 const core = new Core();

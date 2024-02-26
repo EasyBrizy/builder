@@ -6,9 +6,7 @@
     "module": "es6",
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "noImplicitAny": true,
+    "noImplicitAny": true
   },
-  "include": [
-    "**/*.ts"
-  ],
+  "include": ["**/*.ts"]
 }

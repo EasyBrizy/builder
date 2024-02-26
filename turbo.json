@@ -3,6 +3,12 @@
   "globalDependencies": ["**/.env.*local"],
   "pipeline": {
     "build": {
+      "env": [
+        "BUNNY_HOST_NAME",
+        "BUNNY_STORAGE_ZONE_NAME",
+        "BUNNY_ACCESS_KEY",
+        "HOST_NAME"
+      ],
       "outputs": ["dist/**"],
       "dependsOn": ["^build"]
     },
@@ -48,30 +54,30 @@
 
     "@brizy/sdk#dev": {},
 
-    "@brizy/core#dev": {},
+    "@brizy/core-client#dev": {},
 
     "@brizy/builder#dev": {
-      "dependsOn": ["@brizy/core"]
+      "dependsOn": ["@brizy/core-client"]
     },
 
     "@brizy/mock-api-client#dev": {
-      "dependsOn": ["@brizy/core"]
+      "dependsOn": ["@brizy/core-client"]
     },
 
     "@brizy/cms#dev": {
-      "dependsOn": ["@brizy/core"]
+      "dependsOn": ["@brizy/core-client"]
     },
 
     "@brizy/contentful#dev": {
-      "dependsOn": ["@brizy/core"]
+      "dependsOn": ["@brizy/core-client"]
     },
 
     "@brizy/shopify#dev": {
-      "dependsOn": ["@brizy/core"]
+      "dependsOn": ["@brizy/core-client"]
     },
 
     "@brizy/jsapp#dev": {
-      "dependsOn": ["@brizy/core"]
+      "dependsOn": ["@brizy/core-client"]
     },
 
     "lint": {},

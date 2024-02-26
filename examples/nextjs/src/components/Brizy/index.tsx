@@ -2,7 +2,7 @@
 
 import { Builder } from "@brizy/builder";
 import { Cms } from "@brizy/cms";
-import { Core } from "@brizy/core";
+import { Core } from "@brizy/core-client";
 import { Shopify } from "@brizy/shopify";
 import { Storage } from "@brizy/storage";
 import { FC, useEffect, useRef } from "react";
