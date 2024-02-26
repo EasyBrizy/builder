@@ -1,8 +1,8 @@
-import { RegistryInterface } from "./RegistryInterface.js"
-import { Extractor } from "./Extractor.js"
-import { ContextInterface } from "./ContextInterface.js"
 import { ContentPlaceholder } from "./ContentPlaceholder.js"
+import { ContextInterface } from "./ContextInterface.js"
+import { Extractor } from "./Extractor.js"
 import { PlaceholderInterface } from "./PlaceholderInterface.js"
+import { RegistryInterface } from "./RegistryInterface.js"
 
 export class Replacer {
   private registry: RegistryInterface
@@ -19,7 +19,7 @@ export class Replacer {
     context.afterExtract(
       contentPlaceholders,
       instancePlaceholders,
-      contentAfterExtractor,
+      contentAfterExtractor
     )
 
     if (contentPlaceholders.length > 0 && instancePlaceholders.length > 0) {
@@ -27,7 +27,7 @@ export class Replacer {
         contentPlaceholders,
         instancePlaceholders,
         contentAfterExtractor,
-        context,
+        context
       )
     }
 
@@ -38,7 +38,7 @@ export class Replacer {
     contentPlaceholders: ContentPlaceholder[],
     instancePlaceholders: PlaceholderInterface[],
     contentAfterExtractor: string,
-    context: ContextInterface,
+    context: ContextInterface
   ): string {
     const toReplace: string[] = []
     const toReplaceWithValues: string[] = []
@@ -52,18 +52,18 @@ export class Replacer {
         if (instancePlaceholder) {
           const value = instancePlaceholder.getValue(
             context,
-            contentPlaceholder,
+            contentPlaceholder
           )
 
           if (
             instancePlaceholder.shouldFallbackValue(
               value,
               context,
-              contentPlaceholder,
+              contentPlaceholder
             )
           ) {
             toReplaceWithValues.push(
-              instancePlaceholder.getFallbackValue(context, contentPlaceholder),
+              instancePlaceholder.getFallbackValue(context, contentPlaceholder)
             )
           } else {
             toReplaceWithValues.push(value)
@@ -81,7 +81,7 @@ export class Replacer {
       (match) => {
         const index = toReplace.indexOf(match)
         return index !== -1 ? toReplaceWithValues[index] : match
-      },
+      }
     )
 
     return content

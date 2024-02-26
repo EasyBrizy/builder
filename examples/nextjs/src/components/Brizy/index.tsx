@@ -2,7 +2,7 @@
 
 import { Builder } from "@brizy/builder";
 import { Cms } from "@brizy/cms";
-import { Core } from "@brizy/core";
+import { Core } from "@brizy/core-client";
 import { Shopify } from "@brizy/shopify";
 import { Storage } from "@brizy/storage";
 import { FC, useEffect, useRef } from "react";
@@ -29,7 +29,7 @@ const BrizyBuilder: FC = () => {
   return (
     <>
       <div id="editor" style={{ height: "100vh" }} ref={containerRef}></div>
-      <script src="https://cdn.brizylocal.com/pages/3.1.0/index.js" />
+      <script src="https://cdn.brizylocal.com/pages/3.1.0/index.js" async />
     </>
   );
 };

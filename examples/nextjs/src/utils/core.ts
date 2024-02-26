@@ -1,4 +1,4 @@
-import { Core } from "@brizy/core";
+import { Core } from "@brizy/core-client";
 
 class CORE {
   private static instance: Core;

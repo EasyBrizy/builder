@@ -1,6 +1,6 @@
-import { PlaceholderInterface } from "./PlaceholderInterface.js"
-import { ContextInterface } from "./ContextInterface.js"
 import { ContentPlaceholder } from "./ContentPlaceholder.js"
+import { ContextInterface } from "./ContextInterface.js"
+import { PlaceholderInterface } from "./PlaceholderInterface.js"
 import { Attr } from "./types.js"
 import { createUid } from "./utils.js"
 
@@ -25,7 +25,7 @@ export abstract class AbstractPlaceholder implements PlaceholderInterface {
 
   abstract getValue(
     context: ContextInterface,
-    placeholder: ContentPlaceholder,
+    placeholder: ContentPlaceholder
   ): string
 
   abstract support(placeholderName: string): boolean
