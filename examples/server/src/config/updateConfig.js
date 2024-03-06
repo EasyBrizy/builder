@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+
 function updateConfig() {
   const configFilePath = path.join(__dirname, "config.ts");
 
