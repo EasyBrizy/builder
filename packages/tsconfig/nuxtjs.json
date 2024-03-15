@@ -14,17 +14,8 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
-  "include": [
-    "./nuxt.d.ts",
-    "../**/*"
-  ],
-  "exclude": [
-    "../dist",
-    "../.output",
-    "node_modules"
-  ]
+  "include": ["./nuxt.d.ts", "../**/*"],
+  "exclude": ["../dist", "../.output", "node_modules"]
 }

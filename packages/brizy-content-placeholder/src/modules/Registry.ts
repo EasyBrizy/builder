@@ -1,5 +1,5 @@
-import { RegistryInterface } from "./RegistryInterface.js"
 import { PlaceholderInterface } from "./PlaceholderInterface.js"
+import { RegistryInterface } from "./RegistryInterface.js"
 
 export class Registry implements RegistryInterface {
   public placeholders: PlaceholderInterface[] = []
@@ -13,7 +13,7 @@ export class Registry implements RegistryInterface {
   }
 
   public getPlaceholderSupportingName(
-    name: string,
+    name: string
   ): PlaceholderInterface | undefined {
     return this.placeholders.find((placeholder) => placeholder.support(name))
   }

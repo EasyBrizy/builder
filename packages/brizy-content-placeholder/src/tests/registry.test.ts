@@ -1,6 +1,6 @@
-import { jest } from "@jest/globals"
-import { Registry } from "../modules/Registry.js"
 import type { PlaceholderInterface } from "../modules/PlaceholderInterface"
+import { Registry } from "../modules/Registry.js"
+import { jest } from "@jest/globals"
 
 describe("Registry class", () => {
   let registry: Registry

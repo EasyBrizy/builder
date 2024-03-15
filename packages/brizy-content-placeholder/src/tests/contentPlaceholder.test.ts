@@ -121,7 +121,7 @@ describe("Content Placeholder", () => {
     const placeholder = contentPlaceholder.buildPlaceholder()
 
     expect(placeholder).toBe(
-      '{{name id="123" typeId="456"}}content{{end_name}}',
+      '{{name id="123" typeId="456"}}content{{end_name}}'
     )
   })
 
@@ -129,7 +129,7 @@ describe("Content Placeholder", () => {
     const contentPlaceholder = new ContentPlaceholder(
       "name",
       "placeholder",
-      attributes,
+      attributes
     )
 
     const placeholder = contentPlaceholder.buildPlaceholder()

@@ -21,7 +21,9 @@
   "workspaces": [
     "examples/*",
     "packages/*",
-    "core",
-    "plugins/*"
+    "plugins-client/*",
+    "plugins-server/*",
+    "core-client",
+    "core-server"
   ]
 }

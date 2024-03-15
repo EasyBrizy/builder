@@ -1,5 +1,5 @@
-import { ContextInterface } from "./ContextInterface.js"
 import { ContentPlaceholder } from "./ContentPlaceholder.js"
+import { ContextInterface } from "./ContextInterface.js"
 import { Attr } from "./types.js"
 
 export interface PlaceholderInterface {
@@ -12,12 +12,12 @@ export interface PlaceholderInterface {
   shouldFallbackValue(
     value: string,
     context: ContextInterface,
-    placeholder: ContentPlaceholder,
+    placeholder: ContentPlaceholder
   ): boolean
 
   getFallbackValue(
     context: ContextInterface,
-    placeholder: ContentPlaceholder,
+    placeholder: ContentPlaceholder
   ): string
 
   getConfigStructure()

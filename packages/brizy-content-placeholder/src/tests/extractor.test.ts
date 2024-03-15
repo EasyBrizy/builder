@@ -1,10 +1,10 @@
-import { Extractor } from "../modules/Extractor.js"
-import { ContentPlaceholder } from "../modules/ContentPlaceholder.js"
-import { Registry } from "../modules/Registry.js"
-import { expect } from "@jest/globals"
-import { Attr } from "../modules/types.js"
 import { mySimpleClass } from "../examples/mySimpleClass.js"
 import { AbstractPlaceholder } from "../modules/AbstractPlaceholder.js"
+import { ContentPlaceholder } from "../modules/ContentPlaceholder.js"
+import { Extractor } from "../modules/Extractor.js"
+import { Registry } from "../modules/Registry.js"
+import { Attr } from "../modules/types.js"
+import { expect } from "@jest/globals"
 
 describe("Extractors", () => {
   const tests: {

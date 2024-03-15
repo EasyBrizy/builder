@@ -1,5 +1,5 @@
-import { MyAbstractClass } from "./myAbstractClass.js"
 import { Attr } from "../modules/types.js"
+import { MyAbstractClass } from "./myAbstractClass.js"
 
 export class mySimpleClass extends MyAbstractClass {
   protected value: string
