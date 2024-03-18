@@ -4,7 +4,7 @@ import {
   Action,
   CollectionItem,
   CollectionType,
-} from "@brizy/core/dist/types/type";
+} from "@brizy/core-client/dist/types/type";
 
 class Cms extends AbstractPlugin {
   collectionType: Array<string> = [];

@@ -25,7 +25,7 @@ class Core {
   private config: CoreConfig;
 
   // Express
-  private app: Express;
+  public app: Express;
   private router = Router();
   private routes: RouteData[] = [];
 

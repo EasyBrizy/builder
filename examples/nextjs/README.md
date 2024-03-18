@@ -29,7 +29,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone/hidden?repository-url=https://github.com/EasyBrizy/builder&project-name=easybrizynextjs&repository-name=easybrizynextjs&demo-title=EasyBrizy&demo-description=Brizy+with+NextJS&demo-url=https://brizy.io&demo-image=https://a-cloud.b-cdn.net/media/original/48784df12e0f26e18235bde2ecd5510a/image.svg)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FEasyBrizy%2Fbuilder%2F&root-directory=examples%2Fnextjs&env=API_URL&envDescription=API_URL%20is%20need%20to%20know%20where%20editor%20shoult%20to%20upload%20files&project-name=brizy-builder-client&repository-name=brizy-builder-client)
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_source=github.com&utm_medium=referral&utm_campaign=turborepo-readme) from the creators of Next.js.
 

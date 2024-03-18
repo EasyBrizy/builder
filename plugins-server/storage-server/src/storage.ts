@@ -6,12 +6,11 @@ import {
   Response,
   NextFunction,
 } from "@brizy/core-server";
-import fs from "fs";
 import multer from "multer";
 import * as process from "process";
 
 class Storage extends AbstractPlugin {
-  public upload = multer({ dest: "uploads/customfile" });
+  public upload = multer();
 
   constructor(core: Core) {
     super("Storage", core);
@@ -70,7 +69,7 @@ class Storage extends AbstractPlugin {
 
     const url = `https://${config.hostname}/${config.storageZoneName}/${file.originalname}`;
 
-    const fileContent = fs.readFileSync(file.path);
+    const fileContent = Buffer.from(file.buffer);
 
     const response = await fetch(url, {
       method: "PUT",

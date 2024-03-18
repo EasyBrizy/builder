@@ -1,0 +1,2 @@
+Deploy Brizy Builder server to VERCEL
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FEasyBrizy%2Fbuilder%2F&root-directory=examples%2Fserver&env=BUNNY_HOST_NAME,BUNNY_STORAGE_ZONE_NAME,BUNNY_ACCESS_KEY&envDescription=API%20keys%20are%20needed%20to%20be%20able%20to%20upload%20your%20own%20media%20files%20on%20CDN&project-name=brizy-builder-server&repository-name=brizy-builder-server)
