@@ -15,3 +15,5 @@ const start = () => {
 };
 
 start();
+
+export default __CORE__.app;

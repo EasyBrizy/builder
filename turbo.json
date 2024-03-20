@@ -22,6 +22,9 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
+    "@brizy/server#build": {
+      "dependsOn": ["^build"]
+    },
 
     "@brizy/nextjs#dev": {
       "cache": false,
