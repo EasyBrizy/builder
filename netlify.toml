@@ -1,7 +1,0 @@
-[build]
-  # This command runs in base directory (by default the repository root)
-  command = "npm run build:nextjs"
-  publish = "examples/nextjs/.next"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"

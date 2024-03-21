@@ -1,7 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const fs = require("fs");
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const path = require("path");
+const path = require('path');
+const fs = require('fs');
+const findRoot = require('../utils/findRoot');
 
 function updateConfig() {
   const configFilePath = path.join(__dirname, "config.ts");
@@ -16,9 +15,7 @@ function updateConfig() {
   const packagesWithBrizyDisplayNames = {};
 
   for (const packageName in installedPackages) {
-    const packagePath = path.resolve(
-      path.dirname(require.resolve(`${packageName}/package.json`))
-    );
+    const  packagePath = findRoot(require.resolve(packageName));
 
     if (fs.existsSync(packagePath)) {
       try {
@@ -31,8 +28,8 @@ function updateConfig() {
         }
 
         const brizyDisplayName = packageJson.brizy
-          ? packageJson.brizy.name
-          : null;
+            ? packageJson.brizy.name
+            : null;
         const displayName = brizyDisplayName || packageName;
 
         if (!imports.includes(displayName)) {
@@ -42,8 +39,8 @@ function updateConfig() {
         packagesWithBrizyDisplayNames[packageName] = displayName;
       } catch (error) {
         console.error(
-          `Error reading package.json for package '${packageName}':`,
-          error
+            `Error reading package.json for package '${packageName}':`,
+            error
         );
       }
     }

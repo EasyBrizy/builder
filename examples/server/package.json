@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "api/index.ts",
   "scripts": {
-    "postinstall": "node src/config/updateConfig.js",
+    "prebuild": "node src/config/updateConfig.js",
     "build": "npm run clean && npx tsc",
     "start": "node dist/api/index.js",
     "dev": "nodemon --exec ts-node api/index.ts",
@@ -17,7 +17,9 @@
   "dependencies": {
     "@brizy/core-server": "*",
     "@brizy/storage-server": "*",
-    "dotenv": "^16.4.5"
+    "@netlify/functions": "^2.6.0",
+    "dotenv": "^16.4.5",
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",

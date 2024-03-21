@@ -22,7 +22,7 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
-    "@brizy/server#build": {
+    "@brizy/server#prebuild": {
       "dependsOn": ["^build"]
     },
 
