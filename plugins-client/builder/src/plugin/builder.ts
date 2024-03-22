@@ -77,9 +77,14 @@ class Builder extends AbstractPlugin {
 
       pagePreview: typeof pagePreview === "string" ? pagePreview : undefined,
 
-      onSave: (data) => {
-        console.log("Builder did SAVE");
-        console.log(data);
+      onSave: async (data) => {
+        const response = await core.applyHook("PREVIEW_SAVE", {
+          id: data.pageData.id,
+          slug: data.pageData.slug,
+          html: data.html?.root,
+        });
+
+        console.log(response);
       },
 
       api: {
