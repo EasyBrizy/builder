@@ -1,0 +1,14 @@
+[build]
+    #These commands runs from repository root
+    command = "npm run build:server"
+    publish = "examples/server"
+[functions]
+    external_node_modules = ["express"]
+    node_bundler = "esbuild"
+    directory = "examples/server/api"
+[[redirects]]
+    force = true
+    from = "/api/*"
+    status = 200
+    to = "/.netlify/functions/serverless/api/:splat"
+

@@ -4,6 +4,7 @@
   "scripts": {
     "build": "turbo run build",
     "build:nextjs": "turbo build --filter='@brizy/nextjs'",
+    "build:server": "turbo build --filter='@brizy/server'",
     "build:nuxtjs": "turbo build --filter='@brizy/nuxtjs'",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
