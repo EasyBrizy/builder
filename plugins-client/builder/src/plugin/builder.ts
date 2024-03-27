@@ -7,6 +7,10 @@ interface BuilderConfig {
   editorToken: string;
 }
 
+interface BuilderConfig {
+  editorToken: string;
+}
+
 class Builder extends AbstractPlugin {
   private config: BuilderConfig;
 

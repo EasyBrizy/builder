@@ -15,8 +15,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@brizy/core-server": "*",
-    "@brizy/storage-server": "*",
+    "@brizy/core-server": "latest",
+    "@brizy/storage-server": "latest",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
