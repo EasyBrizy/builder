@@ -1,8 +1,8 @@
 export const demoConfig = {
   pageData: {
     id: "1",
-    title: "Home",
-    slug: "Home",
+    title: "home",
+    slug: "home",
     status: "publish",
     data: {
       items: [

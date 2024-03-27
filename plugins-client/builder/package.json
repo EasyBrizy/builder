@@ -26,7 +26,7 @@
     "webpack": "^5.88.2"
   },
   "dependencies": {
-    "@brizy/core-client": "*"
+    "@brizy/core-client": "latest"
   },
   "keywords": [],
   "author": "",

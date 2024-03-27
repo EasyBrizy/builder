@@ -7,8 +7,10 @@ import { Shopify } from "@brizy/shopify";
 import { Storage } from "@brizy/storage";
 import { FC, useEffect, useRef } from "react";
 
-const core = new Core();
-const builder = new Builder(core);
+const core = new Core({ apiUrl: process.env.NEXT_PUBLIC_API_URL ?? "" });
+const builder = new Builder(core, {
+  editorToken: process.env.NEXT_PUBLIC_EDITOR_TOKEN ?? "",
+});
 new Cms(core);
 new Shopify(core);
 new Storage(core);

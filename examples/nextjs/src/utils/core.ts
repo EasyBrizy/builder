@@ -5,7 +5,9 @@ class CORE {
 
   public static getInstance(): Core {
     if (!CORE.instance) {
-      CORE.instance = new Core();
+      CORE.instance = new Core({
+        apiUrl: process.env.NEXT_PUBLIC_API_URL ?? "",
+      });
     }
 
     return CORE.instance;

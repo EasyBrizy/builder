@@ -15,9 +15,12 @@
     "dev": {
       "cache": false,
       "persistent": true,
-      "dependsOn": ["^dev"]
+      "dependsOn": ["^dev"],
+      "env": [
+        "NEXT_PUBLIC_EDITOR_TOKEN",
+        "NEXT_PUBLIC_API_URL"
+      ]
     },
-
     "@brizy/nextjs#build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]

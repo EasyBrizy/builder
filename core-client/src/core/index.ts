@@ -6,6 +6,7 @@ import {
   Callback,
   CollectionItem,
   CollectionType,
+  Config,
   Dispatch,
   Hooks,
   HookTypes,
@@ -18,16 +19,15 @@ class Core {
   private $dispatch: Dispatch | undefined;
   private actions: Set<string> = new Set();
   private hooks: Hooks = {};
-  public config: Record<string, string> = {};
+  public config: Config;
 
   collectionTypes: Array<CollectionType> = [];
   collectionItems: Array<CollectionItem> = [];
 
-  constructor() {
+  constructor(config: Config) {
     this.pluginManager = new PluginManager();
 
-    // eslint-disable-next-line turbo/no-undeclared-env-vars
-    this.config.apiUrl = process.env.API_URL ?? "";
+    this.config = config;
 
     this.addHook(HookTypes.ADD_COLLECTION_TYPE, (collectionType) => {
       const parsed = parseCollectionType(collectionType);
