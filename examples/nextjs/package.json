@@ -14,10 +14,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@brizy/core-client": "latest",
-    "@brizy/cms": "*",
+    "@brizy/cms-client": "latest",
     "@brizy/shopify": "*",
-    "@brizy/storage": "*",
-    "@brizy/builder": "*"
+    "@brizy/storage-client": "latest",
+    "@brizy/builder": "latest"
   },
   "devDependencies": {
     "@brizy/eslint-config": "*",

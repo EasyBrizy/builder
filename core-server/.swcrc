@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/swcrc",
+  "module": {
+    "type": "commonjs",
+  },
+  "minify": true,
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+    }
+  },
+  "env": {
+    "targets": "node 18",
+    "mode": "usage",
+    "coreJs": "3"
+  }
+}
