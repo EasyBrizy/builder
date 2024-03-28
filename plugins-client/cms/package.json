@@ -1,14 +1,26 @@
 {
-  "name": "@brizy/cms",
+  "name": "@brizy/cms-client",
   "version": "1.0.0",
   "description": "CMS plugin, that installs CMS from Brizy.io",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "keywords": [
+    "brizy",
+    "cms"
+  ],
+  "author": "brizy.io",
+  "license": "MIT",
+  "homepage": "https://github.com/EasyBrizy/builder#readme",
+  "bugs": "https://github.com/EasyBrizy/builder/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EasyBrizy/builder.git"
+  },
   "scripts": {
     "lint": "eslint \"src/**/!(*.d).ts*\"",
     "tsc": "tsc --noEmit",
     "prettier-check": "prettier --check \"src/**.{ts,tsx}\"",
-    "dev": "npm run clean && npm run build:types && webpack --watch",
+    "dev": "npm run clean && npm run build:types && webpack --mode development --watch",
     "build": "npm run clean && webpack --mode production && npm run build:types",
     "build:types": "tsc --emitDeclarationOnly",
     "clean": "rimraf dist",
@@ -21,15 +33,14 @@
     "@brizy/tsconfig": "*",
     "path-browserify": "^1.0.1",
     "rimraf": "^5.0.1",
+    "swc-loader": "^0.2.6",
     "util": "^0.12.5",
-    "webpack": "^5.88.2"
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "@brizy/core-client": "latest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "files": [
     "dist",
     "package.json"

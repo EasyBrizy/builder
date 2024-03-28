@@ -24,7 +24,7 @@
     "webpack": "^5.88.2"
   },
   "dependencies": {
-    "@brizy/builder": "*",
+    "@brizy/builder": "latest",
     "@brizy/core-client": "latest",
     "http-server": "^14.1.1"
   },

@@ -67,7 +67,7 @@
       "dependsOn": ["@brizy/core-client"]
     },
 
-    "@brizy/cms#dev": {
+    "@brizy/cms-client#dev": {
       "dependsOn": ["@brizy/core-client"]
     },
 

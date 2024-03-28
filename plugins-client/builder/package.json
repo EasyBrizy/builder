@@ -1,14 +1,26 @@
 {
   "name": "@brizy/builder",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Builder plugin, that installs Editor from Brizy.io",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "keywords": [
+    "brizy",
+    "builder"
+  ],
+  "author": "brizy.io",
+  "license": "MIT",
+  "homepage": "https://github.com/EasyBrizy/builder#readme",
+  "bugs": "https://github.com/EasyBrizy/builder/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EasyBrizy/builder.git"
+  },
   "scripts": {
     "lint": "eslint \"src/**/!(*.d).ts*\"",
     "tsc": "tsc --noEmit",
     "prettier-check": "prettier --check \"src/**.{ts,tsx}\"",
-    "dev": "npm run clean && npm run build:types && webpack --watch",
+    "dev": "npm run clean && npm run build:types && webpack --mode development --watch",
     "build": "npm run clean && webpack --mode production && npm run build:types",
     "build:types": "tsc --emitDeclarationOnly",
     "clean": "rimraf dist",
@@ -23,14 +35,12 @@
     "rimraf": "^5.0.1",
     "swc-loader": "^0.2.3",
     "util": "^0.12.5",
-    "webpack": "^5.88.2"
+    "webpack": "^5.88.2",
+    "webpack-bundle-analyzer": "^4.10.1"
   },
   "dependencies": {
     "@brizy/core-client": "latest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "files": [
     "dist",
     "package.json"
