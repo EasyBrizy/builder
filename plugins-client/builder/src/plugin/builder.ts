@@ -3,9 +3,17 @@ import { LeftSidebarOptionsIds } from "../types/Builder/leftSidebar";
 import { createUpload } from "./utils/createUpload";
 import { AbstractPlugin, Core } from "@brizy/core-client";
 
+interface BuilderConfig {
+  editorToken: string;
+}
+
 class Builder extends AbstractPlugin {
-  constructor(core: Core) {
+  private config: BuilderConfig;
+
+  constructor(core: Core, config: BuilderConfig) {
     super("Builder", core);
+
+    this.config = config;
   }
 
   openCMS = () => {
@@ -224,9 +232,7 @@ class Builder extends AbstractPlugin {
   };
 
   render(container: HTMLDivElement) {
-    const token = this.applyHook("GET_TOKEN");
-
-    if (typeof token !== "string") throw new Error("Invalid Token");
+    const token = this.config.editorToken;
 
     const config = this.createBuilderConfiguration(container);
 

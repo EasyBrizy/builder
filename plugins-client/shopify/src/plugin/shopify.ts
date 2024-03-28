@@ -1,6 +1,5 @@
 import { demoConfig3 } from "../demoConfig/demo";
-import { Core } from "@brizy/core-client";
-import { AbstractPlugin } from "@brizy/core-client";
+import { AbstractPlugin, Core } from "@brizy/core-client";
 
 class Shopify extends AbstractPlugin {
   constructor(core: Core) {

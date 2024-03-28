@@ -3,6 +3,10 @@ export enum ActionTypes {
   "INIT_PLUGIN" = "INIT_PLUGIN",
 }
 
+export interface Config {
+  apiUrl: string;
+}
+
 interface InitApp {
   type: ActionTypes.INIT_APP;
   payload: undefined;
