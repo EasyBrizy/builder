@@ -1,6 +1,6 @@
 {
   "name": "@brizy/storage-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Storage plugin",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,36 +8,46 @@
     "name": "Storage",
     "description": "Description of @brizy/storage plugin (server plugin).",
     "kind": "plugin",
-    "displayName": "@brizy/storage"
+    "displayName": "@brizy/storage-server"
+  },
+  "keywords": [
+    "brizy",
+    "storage-server"
+  ],
+  "author": "brizy.io",
+  "license": "MIT",
+  "homepage": "https://github.com/EasyBrizy/builder#readme",
+  "bugs": "https://github.com/EasyBrizy/builder/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EasyBrizy/builder.git"
   },
   "scripts": {
     "lint": "eslint \"src/**/!(*.d).ts*\"",
     "prettier-check": "prettier --check \"src/**.{ts,tsx}\"",
-    "dev": "nodemon --exec ts-node src/storage.ts",
-    "build": "npm run clean && npx tsc",
-    "start": "node dist/index.js",
+    "build": "npm run clean && tsc --emitDeclarationOnly && swc src -d dist --strip-leading-paths",
     "clean": "rimraf dist",
-    "clean:modules": "find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \\;",
-    "reinstall": "npm run clean:modules && npm install"
+    "tsc": "tsc --noEmit"
   },
   "devDependencies": {
     "@brizy/eslint-config": "*",
     "@brizy/prettier-config": "*",
     "@brizy/tsconfig": "*",
-    "@types/multer": "^1.4.11",
-    "nodemon": "^3.1.0"
+    "@swc/cli": "^0.3.12",
+    "@swc/core": "^1.4.11",
+    "@types/multer": "^1.4.11"
   },
   "dependencies": {
-    "@brizy/core-server": "*",
+    "@brizy/core-server": "latest",
     "dotenv": "^16.4.5",
     "express-fileupload": "^1.4.3",
     "multer": "^1.4.5-lts.1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "files": [
     "dist",
     "package.json"
-  ]
+  ],
+  "engines": {
+    "npm": ">=6.0.0"
+  }
 }
