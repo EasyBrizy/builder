@@ -1,25 +1,33 @@
 {
-  "name": "brizy-content-placeholder",
+  "name": "@brizy/content-placeholder",
   "version": "1.0.0",
-  "description": "Brizy content placeholders",
+  "description": "Brizy content placeholders used to put dynamic data in compiled page (PREVIEW)",
   "main": "build/index.js",
   "module": "build/es/index.js",
   "types": "build/index.d.ts",
   "type": "module",
   "scripts": {
     "dev": "npx nodemon",
-    "build": "rimraf ./build && npx tsc",
+    "build": "npm run clean && npx tsc",
     "build:es": "rimraf ./build/es && npx swc ./src -d ./build/es/",
     "start": "npm run build && node build/index.js",
     "lint": "npx eslint ./src",
     "tsc": "tsc --noEmit",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest test",
+    "check": "npm run lint && npm run tsc && npm run test",
+    "clean": "rimraf ./build",
     "prettier:check": "prettier --config .prettierrc --check src\"**/*.*\"",
-    "prettier:write": "prettier --config .prettierrc --write src\"**/*.*\""
+    "prettier:write": "prettier --config .prettierrc --write src\"**/*.*\"",
+    "prepublishOnly": "npm run clean && npm run check && npm run build && npm run build:es"
   },
-  "keywords": [],
+  "keywords": [
+    "brizy",
+    "content",
+    "placeholder"
+  ],
   "author": "brizy",
   "license": "ISC",
+  "homepage": "https://brizy.io",
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@swc/cli": "^0.1.62",
@@ -38,7 +46,6 @@
     "typescript": "5.1.6"
   },
   "files": [
-    "package.json",
     "build"
   ]
 }
