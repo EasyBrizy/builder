@@ -5,30 +5,86 @@ import { Replacer } from "../modules/Replacer.js"
 import { expect } from "@jest/globals"
 
 describe("Replacer test", () => {
-  const contentWithPlaceholder =
-    '<div begin="hshshsh">ololo</div>{{page_loop filter="some_values" mycustomone="bro"}}<div><h1>{{page_title}}</h2>{{test filter="some_values"}}<div><h1>{{page_title}}</h2><p>{{page_excerpt}}</p></div>{{end_test}}<p>{{page_excerpt}}</p></div>{{end_page_loop}}<h1>something</h1>'
+  const tests: {
+    initialHtml: string
+    expected: string
+    placeholders: { label?: string; name: string; value: string }[]
+  }[] = [
+    {
+      initialHtml: `<div begin="hshshsh">ololo</div>{{page_loop filter="some_values" mycustomone="bro"}}<div><h1>{{page_title}}</h2>{{test filter="some_values"}}<div><h1>{{page_title}}</h2><p>{{page_excerpt}}</p></div>{{end_test}}<p>{{page_excerpt}}</p></div>{{end_page_loop}}<h1>something</h1>`,
+      expected: `<div begin="hshshsh">ololo</div>myCustomValue<h1>something</h1>`,
+      placeholders: [
+        { label: "label", name: "page_loop", value: "myCustomValue" },
+      ],
+    },
+    {
+      initialHtml: `
+      <div class="testWithTwoPlaceholders">
+      <h1>{{placeholder content="rand"}}</h1>
+      Some static content
+      <h2>{{placeholder content="texv"}}</h2>
+      </div>
+      `,
+      expected: `
+      <div class="testWithTwoPlaceholders">
+      <h1>myCustomValue</h1>
+      Some static content
+      <h2>myCustomValue</h2>
+      </div>
+      `,
+      placeholders: [
+        { label: "label", name: "placeholder", value: "myCustomValue" },
+      ],
+    },
+    {
+      initialHtml: `
+      <div class="testWithDifferentPlaceholders">
+      <article>
+      <title>my Article Title</title>
+      <div> Author: {{firstPlaceholder}}</div>
+      {{secondPlaceholder content="withSepia"}}
+      </article>
+      </div>
+      `,
+      expected: `
+      <div class="testWithDifferentPlaceholders">
+      <article>
+      <title>my Article Title</title>
+      <div> Author: Jora Cardan</div>
+      <img src='joraFoto.png'/>
+      </article>
+      </div>
+      `,
+      placeholders: [
+        {
+          name: "firstPlaceholder",
+          value: "Jora Cardan",
+        },
+        {
+          name: "secondPlaceholder",
+          value: "<img src='joraFoto.png'/>",
+        },
+      ],
+    },
+  ]
 
-  const contentAfterReplace =
-    '<div begin="hshshsh">ololo</div>myCustomValue<h1>something</h1>'
+  test.each(tests)(
+    "Check replacer functionality",
+    ({ initialHtml, expected, placeholders }) => {
+      const registry = new Registry()
 
-  test("replacer replace id with value", () => {
-    const myPlaceholder = new mySimpleClass(
-      "label",
-      "page_loop",
-      "myCustomValue"
-    )
+      placeholders.forEach(({ label = "testLabel", name, value }) => {
+        registry.registerPlaceholder(new mySimpleClass(label, name, value))
+      })
 
-    const registration = new Registry()
+      const replacer = new Replacer(registry)
 
-    registration.registerPlaceholder(myPlaceholder)
+      const result = replacer.replacePlaceholders(
+        initialHtml,
+        new EmptyContext(),
+      )
 
-    const replacer = new Replacer(registration)
-
-    const result = replacer.replacePlaceholders(
-      contentWithPlaceholder,
-      new EmptyContext()
-    )
-
-    expect(result).toBe(contentAfterReplace)
-  })
+      expect(result).toBe(expected)
+    },
+  )
 })

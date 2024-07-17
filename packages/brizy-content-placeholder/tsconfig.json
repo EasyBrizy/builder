@@ -7,7 +7,7 @@
     "moduleResolution": "nodenext",
     "rootDir": "./src",
     "sourceMap": true,
-    "outDir": "./build",
+    "outDir": "./dist/esm",
     "removeComments": true,
     "noImplicitAny": false
   },
