@@ -1,24 +1,25 @@
 {
   "name": "@brizy/content-placeholder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Brizy content placeholders used to put dynamic data in compiled page (PREVIEW)",
-  "main": "build/index.js",
-  "module": "build/es/index.js",
-  "types": "build/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "type": "module",
   "scripts": {
     "dev": "npx nodemon",
-    "build": "npm run clean && npx tsc",
-    "build:es": "rimraf ./build/es && npx swc ./src -d ./build/es/",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "build:esm": "npx tsc",
+    "build:cjs": "npx swc ./src -d ./dist/cjs/",
     "start": "npm run build && node build/index.js",
     "lint": "npx eslint ./src",
     "tsc": "tsc --noEmit",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest test",
     "check": "npm run lint && npm run tsc && npm run test",
-    "clean": "rimraf ./build",
+    "clean": "rimraf ./dist",
     "prettier:check": "prettier --config .prettierrc --check src\"**/*.*\"",
     "prettier:write": "prettier --config .prettierrc --write src\"**/*.*\"",
-    "prepublishOnly": "npm run clean && npm run check && npm run build && npm run build:es"
+    "prepublishOnly": "npm run check && npm run build"
   },
   "keywords": [
     "brizy",

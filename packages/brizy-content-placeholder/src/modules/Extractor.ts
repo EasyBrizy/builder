@@ -27,7 +27,7 @@ export class Extractor {
   }
 
   extract(
-    content: string
+    content: string,
   ): [ContentPlaceholderType[], PlaceholderInterface[], string] {
     const placeholderInstances: PlaceholderInterface[] = []
     const contentPlaceholders: ContentPlaceholderType[] = []
@@ -35,8 +35,7 @@ export class Extractor {
       ...content.matchAll(RegExp(Extractor.PLACEHOLDER_REGEX, "g")),
     ]
 
-    const originalContent: string = content
-    let returnContent = originalContent
+    let returnContent = content
 
     if (matches.length === 0) {
       return [contentPlaceholders, placeholderInstances, returnContent]
@@ -54,7 +53,7 @@ export class Extractor {
       placeholderInstances.push(instance)
 
       const attributes = this.getPlaceholderAttributes(
-        match.groups?.attributes ?? ""
+        match.groups?.attributes ?? "",
       )
       const content = match.groups?.content ?? ""
 
@@ -62,15 +61,15 @@ export class Extractor {
         name,
         match[0],
         attributes,
-        content
+        content,
       )
 
       const pos: number = placeholder.getPlaceholder().indexOf(content)
 
       if (pos !== -1) {
-        returnContent = originalContent.replace(
+        returnContent = returnContent.replace(
           placeholder.getPlaceholder(),
-          placeholder.getUid()
+          placeholder.getUid(),
         )
       }
 
