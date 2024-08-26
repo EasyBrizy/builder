@@ -69,22 +69,22 @@ describe("Replacer test", () => {
   ]
 
   test.each(tests)(
-    "Check replacer functionality",
-    ({ initialHtml, expected, placeholders }) => {
-      const registry = new Registry()
+      "Check replacer functionality",
+      async ({ initialHtml, expected, placeholders }) => {
+        const registry = new Registry()
 
-      placeholders.forEach(({ label = "testLabel", name, value }) => {
-        registry.registerPlaceholder(new mySimpleClass(label, name, value))
-      })
+        placeholders.forEach(({ label = "testLabel", name, value }) => {
+          registry.registerPlaceholder(new mySimpleClass(label, name, value))
+        })
 
-      const replacer = new Replacer(registry)
+        const replacer = new Replacer(registry)
 
-      const result = replacer.replacePlaceholders(
-        initialHtml,
-        new EmptyContext(),
-      )
+        const result = await replacer.replacePlaceholders(
+            initialHtml,
+            new EmptyContext(),
+        )
 
-      expect(result).toBe(expected)
-    },
+        expect(result).toBe(expected)
+      },
   )
 })

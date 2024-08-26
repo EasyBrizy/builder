@@ -6,8 +6,8 @@ export interface PlaceholderInterface {
   // Returns true if the placeholder can return a value for the given placeholder name
   support(placeholderName: string): boolean
 
-  // Return the string value that will replace the placeholder name in content
-  getValue(context: ContextInterface, placeholder: ContentPlaceholder): string
+  // Returns a promise that resolves to the string value which will replace the given placeholder name in the content
+  getValue(context: ContextInterface, placeholder: ContentPlaceholder): Promise<string>
 
   shouldFallbackValue(
     value: string,
