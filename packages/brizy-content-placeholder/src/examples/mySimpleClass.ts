@@ -3,6 +3,7 @@ import { MyAbstractClass } from "./myAbstractClass.js"
 
 export class mySimpleClass extends MyAbstractClass {
   protected value: string
+
   constructor(label: string, placeholder: string, value: string, attrs?: Attr) {
     super(label, placeholder, value, attrs)
     this.setLabel(label)
@@ -11,7 +12,7 @@ export class mySimpleClass extends MyAbstractClass {
     if (attrs) this.setAttributes(attrs)
   }
 
-  public getValue(): string {
+  public async getValue(): Promise<string> {
     return this.value
   }
 }

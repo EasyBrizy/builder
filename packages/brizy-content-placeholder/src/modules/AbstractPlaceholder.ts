@@ -26,7 +26,7 @@ export abstract class AbstractPlaceholder implements PlaceholderInterface {
   abstract getValue(
     context: ContextInterface,
     placeholder: ContentPlaceholder
-  ): string
+  ): Promise<string>
 
   abstract support(placeholderName: string): boolean
 
