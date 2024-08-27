@@ -12,25 +12,25 @@ export class Replacer {
   }
 
   async replacePlaceholders(
-      content: string,
-      context: ContextInterface,
+    content: string,
+    context: ContextInterface,
   ): Promise<string> {
     const extractor = new Extractor(this.registry)
     const [contentPlaceholders, instancePlaceholders, contentAfterExtractor] =
-        extractor.extract(content)
+      extractor.extract(content)
 
     context.afterExtract(
-        contentPlaceholders,
-        instancePlaceholders,
-        contentAfterExtractor,
+      contentPlaceholders,
+      instancePlaceholders,
+      contentAfterExtractor,
     )
 
     if (contentPlaceholders.length > 0 && instancePlaceholders.length > 0) {
       return this.replaceWithExtractedData(
-          contentPlaceholders,
-          instancePlaceholders,
-          contentAfterExtractor,
-          context,
+        contentPlaceholders,
+        instancePlaceholders,
+        contentAfterExtractor,
+        context,
       )
     }
 
@@ -38,60 +38,61 @@ export class Replacer {
   }
 
   async replaceWithExtractedData(
-      contentPlaceholders: ContentPlaceholder[],
-      instancePlaceholders: PlaceholderInterface[],
-      contentAfterExtractor: string,
-      context: ContextInterface,
+    contentPlaceholders: ContentPlaceholder[],
+    instancePlaceholders: PlaceholderInterface[],
+    contentAfterExtractor: string,
+    context: ContextInterface,
   ): Promise<string> {
     const toReplace: string[] = []
     const toReplaceWithValues: string[] = []
 
-    await Promise.all(
-        contentPlaceholders.map(async (contentPlaceholder, index) => {
-          try {
-            toReplace.push(contentPlaceholder.getUid())
+    const result = await Promise.all(
+      contentPlaceholders.map(async (contentPlaceholder, index) => {
+        try {
+          const uid = contentPlaceholder.getUid()
+          const instancePlaceholder = instancePlaceholders[index]
+          let value = ""
 
-            const instancePlaceholder = instancePlaceholders[index]
+          if (instancePlaceholder) {
+            value = await instancePlaceholder.getValue(
+              context,
+              contentPlaceholder,
+            )
 
-            if (instancePlaceholder) {
-              const value = await instancePlaceholder.getValue(
-                  context,
-                  contentPlaceholder,
+            if (
+              instancePlaceholder.shouldFallbackValue(
+                value,
+                context,
+                contentPlaceholder,
               )
-
-              if (
-                  instancePlaceholder.shouldFallbackValue(
-                      value,
-                      context,
-                      contentPlaceholder,
-                  )
-              ) {
-                toReplaceWithValues.push(
-                    instancePlaceholder.getFallbackValue(
-                        context,
-                        contentPlaceholder,
-                    ),
-                )
-              } else {
-                toReplaceWithValues.push(value)
-              }
-            } else {
-              toReplaceWithValues.push("")
+            ) {
+              value = instancePlaceholder.getFallbackValue(
+                context,
+                contentPlaceholder,
+              )
             }
-          } catch (e) {
-            toReplace.pop()
           }
-        }),
+
+          return { index, uid, value }
+        } catch (e) {
+          return { index, uid: null, value: null }
+        }
+      }),
     )
 
-    const content = contentAfterExtractor.replace(
-        new RegExp(toReplace.join("|"), "g"),
-        (match) => {
-          const index = toReplace.indexOf(match)
-          return index !== -1 ? toReplaceWithValues[index] : match
-        },
-    )
+    result.forEach(({ uid, value }) => {
+      if (uid !== null) {
+        toReplace.push(uid)
+        toReplaceWithValues.push(value)
+      }
+    })
 
-    return content
+    return contentAfterExtractor.replace(
+      new RegExp(toReplace.join("|"), "g"),
+      (match) => {
+        const index = toReplace.indexOf(match)
+        return index !== -1 ? toReplaceWithValues[index] : match
+      },
+    )
   }
 }
