@@ -18,6 +18,16 @@ describe("Replacer test", () => {
       ],
     },
     {
+      initialHtml: `<div>multiline loop {{post_loop}}
+                    <div><span>some value</span></div>
+                    <h1>value2</h1>
+                    {{end_post_loop}}</div>`,
+      expected: `<div>multiline loop loop_value</div>`,
+      placeholders: [
+        { label: "label", name: "post_loop", value: "loop_value" },
+      ],
+    },
+    {
       initialHtml: `
       <div class="testWithTwoPlaceholders">
       <h1>{{placeholder content="rand"}}</h1>
@@ -69,22 +79,22 @@ describe("Replacer test", () => {
   ]
 
   test.each(tests)(
-      "Check replacer functionality",
-      async ({ initialHtml, expected, placeholders }) => {
-        const registry = new Registry()
+    "Check replacer functionality",
+    async ({ initialHtml, expected, placeholders }) => {
+      const registry = new Registry()
 
-        placeholders.forEach(({ label = "testLabel", name, value }) => {
-          registry.registerPlaceholder(new mySimpleClass(label, name, value))
-        })
+      placeholders.forEach(({ label = "testLabel", name, value }) => {
+        registry.registerPlaceholder(new mySimpleClass(label, name, value))
+      })
 
-        const replacer = new Replacer(registry)
+      const replacer = new Replacer(registry)
 
-        const result = await replacer.replacePlaceholders(
-            initialHtml,
-            new EmptyContext(),
-        )
+      const result = await replacer.replacePlaceholders(
+        initialHtml,
+        new EmptyContext()
+      )
 
-        expect(result).toBe(expected)
-      },
+      expect(result).toBe(expected)
+    }
   )
 })

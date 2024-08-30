@@ -7,7 +7,7 @@ type ContentPlaceholderType = ContentPlaceholder
 
 export class Extractor {
   private static readonly PLACEHOLDER_REGEX: RegExp =
-    /(?<placeholder>{{\s*(?<placeholderName>.+?)\s*(?<attributes>\s+((?:\w+(?:\[(?:\w+)?\])?\s*=\s*(?:'|\"|\&quot;|\&apos;|\&#x27;)(?:.*?)(?<!\\\\)(?:'|\"|\&quot;|\&apos;|\&#x27;)\s*)*))?}}(?:(?<content>.*?){{\s*end_\2?\s*}})?)/ims
+    /(?<placeholder>{{\s*(?<placeholderName>.+?)\s*(?<attributes>\s+((?:\w+(?:\[(?:\w+)?\])?\s*=\s*(?:'|\"|\&quot;|\&apos;|\&#x27;)(?:.*?)(?<!\\\\)(?:'|\"|\&quot;|\&apos;|\&#x27;)\s*)*))?}}(?:(?<content>[\s\S]*?){{\s*end_\2?\s*}})?)/ims
 
   private static readonly ATTRIBUTE_REGEX: RegExp =
     /(?<attr_name>\w+)\s*=\s*(?<quote>'|"|&quot;|&apos;|&#x27;)(?<attr_value>.*?)\2/g
@@ -27,7 +27,7 @@ export class Extractor {
   }
 
   extract(
-    content: string,
+    content: string
   ): [ContentPlaceholderType[], PlaceholderInterface[], string] {
     const placeholderInstances: PlaceholderInterface[] = []
     const contentPlaceholders: ContentPlaceholderType[] = []
@@ -53,7 +53,7 @@ export class Extractor {
       placeholderInstances.push(instance)
 
       const attributes = this.getPlaceholderAttributes(
-        match.groups?.attributes ?? "",
+        match.groups?.attributes ?? ""
       )
       const content = match.groups?.content ?? ""
 
@@ -61,7 +61,7 @@ export class Extractor {
         name,
         match[0],
         attributes,
-        content,
+        content
       )
 
       const pos: number = placeholder.getPlaceholder().indexOf(content)
@@ -69,7 +69,7 @@ export class Extractor {
       if (pos !== -1) {
         returnContent = returnContent.replace(
           placeholder.getPlaceholder(),
-          placeholder.getUid(),
+          placeholder.getUid()
         )
       }
 
