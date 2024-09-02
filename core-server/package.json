@@ -18,7 +18,8 @@
   },
   "scripts": {
     "lint": "eslint \"src/**/!(*.d).ts*\"",
-    "prettier-check": "prettier --check \"src/**.{ts,tsx}\"",
+    "prettier:check": "prettier --check \"src/**/*.{ts,tsx}\"",
+    "prettier:write": "prettier --write \"src/**/*.{ts,tsx}\"",
     "clean": "rimraf dist",
     "clean:modules": "find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \\;",
     "reinstall": "npm run clean:modules && npm install",

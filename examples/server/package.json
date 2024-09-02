@@ -9,7 +9,8 @@
     "dev": "nodemon --exec ts-node api/index.ts",
     "clean": "rimraf dist",
     "lint": "eslint \"./**/!(*.d).ts*\"",
-    "prettier-check": "prettier --check \"src/**/*.{ts,js}\""
+    "prettier:check": "prettier --check \"src/**/*.{ts,js}\"",
+    "prettier:write": "prettier --write \"src/**/*.{ts,js}\""
   },
   "keywords": [],
   "author": "",

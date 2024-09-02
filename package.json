@@ -8,8 +8,9 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "tsc": "turbo run tsc",
-    "prettier-check": "turbo run prettier-check",
-    "check": "npm run prettier-check && npm run lint && npm run tsc",
+    "prettier:check": "turbo run prettier:check",
+    "prettier:write": "turbo run prettier:write",
+    "check": "turbo run prettier:check lint tsc",
     "clean": "find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \\;",
     "reinstall": "npm run clean && npm install"
   },
