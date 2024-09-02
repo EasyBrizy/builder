@@ -51,10 +51,14 @@ function updateConfig() {
 
   configContent += "export const config = {\n";
   configContent += "  plugins: {\n";
-  for (const packageName in packagesWithBrizyDisplayNames) {
-    const displayName = packagesWithBrizyDisplayNames[packageName];
-    configContent += `    "${packageName}": ${displayName},\n`;
-  }
+  const packages = Object.entries(packagesWithBrizyDisplayNames);
+  const numberOfPackages = packages.length;
+  Object.entries(packagesWithBrizyDisplayNames).forEach(
+    ([name, displayName], index) => {
+      const endOfLine = index + 1 < numberOfPackages ? ",\n" : "\n";
+      configContent += `    "${name}": ${displayName}${endOfLine}`;
+    }
+  );
   configContent += "  }\n";
   configContent += "};\n";
 

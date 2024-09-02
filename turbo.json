@@ -25,12 +25,10 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
-
     "@brizy/nextjs#dev": {
       "cache": false,
       "persistent": true
     },
-
     "@brizy/nuxtjs#build": {
       "dependsOn": ["^build"],
       "outputs": [".nuxt/**"]
@@ -82,11 +80,13 @@
     "@brizy/jsapp#dev": {
       "dependsOn": ["@brizy/core-client"]
     },
-
     "lint": {},
     "tsc": {
       "dependsOn": ["^build"]
     },
-    "prettier-check": {}
+    "prettier:check": {
+    },
+    "prettier:write": {
+    }
   }
 }

@@ -41,4 +41,4 @@ jobs:
         run: npm run tsc
 
       - name: Prettier Check
-        run: npm run prettier-check
+        run: npm run prettier:check
