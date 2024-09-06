@@ -12,13 +12,16 @@ export class Extractor {
   private static readonly ATTRIBUTE_REGEX: RegExp =
     /(?<attr_name>\w+)\s*=\s*(?<quote>'|"|&quot;|&apos;|&#x27;)(?<attr_value>.*?)\2/g
 
-  private registry: RegistryInterface
+  private registry: RegistryInterface | null = null
 
-  constructor(registry: RegistryInterface) {
+  constructor(registry?: RegistryInterface) {
     // there were cases were the page had mode that 2Mb of html and
     // this is making sure the preg_match_all wil work
     process.env.PCRE_BACKTRACK_LIMIT = "900000000"
-    this.registry = registry
+
+    if (registry) {
+      this.registry = registry
+    }
   }
 
   stripPlaceholders(content: string): string {
@@ -26,9 +29,10 @@ export class Extractor {
     return content.replace(expression, "")
   }
 
-  extract(
-    content: string
-  ): [ContentPlaceholderType[], PlaceholderInterface[], string] {
+  private extractPlaceholders(
+    content: string,
+    useRegistry: boolean,
+  ): [ContentPlaceholder[], PlaceholderInterface[], string] {
     const placeholderInstances: PlaceholderInterface[] = []
     const contentPlaceholders: ContentPlaceholderType[] = []
     const matches = [
@@ -43,17 +47,19 @@ export class Extractor {
 
     for (const match of matches) {
       const name = match.groups?.placeholderName ?? ""
-      const instance = this.registry.getPlaceholderSupportingName(name ?? "")
 
-      // ignore unknown placeholders
-      if (!instance) {
+      // Check registry only if useRegistry is true
+      const instance = useRegistry
+        ? this.registry?.getPlaceholderSupportingName(name)
+        : null
+
+      // If using registry and instance is not found, skip to next match
+      if (useRegistry && !instance) {
         continue
       }
 
-      placeholderInstances.push(instance)
-
       const attributes = this.getPlaceholderAttributes(
-        match.groups?.attributes ?? ""
+        match.groups?.attributes ?? "",
       )
       const content = match.groups?.content ?? ""
 
@@ -61,7 +67,7 @@ export class Extractor {
         name,
         match[0],
         attributes,
-        content
+        content,
       )
 
       const pos: number = placeholder.getPlaceholder().indexOf(content)
@@ -69,14 +75,35 @@ export class Extractor {
       if (pos !== -1) {
         returnContent = returnContent.replace(
           placeholder.getPlaceholder(),
-          placeholder.getUid()
+          placeholder.getUid(),
         )
       }
 
       contentPlaceholders.push(placeholder)
+
+      // Only push instance if registry is being used
+      if (useRegistry && instance) {
+        placeholderInstances.push(instance)
+      }
     }
 
     return [contentPlaceholders, placeholderInstances, returnContent]
+  }
+
+  // Public method using the registry
+  extract(
+    content: string,
+  ): [ContentPlaceholderType[], PlaceholderInterface[], string] {
+    return this.extractPlaceholders(content, true)
+  }
+
+  // Public method ignoring the registry
+  extractIgnoringRegistry(content: string): [ContentPlaceholder[], string] {
+    const [placeholders, , returnContent] = this.extractPlaceholders(
+      content,
+      false,
+    )
+    return [placeholders, returnContent]
   }
 
   //Split the attributes from attribute string
