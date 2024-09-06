@@ -69,4 +69,19 @@ describe("Extractors", () => {
     expect(res[0][0]).toBeInstanceOf(ContentPlaceholder)
     expect(res[1][0]).toBeInstanceOf(AbstractPlaceholder)
   })
+
+  test.each(tests)(
+    "should return instance of placeholder without register it",
+    ({ placeholder, attr }) => {
+      const extractor = new Extractor()
+
+      const res = extractor.extractIgnoringRegistry(placeholder)
+
+      if (attr) {
+        expect(res[0][0].getAttributes()).toStrictEqual(attr)
+      }
+
+      expect(res[0][0]).toBeInstanceOf(ContentPlaceholder)
+    },
+  )
 })
