@@ -38,7 +38,7 @@ class Core {
     // TODO: REMOVE CORS FROM HERE
     // will do it next PR
     this.app.use(cors());
-    this.app.use(express.json());
+    this.app.use(express.json({ limit: "50mb" }));
   }
 
   public registerRoute(data: RouteData) {
