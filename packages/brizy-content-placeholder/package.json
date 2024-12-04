@@ -45,5 +45,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "leac": "^0.6.0"
+  }
 }
