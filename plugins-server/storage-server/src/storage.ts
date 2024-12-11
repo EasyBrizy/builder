@@ -1,4 +1,4 @@
-import ApiError from "./exceptions/ApiError";
+import { getHtml, uploadFileToCDN } from "./services/services";
 import {
   AbstractPlugin,
   Core,
@@ -8,10 +8,9 @@ import {
 } from "@brizy/core-server";
 import fs from "fs";
 import multer from "multer";
-import * as process from "process";
 
 class Storage extends AbstractPlugin {
-  public upload = multer({ dest: "uploads/customfile" });
+  public upload = multer();
 
   constructor(core: Core) {
     super("Storage", core);
@@ -20,76 +19,106 @@ class Storage extends AbstractPlugin {
   initialize() {
     super.initialize();
 
+    // region Routes
+
     this.core.registerRoute({
       pluginName: this.name,
       path: "/upload",
       middleWare: this.upload.single("file").bind(this),
-      handler: this.uploadCustomFileHandler.bind(this),
+      handler: this.uploadCustomFileHandler,
       method: "POST",
     });
 
     this.core.registerRoute({
       pluginName: this.name,
-      path: "/something",
-      handler: (_: Request, res: Response) => {
-        res.status(200).json("something");
-      },
-      method: "GET",
+      path: "/preview/save",
+      handler: this.uploadHTMLHandler,
+      method: "POST",
     });
 
-    console.warn("Storage-Server plugin has been initialized...");
+    this.core.registerRoute({
+      pluginName: this.name,
+      path: "/preview/get",
+      handler: this.getHtmlHandler,
+      method: "POST",
+    });
+
+    // endregion Routes
   }
 
-  async uploadCustomFileHandler(
+  // region getHtmlHandler
+
+  getHtmlHandler = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id, slug } = req.body;
+
+      const HTML = await getHtml({ id, slug });
+
+      return res.status(200).json({ data: HTML });
+    } catch (e) {
+      next(e);
+    }
+  };
+
+  // endregion getHtmlHandler
+
+  // region uploadCustomFileHandler
+  uploadCustomFileHandler = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ) {
-    if (!req.file) {
-      return res.status(400).json({ error: "No file uploaded" });
-    }
-
+  ) => {
     try {
-      const result = await this.uploadCustomFile(req.file);
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+
+      const result = await uploadFileToCDN({ file: req.file });
       res.status(201).json({ data: result });
     } catch (error) {
       next(error);
     }
-  }
+  };
 
-  async uploadCustomFile(file: Express.Multer.File) {
-    const config = {
-      hostname: process.env.BUNNY_HOST_NAME,
-      storageZoneName: process.env.BUNNY_STORAGE_ZONE_NAME,
-      accessKey: process.env.BUNNY_ACCESS_KEY,
-    };
+  // endregion uploadCustomFileHandler
 
-    if (!config.accessKey) {
-      throw ApiError.BadRequest("No BUNNY_CDN accessKey was provided...");
+  // region uploadHTMLHandler
+
+  uploadHTMLHandler = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { id, slug, html } = req.body;
+
+      const directoryPath = "./generated_html";
+
+      if (!fs.existsSync(directoryPath)) {
+        fs.mkdirSync(directoryPath);
+      }
+
+      const fileName = `id=${id}slug=${slug}.html`;
+      const filePath = `./generated_html/${fileName}`;
+
+      fs.writeFile(filePath, html, async (err) => {
+        if (err) {
+          return res
+            .status(500)
+            .send({ message: "An error occurred when saving HTML file." });
+        } else {
+          const result = await uploadFileToCDN({ filePath });
+          return res
+            .status(200)
+            .send({ message: "HTML file successfully saved", data: result });
+        }
+      });
+    } catch (e) {
+      next(e);
     }
+  };
 
-    const url = `https://${config.hostname}/${config.storageZoneName}/${file.originalname}`;
-
-    const fileContent = fs.readFileSync(file.path);
-
-    const response = await fetch(url, {
-      method: "PUT",
-      headers: {
-        AccessKey: config.accessKey,
-        "Content-Type": "application/octet-stream",
-      },
-      body: fileContent,
-    });
-
-    if (!response.ok) {
-      throw new ApiError(
-        response.status,
-        `File upload failed. StatusText: ${response.statusText}`
-      );
-    }
-
-    return file.originalname;
-  }
+  // endregion uploadHTMLHandler
 }
 
 export { Storage };

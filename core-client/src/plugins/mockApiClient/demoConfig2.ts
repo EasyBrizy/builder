@@ -1,8 +1,8 @@
 export const demoConfig2 = {
   pageData: {
-    id: "/collection_items/3832293",
+    id: "3",
     title: "MyPost",
-    slug: "somePost",
+    slug: "somepost",
     data: {
       items: [
         {
@@ -3526,8 +3526,8 @@ export const demoConfig2 = {
     status: "publish",
     dataVersion: 1,
     collectionType: {
-      id: "/collection_types/3089972",
-      title: "Posts",
+      id: "3",
+      title: "somepost",
     },
     fields: [
       {
