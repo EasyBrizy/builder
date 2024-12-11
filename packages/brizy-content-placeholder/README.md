@@ -87,7 +87,7 @@ export class Placeholder extends AbstractPlaceholder {
     return placeholderName === this.placeholder
   }
 
-  public getValue(): string {
+  public getValue(context:ContextInterface, placeholder: ContentPlaceholder): string {
     return this.value
   }
 
@@ -154,4 +154,28 @@ And the finalHTML value is :
     </article>
 </div>
 ```
+
+### Placeholders Context
+
+Placeholders context is used to specify the context in which a placeholder's value should be extracted and replaced.
+
+Suppose you have a placeholder for a "Post Title" `{{post_title}}`. This placeholder needs to be replaced with the 
+title of each individual post context.
+```html
+//...
+<h2>Last News</h2>
+<div class="newsContainer">
+{{post_loop }} 
+    {{post_title}} 
+    {{post_content}}
+    {{post_content}}
+{{end_post_loop}}
+</div>
+//...
+```
+
+When we call `replacer.replacePlaceholder(content,context)`, the replacer automatic call `getValue(context,placeholder)`
+of each registered placeholder and pass in the context & placeholder instance
+
+>Note: The logic for getting the value depends on your needs. Inside the placeholder that you have registered, the getValue method that you have to define will receive as parameter : context, and contentPlaceholder. 
 
